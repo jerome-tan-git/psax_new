@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	<context:annotation-config />
+	<!--context:component-scan base-package="com.asso" /-->
+	<!--<bean id="springfactory" class="util.SpringFactory"></bean>-->
+	<bean id="SpringFactory" class="util.SpringFactory"></bean>
+	
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:jdbc.properties</value>
+		</property>
+	</bean>
+	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  
+        destroy-method="close">  
+        <property name="driverClass" value="${jdbc.driverClassName}" />  
+        <property name="jdbcUrl" value="${jdbc.url}" />  
+        <property name="user" value="${jdbc.username}" />  
+        <property name="password" value="${jdbc.password}" />  
+  
+     
+        <property name="minPoolSize" value="5" />       
+        <property name="maxPoolSize" value="150" />
+        <property name="initialPoolSize" value="3" />
+        <property name="maxIdleTime" value="10" />  
+        <property name="acquireIncrement" value="3" />  
+        <property name="maxStatements" value="0" />
+        <property name="idleConnectionTestPeriod" value="60" />
+        <property name="acquireRetryAttempts" value="30" />  
+        <property name="breakAfterAcquireFailure" value="false" />
+        <property name="testConnectionOnCheckout" value="false" />  
+    </bean>  
+	
+<!-- 
+	<bean id="dataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+ -->
+ 
+ 
+ 
+ 
+ 
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+
+		<property name="mappingLocations" value="classpath:/com/asso/model/*.hbm.xml" /> 
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>  
+                <prop key="hibernate.jdbc.fetch_size">50</prop>  
+                <prop key="hibernate.jdbc.batch_size">50</prop>  
+                <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+                <prop key="hibernate.autoReconnect">true</prop>
+                <prop key="hibernate.connection.release_mode">auto</prop>
+                <!-- 
+                <prop key="hibernate.cache.use_second_level_cache">true</prop> 
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>  
+                              <prop key="hibernate.current_session_context_class">thread</prop>
+                   -->
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="userManager" class="com.asso.manager.impl.UserManagerImpl">		
+	</bean>
+	<bean id="examManager" class="com.asso.manager.impl.ExamManagerImpl">		
+	</bean>
+	<bean id="scoreManager" class="com.asso.manager.impl.ScoreManagerImpl">		
+	</bean>
+	<bean id="channelManager" class="com.asso.manager.impl.ChannelManagerImpl">		
+	</bean>
+	<bean id="articleManager" class="com.asso.manager.impl.ArticleManagerImpl">		
+	</bean>
+	<bean id="formManager" class="com.asso.manager.impl.FormManagerImpl">		
+	</bean>
+	<bean id="docManager" class="com.asso.manager.impl.DocManagerImpl">		
+	</bean>
+	<bean id="bbsManager" class="com.asso.manager.impl.BbsManagerImpl">		
+	</bean>
+	<bean name="userDao" class="com.asso.dao.impl.UserDaoImpl">            
+    </bean>
+    <bean name="examDao" class="com.asso.dao.impl.ExamDaoImpl">            
+    </bean>
+    <bean name="scoreDao" class="com.asso.dao.impl.ScoreDaoImpl">            
+    </bean>
+    <bean name="channelDao" class="com.asso.dao.impl.ChannelDaoImpl">            
+    </bean>
+    <bean name="articleDao" class="com.asso.dao.impl.ArticleDaoImpl">            
+    </bean>
+    <bean name="formDao" class="com.asso.dao.impl.FormDaoImpl">            
+    </bean>
+    <bean name="docDao" class="com.asso.dao.impl.DocDaoImpl">            
+    </bean>
+    <bean name="bbsDao" class="com.asso.dao.impl.BbsDaoImpl">            
+    </bean>
+    <!-- 
+	<aop:config>
+		<aop:pointcut id="bussinessService"
+			expression="execution(public * com.asso.manager.*.*(..))" />
+		<aop:advisor pointcut-ref="bussinessService"
+			advice-ref="txAdvice" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="exists" read-only="true" />
+			<tx:method name="check*" read-only="true" />
+			<tx:method name="get*" read-only="true" /> 
+            <tx:method name="find*" read-only="true"/> 
+            <tx:method name="load*" read-only="true"/> 
+           
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+						
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	 -->
+</beans>

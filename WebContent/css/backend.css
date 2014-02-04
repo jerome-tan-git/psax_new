@@ -1,0 +1,85 @@
+body {
+	color: #A29C9A;
+	font-family: "微软雅黑",Arial,"宋体" !important;
+	font-size: 13px;
+	line-height: 18px;
+	margin: 0;
+	padding: 0;
+	background-color: #f3f3f3;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+font-family: "微软雅黑",Arial,"宋体" !important;
+font-weight: 500;
+line-height: 1.1;
+color: inherit;
+}
+.exam_list_button{
+	position: absolute;
+	top: 0px;
+	right: 13px;
+	top: 11px;
+}
+.exam_block
+{
+	position:relative;
+}
+.bt_group
+{
+	margin-right: 17px;
+	margin-top: 12px;
+}
+.exam_option
+{
+	cursor: pointer;
+}
+.option_text
+{
+	color:#000;
+}
+label
+{
+	color:#000;
+	font-size: 11pt;
+}
+.hand
+{
+	cursor:pointer;
+}
+.deleteExam
+{
+	color:#333;
+}
+.expandOption
+{
+	color:#333;
+}
+.exam_pager
+{
+	color:#333;
+	margin-right: 10px;
+}
+.options{
+	height: 0px;
+	overflow:hidden;
+}
+.option_list
+{
+	padding:15px 15px 15px 15px;
+}
+
+.exam_title_list
+{
+	font-size:13pt;
+	color:#333;
+	padding:10px 10px 10px 10px;
+}
+.option_list ol
+{
+	color:#333;
+	line-height: 20px;
+	
+}
+.option_list ol li div
+{
+	margin-bottom:10px;
+}

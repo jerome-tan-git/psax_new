@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+
+    <package name="com.asso" namespace="/" extends="struts-default">
+    
+    	<interceptors>
+            <interceptor name="loginedCheck" class="com.asso.util.LoginedCheckInterceptor"/>
+            <interceptor-stack name="mystack">
+                <interceptor-ref name="loginedCheck" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors> 
+
+        <default-action-ref name="index" />
+        <!-- 
+        <global-results>
+            <result name="error">/error.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+		 -->
+		<global-results>           
+            <!-- <result name="exception">exception.jsp</result>-->
+            <result name="gologin" type="redirect">gologin.action</result>
+        </global-results>   
+             
+        <global-exception-mappings>            
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+        </global-exception-mappings>
+        
+		<action name="wip" class="com.asso.action.ChannelEdit" method="wip">  
+			<result name="success" type="freemarker">/WEB-INF/ccpage/wip.ftl</result>							 
+		</action> 
+		
+		<action name="page" class="com.asso.action.ChannelEdit">  
+			<result name="cat0" type="freemarker">/WEB-INF/ccpage/index.ftl</result>
+			<result name="cat1" type="freemarker">/WEB-INF/ftl/membercenter.ftl</result>
+			<result name="cat2" type="freemarker">/WEB-INF/ccpage/about_us.ftl</result>
+			<result name="cat15" type="freemarker">/WEB-INF/ccpage/exam_home.ftl</result>	
+			<result name="cat16" type="redirect">bbs_alltopiclist.action</result>							 
+		</action>
+		 
+		 
+		<action name="gologin" class="com.asso.action.UserLogin" method="gologin">  
+			<result name="go" type="freemarker">/WEB-INF/ftl/login.ftl</result>			 
+		</action>
+		
+		<action name="userlogin" class="com.asso.action.UserLogin">  
+			<!-- <result name="success">loginSuccess.jsp</result> -->
+			<!-- <result name="success"  type="freemarker">/WEB-INF/ftl/examItemList.ftl</result> -->
+			<!-- <result name="success">exam_home.html</result> -->
+			<!-- <result name="success" type="freemarker">/WEB-INF/ftl/exam_home.ftl</result> -->
+			<!-- <result name="success">login_result.jsp</result> -->
+			<result name="success" type="freemarker">/WEB-INF/ftl/membercenter.ftl</result>
+			<!-- <result name="failure">loginFail.jsp</result> -->
+			<result name="failure" type="freemarker">/WEB-INF/ftl/loginError.ftl</result>    
+		</action>
+		<action name="userlogout" class="com.asso.action.UserLogout" >  
+			<result name="success" type="freemarker">/WEB-INF/ccpage/index.ftl</result>
+		</action>
+		
+		<action name="usercenter" class="com.asso.action.UserLogin" method="userCenter">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/usercenter.ftl</result>
+			<interceptor-ref name="mystack" />			 
+		</action>
+		<!-- 
+		<action name="userupdate" class="com.asso.action.UserLogin" method="updateUserInfo">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/usercenter.ftl</result>			 
+		</action> -->	
+		<action name="userupdateinfo" class="com.asso.action.UserLogin" method="updateInfo">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/usercenter.ftl</result>	
+			<interceptor-ref name="mystack" />		 
+		</action>		
+		<action name="uploadfilesmanager" class="com.asso.action.UserBuilt" method="manager">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>	
+			<interceptor-ref name="mystack" />		 
+		</action>		
+		<action name="useruploadfiles" class="com.asso.action.UserBuilt" method="upload">  
+			<result name="upload" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>
+			<interceptor-ref name="mystack" />			 
+		</action>
+		<action name="listtodownloads" class="com.asso.action.UserDownloads">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/downloadlist.ftl</result>	
+			<interceptor-ref name="mystack" />		 
+		</action>
+		<action name="listnotice" class="com.asso.action.UserDownloads" method="getNotice">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/notice.ftl</result>		
+			<interceptor-ref name="mystack" />	 
+		</action>
+		<action name="sendmessage" class="com.asso.action.UserDownloads" method="sendNotice">  
+			<result name="success" type="redirect">manageruser.action</result>			 
+		</action>
+		
+		<action name="manageruser" class="com.asso.action.UserEdit">
+			<result name="list" type="freemarker">/WEB-INF/ftl/userlist.ftl</result>
+		</action>
+		<action name="updateuser" class="com.asso.action.UserEdit" method="updateUser">
+			<result name="update" type="redirect">manageruser.action</result>
+		</action>		
+		<action name="deleteuser" class="com.asso.action.UserEdit" method="deleteUser">					
+			<result name="delete" type="redirect">manageruser.action</result>
+		</action>
+		<action name="adduser" class="com.asso.action.UserEdit" method="addUser">					
+			<result name="add" type="redirect">manageruser.action</result>
+		</action>
+		
+		<action name="managerexam" class="com.asso.action.ExamItemsList" method="managerExamContext">
+			<result name="success" type="freemarker">/WEB-INF/ftl/editExam_.ftl</result>		                     	 
+		</action>
+		<action name="newitem1" class="com.asso.action.ExamItemsList" method="addItem">
+			<result name="save" type="freemarker">/WEB-INF/ftl/editExam_.ftl</result>			 
+		</action>
+		<action name="delitem" class="com.asso.action.PageExamItemsList" method="deleteItem">
+			<result name="delete" type="freemarker">/WEB-INF/ftl/listItem.ftl</result>			 
+		</action>
+		<!-- 
+		<action name="listitem" class="com.asso.action.ExamItemsList" method="loadPageItemlistFByExamId">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/listItem.ftl</result>		                     	 
+		</action>
+ 		-->
+		<action name="listitem" class="com.asso.action.PageExamItemsList" method="loadPageItemlistFByExamId">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/listItem.ftl</result>		                     	 
+		</action>
+		
+		
+		<action name="beginexam" class="com.asso.action.ExamItemsList" method="beginExam">  
+			<result name="begin" type="freemarker">/WEB-INF/ftl/exam.ftl</result>		
+			<interceptor-ref name="mystack" />                     	 
+		</action>
+		<action name="submit" class="com.asso.action.ExamSubmit" method="pageSubmit">  
+			<result name="next" type="freemarker">/WEB-INF/ftl/exam.ftl</result>
+			<result name="over" type="freemarker">/WEB-INF/ftl/exam_rz.ftl</result>
+			<interceptor-ref name="mystack" />		                     	 
+		</action>
+		<action name="switchpage" class="com.asso.action.ExamSubmit"  method="pageSwitch">  
+			<result name="switch" type="freemarker">/WEB-INF/ftl/exam.ftl</result>
+			<interceptor-ref name="mystack" />		                     	 
+		</action>
+		<action name="finalizexam" class="com.asso.action.ExamSubmit" method="finalizeExam">  
+			<result name="final" type="freemarker">/WEB-INF/ftl/exam_rz.ftl</result>
+			<interceptor-ref name="mystack" />		                     	 
+		</action>
+		<action name="showerror" class="com.asso.action.ExamSubmit" method="showError">  
+			<result name="show" type="freemarker">/WEB-INF/ftl/exam_rz.ftl</result>	
+			<interceptor-ref name="mystack" />	                     	 
+		</action>
+		<!-- method="addCategory/addChannel" -->
+		<action name="addCategory" class="com.asso.action.ChannelEdit" method="addChannel">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		<!-- method="addArticley/addChannel" -->
+		<action name="managerArt" class="com.asso.action.ArtEdit" >  
+			<result name="success" type="freemarker">/WEB-INF/ftl/editArticle.ftl</result>
+		</action>
+		<action name="addArt" class="com.asso.action.ArtEdit" method="addArticle">  
+			<result name="save" type="freemarker">/WEB-INF/ftl/editArticle.ftl</result>	
+			<result name="update" type="redirect">managerArt.action</result>	                     	 
+		</action>
+		<action name="listArt" class="com.asso.action.ArtEdit" method="listArticleByCategoryId">  
+			<result name="list" type="freemarker">/WEB-INF/ccpage/moment.ftl</result>	                     	 
+		</action>
+		<action name="listArticles" class="com.asso.action.ArtEdit" method="list">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/articles.ftl</result>	                     	 
+		</action>
+		<action name="detailArt" class="com.asso.action.ArtEdit" >  
+			<result name="success" type="freemarker">/WEB-INF/ftl/article.ftl</result>
+		</action>
+		<action name="listImgArt" class="com.asso.action.ArtEdit" method="listJsonArticleByCategoryId">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/imagesArtList.ftl</result>	                     	 
+		</action>
+		<action name="bklistArt" class="com.asso.action.ArtEdit" method="listArticles">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/listArticle.ftl</result>	                     	 
+		</action>
+		<!-- 
+		<action name="deleteArt" class="com.asso.action.ArtEdit" method="deleteArticle">  
+			<result name="delete" type="redirect">bklistArt.action</result>	                     	 
+		</action>
+		 -->
+		<action name="deleteArt" class="com.asso.action.ArtEdit" method="deleteArticle">  
+			<result name="delete" type="freemarker">/WEB-INF/ftl/listArticle.ftl</result>	                     	 
+		</action>
+		
+		
+		
+		<action name="bbs_*" class="com.asso.action.BbsEdit" method="{1}">
+            <result name="input" type="freemarker">/WEB-INF/ftl/topicbuilt.ftl</result>            
+            <result name="built" type="freemarker">/WEB-INF/ftl/topiclist.ftl</result>
+            <result name="list" type="freemarker">/WEB-INF/ftl/topiclist.ftl</result>               
+            <result name="detail" type="freemarker">/WEB-INF/ftl/topicdetail.ftl</result>
+            <result name="save" type="freemarker">/WEB-INF/ftl/topicdetail.ftl</result>
+            <!-- 
+            <result name="topic_update" type="freemarker">/WEB-INF/ftl/topicbuilt.ftl</result>
+            <result name="topic_updated" type="freemarker">/WEB-INF/ftl/topicbuilt.ftl</result>
+             -->
+            <result name="comment_update" type="freemarker">/WEB-INF/ftl/commentbuilt.ftl</result>
+            <result name="comment_updated" type="freemarker">/WEB-INF/ftl/topicdetail.ftl</result>
+            <result name="delete" type="freemarker">/WEB-INF/ftl/topiclist.ftl</result>            
+            <interceptor-ref name="mystack" />
+        </action>
+		
+		
+		<action name="saveDoc" class="com.asso.action.FormEdit" method="updateDoc">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/membercenter.ftl</result>	                     	 
+		</action>
+		
+		
+		
+		
+		<action name="upload" class="com.asso.action.CKEUpload"  method="myExecute" />
+		
+		
+		<action name="testform" class="com.asso.action.test"  method="addform" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		
+		<!-- 
+		
+		<action name="intoexam" class="com.asso.action.ExamItemsList" method="loadExamItemlistFByExamId">  
+			<result name="list" type="redirect">switchexampage.action?currentpage=1</result>		                     	 
+		</action>		
+		<action name="switchexampage" class="com.asso.action.SwitchExamPage" >  
+			<result name="success">examPage.jsp</result>		                     	 
+		</action>
+		<action name="examsubmit" class="com.asso.action.ExamSubmit" >  
+			<result name="success">examPage.jsp</result>		                     	 
+		</action>
+		 
+		<action name="memberedit" class="com.asso.action.MemberEdit">  
+			<result name="success">success.html</result>			 
+		</action>
+		<action name="userbuilt" class="com.asso.action.UserLogin" method="save">  
+			<result name="save">loginSuccess.jsp</result>			 
+		</action>
+		<action name="checksession" class="com.asso.action.CheckSession" >  
+			<result name="success">loginSuccess.jsp</result>			 
+		</action>
+				
+		<action name="newexam" class="com.asso.action.ExamItemsList" method="addExam">  
+			<result name="save">inputExam.jsp?examsave=1</result>			 
+		</action>
+		<action name="newitem" class="com.asso.action.ExamItemsList" method="addItem">   
+			<result name="save">inputExam.jsp?examsave=2</result>			 
+		</action>
+		
+		<action name="manageritemlist" class="com.asso.action.ExamItemsList" method="loadItemlistFByExamId">  
+			<result name="list">examItemsList.jsp</result>		                     	 
+		</action>
+ 		
+		<action name="managerexamcontext" class="com.asso.action.ExamItemsList" method="managerExamContext">  
+			<result name="success">inputExam_.jsp?examsave=0</result>		                     	 
+		</action>
+		
+		<action name="test" class="com.asso.action.test" >  
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		<action name="testform" class="com.asso.action.test"  method="addform" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		<action name="updateform" class="com.asso.action.test"  method="updateform" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>		
+		<action name="adddoc" class="com.asso.action.test"  method="addDoc" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		<action name="updatedoc" class="com.asso.action.test"  method="updateDoc" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		
+		<action name="updatevls" class="com.asso.action.test"  method="updateFieldValues" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		<action name="addvls" class="com.asso.action.test"  method="addFieldValues" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		<action name="loadform" class="com.asso.action.test"  method="loadForm" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		<action name="loaddocs" class="com.asso.action.test"  method="loadDocs" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/test.ftl</result>	                     	 
+		</action>
+		
+		<action name="loaddoc" class="com.asso.action.FormEdit"  method="listJsonDocById" >
+			<result name="success" type="freemarker">/WEB-INF/ftl/form.ftl</result>	                     	 
+		</action>
+		-->
+		<!-- TEST URLs
+
+		<action name="*">
+	            <result type="freemarker">/WEB-INF/ccpage/{1}.ftl</result>
+	    </action>
+	
+ 		-->
+    </package>
+
+    <include file="example.xml"/>
+
+    <!-- Add packages here -->
+    
+    <package name="default" namespace="/" extends="struts-default">
+	    <default-action-ref name="index"/>
+	    <action name="index" class="com.asso.action.ChannelEdit" method="index">
+	        <result name="success" type="redirect">page.action</result>
+	    </action>
+	</package>
+
+
+</struts>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd//hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.asso.model.Category" table="category" catalog="asso">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="category" type="java.lang.String">
+            <column name="category" length="20" />
+        </property>
+        <property name="parentid" type="int">
+            <column name="parentid" length="11" />
+        </property>
+        <property name="channelid" type="int">
+            <column name="channelid" length="11" />
+        </property>
+    </class>
+</hibernate-mapping>
