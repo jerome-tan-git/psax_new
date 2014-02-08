@@ -19,5 +19,6 @@ public interface FormDao {
 	void saveField(Fields field);
 	Fields getFieldIdByName(String _name);
 	List<Form> loadAllForms();
+	List<Form> load2showForms();
 	
 }

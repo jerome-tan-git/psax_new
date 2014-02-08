@@ -118,6 +118,16 @@ public class FormDaoImpl implements FormDao{
         rlist = query.list();
         return rlist;
 	}
+	@Override
+	public List<Form> load2showForms(){		
+		List<Form> rlist = new ArrayList<Form>();
+		Session s = sessionFactory.getCurrentSession();
+		String hql = "from Form where isshow=?";      
+        Query query = s.createQuery(hql); 
+        query.setString(0, "1"); 
+        rlist = query.list();
+        return rlist;
+	}
 	
 	@Override
 	public Fields getFieldIdByName(String _name){

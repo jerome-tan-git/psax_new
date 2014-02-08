@@ -48,6 +48,10 @@ public class FormManagerImpl implements FormManager {
 		return formDao.loadAllForms();
 	}
 	@Override
+	public List<Form> loadValidForms() throws ClassNotFoundException, SQLException{		
+		return formDao.load2showForms();
+	}
+	@Override
 	public Form loadFormById(int _formid) throws ClassNotFoundException, SQLException{		
 		return formDao.loadForm(_formid);
 	}

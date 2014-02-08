@@ -17,6 +17,9 @@
         <property name="path" type="java.lang.String">
             <column name="path" length="500" />
         </property>
+        <property name="isshow" type="int">
+            <column name="isshow" length="11" />
+        </property>
                 
     </class>
 </hibernate-mapping>

@@ -214,7 +214,27 @@ public class UserDownloads extends ActionSupport implements ServletRequestAware,
 	private void build2DownloadFiles(){
 		List<Form> flist = new ArrayList<Form>();
 		try {
-			flist = fm.loadForms();
+//			flist = fm.loadForms();
+			flist = fm.loadValidForms();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.formlist = new ArrayList<Form>();
+		for(Form f:flist){
+			System.out.println("---------->>>"+f.toString());
+			if(f.getDisplayname()!=null && f.getDisplayname().length()>0
+					&& f.getFrontendtpl()!=null && f.getFrontendtpl().length()>0
+					&& f.getPath()!=null && f.getPath().length()>0)
+				this.formlist.add(f);
+		}
+	}
+	
+	private void build2BDownloadedFiles(){
+		List<Form> flist = new ArrayList<Form>();
+		try {
+			flist = fm.loadForms();			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -233,18 +253,24 @@ public class UserDownloads extends ActionSupport implements ServletRequestAware,
 	
 	@Override
 	public String execute(){
-		if(this.session!=null){
-			User u = (User) this.session.get("user_");
-			if(u!=null){
-				this.user = new User();
-				this.setUser(u);
-			}
-			System.out.println("session user------"+u.toString());
-			
-			this.build2DownloadFiles();
-		}		
-		return "success";
-	
+		String isall = this.request.getParameter("isall");
+		if(isall!=null && isall.length()>0){
+			System.out.println("---------------Backend edit listing forms for users--------------");
+			this.build2BDownloadedFiles();
+			return "list";
+		}else{
+			if(this.session!=null){
+				User u = (User) this.session.get("user_");
+				if(u!=null){
+					this.user = new User();
+					this.setUser(u);
+				}
+				System.out.println("session user------"+u.toString());
+				
+				this.build2DownloadFiles();
+			}		
+			return "success";
+		}	
 	}
 	
 //	@Override

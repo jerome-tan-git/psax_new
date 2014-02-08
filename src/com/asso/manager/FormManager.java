@@ -20,6 +20,8 @@ public interface FormManager {
 			SQLException;
 
 	List<Form> loadForms() throws ClassNotFoundException, SQLException;
+
+	List<Form> loadValidForms() throws ClassNotFoundException, SQLException;
 	
 
 }

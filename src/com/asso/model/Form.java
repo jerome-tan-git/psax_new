@@ -9,9 +9,15 @@ public class Form {
 	private String frontendtpl;
 	private List<Fields> fields;
 	private String path;
+	private int isshow;
 	
 	
-	
+	public int getIsshow() {
+		return isshow;
+	}
+	public void setIsshow(int isshow) {
+		this.isshow = isshow;
+	}
 	public String getPath() {
 		return path;
 	}
@@ -46,9 +52,9 @@ public class Form {
 	public String toString(){
 		if(this.fields!=null)
 			return this.formid+":"+this.displayname+":"+this.frontendtpl+":"+this.path+",\n"
-				+this.fields.toString();
+				+this.fields.toString()+",\n"+this.isshow;
 		else
-			return this.formid+":"+this.displayname+":"+this.frontendtpl+":"+this.path;
+			return this.formid+":"+this.displayname+":"+this.frontendtpl+":"+this.path+this.isshow;
 	}
 	
 }

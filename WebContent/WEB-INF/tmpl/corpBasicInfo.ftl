@@ -232,7 +232,9 @@ transitional.dtd">
 
 				<h2 align="center">上海市浦东新区食品生产安全管理协会</h2>
 				<h2 align="center">企业基本信息情况</h2>
-				<p class="STYLE1">填写请参见背面样张，填写完整后请于20130130	前寄往背面地址表或电子版邮箱至pdspsax@163.com(未来电可索要电子版)</p>
+				
+				<p class="STYLE1">&nbsp;&nbsp;&nbsp;&nbsp;</p>
+				<!--<p class="STYLE1">填写请参见背面样张，填写完整后请于20130130	前寄往背面地址表或电子版邮箱至pdspsax@163.com(未来电可索要电子版)</p>-->
 				
 				<table width="1033" border="0" cellpadding="0" cellspacing="1" bgcolor="#666666">
 				  <tr>
