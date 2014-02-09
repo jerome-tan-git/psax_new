@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.asso.model.MemberInfo;
+import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
 import com.asso.model.User;
 
@@ -42,6 +43,15 @@ public interface UserManager {
 	void delete(int userid) throws ClassNotFoundException, SQLException;
 
 	User loadUserByid(int _userid) throws ClassNotFoundException, SQLException;
+
+	List<Uploadfilefolders> loadUploadeFileFolders()
+			throws ClassNotFoundException, SQLException;
+
+	void addUploadfolder(Uploadfilefolders upff) throws ClassNotFoundException,
+			SQLException;
+
+	void deleteUploadfolder(Uploadfilefolders upff)
+			throws ClassNotFoundException, SQLException;
 
 
 

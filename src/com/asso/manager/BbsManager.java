@@ -41,6 +41,9 @@ public interface BbsManager {
 	Comment loadCommentById(int _commentid) throws ClassNotFoundException,
 			SQLException;
 
+	List<Comment> loadCommentsByTopicId(int _topicid)
+			throws ClassNotFoundException, SQLException;
+
 	
 
 }

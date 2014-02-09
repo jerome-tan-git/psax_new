@@ -82,7 +82,20 @@
 		<action name="uploadfilesmanager" class="com.asso.action.UserBuilt" method="manager">  
 			<result name="success" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>	
 			<interceptor-ref name="mystack" />		 
+		</action>
+		<action name="listUploads" class="com.asso.action.UserBuilt" method="loadFolder">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
+			<interceptor-ref name="mystack" />		 
+		</action>
+		<action name="addfolder" class="com.asso.action.UserBuilt" method="addfolder">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
+			<interceptor-ref name="mystack" />		 
+		</action>
+		<action name="deletefolder" class="com.asso.action.UserBuilt" method="deletefolder">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
+			<interceptor-ref name="mystack" />		 
 		</action>		
+		
 		<action name="useruploadfiles" class="com.asso.action.UserBuilt" method="upload">  
 			<result name="upload" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>
 			<interceptor-ref name="mystack" />			 
@@ -196,6 +209,10 @@
 		</action>
 		
 		
+		<action name="bbsbk_*" class="com.asso.action.BbsEdit" method="{1}">  
+			<result name="list" type="freemarker">/WEB-INF/ftl/listTopics.ftl</result>
+			<result name="delete" type="freemarker">/WEB-INF/ftl/listTopics.ftl</result>	                     	 
+		</action>
 		
 		<action name="bbs_*" class="com.asso.action.BbsEdit" method="{1}">
             <result name="input" type="freemarker">/WEB-INF/ftl/topicbuilt.ftl</result>            

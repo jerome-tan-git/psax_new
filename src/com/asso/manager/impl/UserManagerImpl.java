@@ -12,6 +12,7 @@ import com.asso.dao.impl.UserDaoImpl;
 import com.asso.manager.UserManager;
 import com.asso.model.Article;
 import com.asso.model.MemberInfo;
+import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
 import com.asso.model.User;
 
@@ -108,6 +109,16 @@ public class UserManagerImpl implements UserManager {
 	}
 	
 	@Override
+	public void addUploadfolder(Uploadfilefolders upff) throws ClassNotFoundException, SQLException{
+		userDao.save(upff);
+	}
+	
+	@Override
+	public void deleteUploadfolder(Uploadfilefolders upff) throws ClassNotFoundException, SQLException{
+		userDao.delete(upff);
+	}
+	
+	@Override
 	public List<Uploadfiles> loadUploadedFilesByUserid(int _userid) throws ClassNotFoundException, SQLException{		
 		System.out.println("loadUploadedFilesByUserid, input userid ------"+_userid);
 		return userDao.loadUploadfilesByUserId(_userid);	
@@ -120,4 +131,8 @@ public class UserManagerImpl implements UserManager {
 		userDao.delete(uf);
 	}
 	
+	@Override
+	public List<Uploadfilefolders> loadUploadeFileFolders() throws ClassNotFoundException, SQLException{	
+		return userDao.loadAllUploadfilefolders();	
+	}
 }

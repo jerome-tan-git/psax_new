@@ -17,6 +17,7 @@ import util.CONSTANT;
 import util.SpringFactory;
 
 import com.asso.manager.UserManager;
+import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
 import com.asso.model.User;
 import com.asso.vo.UserRegisterInfo;
@@ -34,6 +35,7 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	
 	private User user;
 	private List<Uploadfiles> upflist;
+	private List<Uploadfilefolders> upfflist;
 
 	public UserBuilt(){
 		um = (UserManager) SpringFactory.getObject("userManager");
@@ -63,6 +65,12 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	}
 	public void setUpflist(List<Uploadfiles> upflist) {
 		this.upflist = upflist;
+	}	
+	public List<Uploadfilefolders> getUpfflist() {
+		return upfflist;
+	}
+	public void setUpfflist(List<Uploadfilefolders> upfflist) {
+		this.upfflist = upfflist;
 	}
 
 	public String manager(){
@@ -143,8 +151,64 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 			uf.setUploadtime(time);
 			System.out.println("---------->>>"+uf.toString());
 		}
+
+		this.loadFolder();
 	}
 
+	public String loadFolder(){
+		
+		System.out.println("TEST ~~~~~，，，，，，，，，~~~~~");
+		this.upfflist = new ArrayList<Uploadfilefolders>();
+		try {
+			upfflist = um.loadUploadeFileFolders();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for(Uploadfilefolders upff:upfflist ){
+			System.out.println("FOLDER: "+upff.toString());
+		}
+		System.out.println("TEST ~~~~~，，，，，，，，，~~~~~");
+		
+		return "list";
+	}
+	
+	public String addfolder(){		
+		System.out.println("GET uploadfolder--->"+this.uInfo.getUploadfolder());
+		User user = (User)this.request.getSession().getAttribute("user_");
+//		System.out.println("user---"+user.toString());
+		Uploadfilefolders upff = new Uploadfilefolders();
+		upff.setFoldername(this.uInfo.getUploadfolder());
+		upff.setCreatetime(CONSTANT.getNowTime());
+		upff.setAuther(user.getUsername());
+		upff.setAutherid(user.getId());
+//		System.out.println("upff---"+upff.toString());
+		try {
+			um.addUploadfolder(upff);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return this.loadFolder();		
+	}
+	
+	public String deletefolder(){
+		String delFolderId = this.request.getParameter("folderid");
+		if(delFolderId!=null && delFolderId.length()>0){
+			Uploadfilefolders upff = new Uploadfilefolders();
+			upff.setId(Integer.parseInt(delFolderId));
+			try {
+				um.deleteUploadfolder(upff);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		return this.loadFolder();
+	}
 	
 	@Override
 	public String execute(){

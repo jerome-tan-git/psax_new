@@ -18,7 +18,6 @@ import util.SpringFactory;
 
 import com.asso.manager.BbsManager;
 import com.asso.manager.UserManager;
-import com.asso.model.Article;
 import com.asso.model.Comment;
 import com.asso.model.Topic;
 import com.asso.model.User;
@@ -326,6 +325,57 @@ public class BbsEdit extends ActionSupport implements ModelDriven<Object>,Servle
 	
 	public String alltopiclist(){
 		System.out.println("--------------topicbuilt-----------");
+		this.listAllTopics();
+		this.pagination();
+		return "list";
+	}
+	public String topicslist(){
+		this.listAllTopics();		
+		return "list";
+	}
+	public String topicsdelete(){
+		String delTopicId = this.request.getParameter("topicid");
+		System.out.println("topicid="+delTopicId);
+		List<Comment> topiccomments = new ArrayList<Comment>();
+		
+		if(delTopicId!=null && delTopicId.length()>0){	
+			try {
+				topiccomments = bm.loadCommentsByTopicId(Integer.parseInt(delTopicId));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			for(Comment comm : topiccomments){
+				System.out.println("$$$---"+comm.toString());
+				try {
+					bm.delete(comm);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			Topic deltopic = new Topic();
+			deltopic.setId(Integer.parseInt(delTopicId));
+			try {
+				bm.delete(deltopic);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		this.listAllTopics();
+		return "delete";
+	}
+	
+	private void listAllTopics(){
 		this.topiclist = new ArrayList<Topic>();
 		try {
 			this.topiclist = bm.loadTopics();
@@ -337,8 +387,6 @@ public class BbsEdit extends ActionSupport implements ModelDriven<Object>,Servle
 		
 		System.out.println("list size = "+this.topiclist.size());
 		this.sortTopiclistByDate(this.topiclist);
-		this.pagination();
-		return "list";
 	}
 	
 	

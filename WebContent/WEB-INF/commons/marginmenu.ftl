@@ -22,11 +22,14 @@
 								</ul>
 							</li>
 							<li class="active">
+								<a href="./bbsbk_topicslist.action">BBS管理</a>								
+							</li>
+							<li class="active">
 								<a href="#">用户管理</a>
 								<!--<a href="./manageruser.action">用户管理</a>-->
 								<ul class="nav">
 								    <li><a href="./manageruser.action">账户管理</a></li>
-								    <li><a href="./bklistArt.action?categoryid=3">企业管理</a></li>
+								    <li><a href="./listUploads.action">企业管理</a></li>
 								    <li><a href="./listtodownloads.action?isall=1">下载管理</a></li>
 								</ul>
 							</li>

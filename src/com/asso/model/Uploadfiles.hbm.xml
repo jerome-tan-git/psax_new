@@ -19,6 +19,9 @@
         </property>
         <property name="userid" type="int">
             <column name="userid" length="11" />
+        </property> 
+        <property name="folderid" type="int">
+            <column name="folderid" length="11" />
         </property>       
     </class>
 </hibernate-mapping>

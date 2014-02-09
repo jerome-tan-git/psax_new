@@ -78,4 +78,7 @@ http://localhost:8080/psax/bbs_topicdetail.action?id=1
 //http://localhost:8080/psax/bbs_intotopicupdate.action?topicid=
 http://localhost:8080/psax/bbs_intocommentupdate.action?commentid=
 
+http://localhost:8080/psax/listUploads.action
+http://localhost:8080/psax/bbsbk_topicsdelete.action?topicid=3
+http://localhost:8080/psax/bbsbk_topicslist.action
 

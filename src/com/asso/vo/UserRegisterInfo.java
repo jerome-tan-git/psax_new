@@ -21,8 +21,22 @@ public class UserRegisterInfo {
 
 	private String[] uploadfiles;	
 	private String[] uploadfilenames;
+	private String uploadfolder;
+//	private String uploadfolderId;
 	
 	
+//	public String getUploadfolderId() {
+//		return uploadfolderId;
+//	}
+//	public void setUploadfolderId(String uploadfolderId) {
+//		this.uploadfolderId = uploadfolderId;
+//	}
+	public String getUploadfolder() {
+		return uploadfolder;
+	}
+	public void setUploadfolder(String uploadfolder) {
+		this.uploadfolder = uploadfolder;
+	}
 	public String getIssave() {
 		return issave;
 	}

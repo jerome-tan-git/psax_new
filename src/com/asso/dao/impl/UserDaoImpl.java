@@ -16,6 +16,7 @@ import com.asso.dao.UserDao;
 import com.asso.model.Form;
 import com.asso.model.Member;
 import com.asso.model.MemberInfo;
+import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
 import com.asso.model.User;
 
@@ -264,10 +265,32 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
+	public List<Uploadfilefolders> loadAllUploadfilefolders() {
+		List<Uploadfilefolders> flist = new ArrayList<Uploadfilefolders>();
+		Session s = sessionFactory.getCurrentSession(); 
+		String hql = "from Uploadfilefolders";
+		System.out.println("---hql----"+hql);		
+        Query query = s.createQuery(hql);
+        flist = query.list();
+        return flist;		
+	}
+	
+	@Override
 	public void save(Uploadfiles _uploadfiles) {
 		Session s = sessionFactory.getCurrentSession(); 
 	     s.beginTransaction();
 	     s.save(_uploadfiles);
+	     s.flush();
+	     s.getTransaction().commit();
+		
+	}
+	
+	
+	@Override
+	public void save(Uploadfilefolders _upff) {
+		Session s = sessionFactory.getCurrentSession(); 
+	     s.beginTransaction();
+	     s.save(_upff);
 	     s.flush();
 	     s.getTransaction().commit();
 		
@@ -278,6 +301,16 @@ public class UserDaoImpl implements UserDao {
 		Session s = sessionFactory.getCurrentSession(); 
 	     s.beginTransaction();
 	     s.delete(_uploadfiles);
+	     s.flush();
+	     s.getTransaction().commit();
+		
+	}
+	
+	@Override
+	public void delete(Uploadfilefolders _upff) {
+		Session s = sessionFactory.getCurrentSession(); 
+	     s.beginTransaction();
+	     s.delete(_upff);
 	     s.flush();
 	     s.getTransaction().commit();
 		

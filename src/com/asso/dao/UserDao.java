@@ -3,6 +3,7 @@ package com.asso.dao;
 import java.util.List;
 
 import com.asso.model.MemberInfo;
+import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
 import com.asso.model.User;
 
@@ -30,6 +31,9 @@ public interface UserDao {
 	void update(User user);
 	List<User> loadAllUsers();
 	void delete(User user);
+	List<Uploadfilefolders> loadAllUploadfilefolders();
+	void save(Uploadfilefolders _upff);
+	void delete(Uploadfilefolders _upff);
 	
 	
 	
