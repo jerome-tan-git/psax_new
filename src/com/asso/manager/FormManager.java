@@ -22,6 +22,12 @@ public interface FormManager {
 	List<Form> loadForms() throws ClassNotFoundException, SQLException;
 
 	List<Form> loadValidForms() throws ClassNotFoundException, SQLException;
+
+	void updateForm2Valid(int _formid) throws ClassNotFoundException,
+			SQLException;
+
+	void updateForm2Invalid(int _formid) throws ClassNotFoundException,
+			SQLException;
 	
 
 }

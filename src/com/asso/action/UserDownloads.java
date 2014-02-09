@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -211,16 +212,89 @@ public class UserDownloads extends ActionSupport implements ServletRequestAware,
 			System.out.println("Time DATA ERROR, PLS INV...");
 	}
 	
-	private void build2DownloadFiles(){
-		List<Form> flist = new ArrayList<Form>();
+	private List<Integer> getInvalidFormIds(Set<String> _formIdInKeys){
+		List<Integer> invalidFormIds = new ArrayList<Integer>();
+		List<Form> fl = new ArrayList<Form>();
 		try {
-//			flist = fm.loadForms();
-			flist = fm.loadValidForms();
+			fl = fm.loadForms();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		List<Integer> validFormIds = new ArrayList<Integer>();
+		if(_formIdInKeys.size()>0){
+			for(String key:_formIdInKeys){				
+				key = key.substring(2,key.length());
+				validFormIds.add(Integer.parseInt(key));
+			}
+		}
+		if(fl.size()>0 && validFormIds.size()>0){
+			for(Form form:fl){
+				int id = form.getFormid();
+				boolean isValid = false;
+				for(int vid :validFormIds){
+					if(vid==id)
+						isValid = true;
+				}
+				if(!isValid)
+					invalidFormIds.add(id);
+			}
+		}
+		return invalidFormIds;
+	}
+	public String updatedownloads(){
+		System.out.println("------------updatedownloads--------------");
+		Map map = this.request.getParameterMap();
+		Set<String> keys = map.keySet();		
+		List<Integer> invalidFormIds = this.getInvalidFormIds(keys);
+		for(String key:keys){
+			System.out.println("----key="+key);
+			key = key.substring(2,key.length());
+			try {
+				fm.updateForm2Valid(Integer.parseInt(key));				
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		for(int invalidid:invalidFormIds){
+			try {
+				fm.updateForm2Invalid(invalidid);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		this.build2DownloadFiles("all");
+		return "list";
+	}
+	
+	private void build2DownloadFiles(String _mode){
+		List<Form> flist = new ArrayList<Form>();
+		if(_mode!=null && _mode.equals("all")){
+			try {
+				flist = fm.loadForms();			
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+//				flist = fm.loadForms();
+				flist = fm.loadValidForms();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		this.formlist = new ArrayList<Form>();
 		for(Form f:flist){
 			System.out.println("---------->>>"+f.toString());
@@ -231,32 +305,13 @@ public class UserDownloads extends ActionSupport implements ServletRequestAware,
 		}
 	}
 	
-	private void build2BDownloadedFiles(){
-		List<Form> flist = new ArrayList<Form>();
-		try {
-			flist = fm.loadForms();			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		this.formlist = new ArrayList<Form>();
-		for(Form f:flist){
-			System.out.println("---------->>>"+f.toString());
-			if(f.getDisplayname()!=null && f.getDisplayname().length()>0
-					&& f.getFrontendtpl()!=null && f.getFrontendtpl().length()>0
-					&& f.getPath()!=null && f.getPath().length()>0)
-				this.formlist.add(f);
-		}
-	}
-
 	
 	@Override
 	public String execute(){
 		String isall = this.request.getParameter("isall");
 		if(isall!=null && isall.length()>0){
 			System.out.println("---------------Backend edit listing forms for users--------------");
-			this.build2BDownloadedFiles();
+			this.build2DownloadFiles("all");
 			return "list";
 		}else{
 			if(this.session!=null){
@@ -265,9 +320,8 @@ public class UserDownloads extends ActionSupport implements ServletRequestAware,
 					this.user = new User();
 					this.setUser(u);
 				}
-				System.out.println("session user------"+u.toString());
-				
-				this.build2DownloadFiles();
+				System.out.println("session user------"+u.toString());				
+				this.build2DownloadFiles("");
 			}		
 			return "success";
 		}	

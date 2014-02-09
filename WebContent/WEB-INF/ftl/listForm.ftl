@@ -57,33 +57,39 @@
 				
 				<div class="col-md-8">
 				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom: 1px solid #D6D6D6;position: relative;">
-				  <h1><small>!CATEGORY NAME!</small></h1>
-				  <div style="float: right;position: absolute;right: 20px;top: 10px;font-size: 13pt;color: #333;">
-				  	<a href="./managerArt.action"><span class="glyphicon glyphicon-plus"></span></a> �½�
-				  </div>
+				  <h1><small>用户下载文件</small></h1>
+				  
 				</div>
 					<div class="col-md-12">
-					<#if artlist?exists>
-						<#list artlist as article>
-						<#if article?exists>
-						<div class="panel panel-default exam_container">
-						  <div class="panel-heading clearfix">
-						  		<div class="exam_title_list pull-left ">${article.pubdate}&nbsp;&nbsp;&nbsp;${article.title}</div>
-						  		<a href="#"><span class="glyphicon glyphicon-remove pull-right hand deleteExam" ></span></a>
-						  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
-						  		<a href="#"><span class="glyphicon glyphicon-pencil pull-right hand deleteExam" ></span></a>
-						  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
-							  	
+					<form action="updatedownloadfiles.action" method="post">
+					<#if formlist?exists>
+						<#list formlist as form>
+						<#if form?exists>
+							<div class="panel panel-default exam_container">
+							  <div class="panel-heading clearfix">
+							  		<div class="exam_title_list pull-left ">
+							  		<#if (form.isshow==1)>
+								  		<input type="checkbox" name="f_${form.formid}" value="${form.formid}" checked/>
+								  	<#else>
+								  		<input type="checkbox" name="f_${form.formid}" value="${form.formid}" />
+								  	</#if>
+								  		&nbsp;&nbsp;&nbsp;
+								  		${form.displayname}
+							  		</div>							  		
+							  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>							  		
+							  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+								  	
+								</div>
 							</div>
-						</div>
 						</#if>
 						</#list>
-																	
+						<ul class="pager">
+							<input type="submit" value="确认"></input>
+						</ul>																	
 					</#if>
-														
+					</form>									
 						<ul class="pager">
 						  
-						  				  
 						</ul>
 					</div>
 				</div>

@@ -7,8 +7,15 @@ public class Uploadfiles {
 	private String file;
 	private String uploadtime;
 	private String fname;
+	private int folderid;
 	
 	
+	public int getFolderid() {
+		return folderid;
+	}
+	public void setFolderid(int folderid) {
+		this.folderid = folderid;
+	}
 	public String getFname() {
 		return fname;
 	}
@@ -41,7 +48,7 @@ public class Uploadfiles {
 	}
 	
 	public String toString(){
-		return this.id+":"+this.userid+":"+this.file+":"+this.uploadtime+":"+this.fname;
+		return this.id+":"+this.userid+":"+this.file+":"+this.uploadtime+":"+this.fname+":"+this.folderid;
 	}
 
 }

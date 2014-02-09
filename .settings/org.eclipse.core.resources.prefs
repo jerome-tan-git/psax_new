@@ -22,6 +22,7 @@ encoding//WebContent/WEB-INF/ftl/exam_rz.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/form.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/imagesArtList.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/listArticle.ftl=UTF-8
+encoding//WebContent/WEB-INF/ftl/listForm.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/listItem.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/login.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/loginError.ftl=UTF-8

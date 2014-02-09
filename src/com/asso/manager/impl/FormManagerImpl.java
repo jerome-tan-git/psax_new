@@ -36,6 +36,20 @@ public class FormManagerImpl implements FormManager {
 	public void updateForm(Form _form) throws ClassNotFoundException, SQLException {		
 		formDao.updateForm(_form);		
 	}
+	@Override
+	public void updateForm2Valid(int _formid) throws ClassNotFoundException, SQLException {
+		Form form = new Form();
+		form = formDao.loadForm(_formid);
+		form.setIsshow(1);
+		formDao.updateForm(form);		
+	}
+	@Override
+	public void updateForm2Invalid(int _formid) throws ClassNotFoundException, SQLException {
+		Form form = new Form();
+		form = formDao.loadForm(_formid);
+		form.setIsshow(0);
+		formDao.updateForm(form);		
+	}
 //	
 //	@Override
 //	public List<Article> loadArticles(int categoryid) throws ClassNotFoundException, SQLException{
