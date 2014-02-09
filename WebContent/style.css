@@ -1879,3 +1879,28 @@ margin-top: 10px;
 	font-size: 15pt;
 	padding-bottom: 9px;
 }
+
+
+.member_block_folder
+{
+	width: 166px;
+	float: left;
+	height: 161px;
+	margin: 20px;
+	overflow: hidden;
+	position: relative;
+}
+.member_block_folder.blue
+{
+	background: url('./images/folderback.png') repeat-x;
+}
+.member_block_upload_folder_title
+{
+	position: absolute;
+font-size: 13pt;
+color: #161616;
+top: 137px;
+left: 0px;
+width: 160px;
+text-align: center;
+}

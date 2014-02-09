@@ -70,7 +70,7 @@ http://localhost:8080/psax/page.action?categoryid=2
 http://localhost:8080/psax/listtodownloads.action
 http://localhost:8080/psax/manageruser.action
 http://localhost:8080/psax/index
-http://localhost:8080/psax/
+
 
 http://localhost:8080/psax/bbs_toinput.action
 http://localhost:8080/psax/bbs_alltopiclist.action
@@ -81,4 +81,4 @@ http://localhost:8080/psax/bbs_intocommentupdate.action?commentid=
 http://localhost:8080/psax/listUploads.action
 http://localhost:8080/psax/bbsbk_topicsdelete.action?topicid=3
 http://localhost:8080/psax/bbsbk_topicslist.action
-
+http://localhost:8080/psax/uploadfoldersmanager.action

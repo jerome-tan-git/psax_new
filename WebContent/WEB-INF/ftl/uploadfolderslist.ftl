@@ -67,23 +67,7 @@ transitional.dtd">
 		}
 			$(document).ready(function() {
 				
-				
-				
-				
-				
-
-				// bancy bo=x
-				// jQuery("a#example6").fancybox({
-					// 'titlePosition' : 'outside',
-					// 'overlayColor' : '#000',
-					// 'overlayOpacity' : 0.9
-				// });
-				//slider
-				// var sudoSlider = jQuery("#testimonail").sudoSlider({
-				// continuous:true,
-				// numeric:false
-				// });
-				$('.banner').unslider();
+			$('.banner').unslider();
 
 				//menu_item
 				$(".menu_item").hover(function() {
@@ -187,11 +171,6 @@ transitional.dtd">
 			
 			
 			
-			
-			
-			
-			
-			
 		</script>
 	</head>
 	<body>
@@ -249,16 +228,11 @@ transitional.dtd">
 			<!-- Teaser Start -->
 			<div class="section" id="content" class="tag_line" style="padding-top: 30px">
 			<div class="clearfix">
-			<#if upflist?exists>
-				<#list upflist as upf>
-					<div class="member_block_upload blue">
-						<div class="member_upload_icon">&nbsp;</div>
-						<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
-						<div class="member_block_upload_title">${upf.fname}</div>
-						<div class="member_block_upload_desc">${upf.uploadtime}</div>
-						<div class="del_upload">
-							<a href="./uploadfilesmanager.action?upfid=${upf.id}">x</a>
-						</div>
+			<#if upfflist?exists>
+				<#list upfflist as upff>
+					<div class="member_block_folder blue">
+						<div class="member_block_upload_folder_title">${upff.foldername}</div>
+												
 					</div>		
 					<div></div>
 				</#list>

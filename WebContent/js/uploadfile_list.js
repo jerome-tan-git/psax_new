@@ -25,7 +25,7 @@ $(document).ready(function() {
 					//alert('The file was saved to: ' + obj.plugin);
 				},
 				'onUploadComplete' : function(file) {
-					//alert('The file ' + file.name + ' finished processing.');
+					$('#uploadForm').submit();
 				}
 			});
 	

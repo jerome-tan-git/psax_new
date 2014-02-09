@@ -369,8 +369,7 @@ public class BbsEdit extends ActionSupport implements ModelDriven<Object>,Servle
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		
+		}		
 		this.listAllTopics();
 		return "delete";
 	}
