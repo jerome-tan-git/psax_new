@@ -265,6 +265,35 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
+	public List<Uploadfiles> loadUploadfilesByFolderId(int _folderid) {
+		List<Uploadfiles> ffiles = new ArrayList<Uploadfiles>();
+		Session s = sessionFactory.getCurrentSession(); 
+		String hql = "from Uploadfiles where folderid=?";      
+	    Query query = s.createQuery(hql); 
+	    query.setString(0, ""+_folderid);
+		ffiles = query.list();
+		System.out.println("ffiles size="+ffiles.size());
+		for(Uploadfiles ff:ffiles)
+			System.out.println("-----###-----"+ff.toString());
+		return ffiles;
+	}
+	
+	@Override
+	public List<Uploadfiles> loadUploadfilesByFolderIdUserId(int _folderid, int _userid) {
+		List<Uploadfiles> ffiles = new ArrayList<Uploadfiles>();
+		Session s = sessionFactory.getCurrentSession(); 
+		String hql = "from Uploadfiles where folderid=? and userid=?";      
+	    Query query = s.createQuery(hql); 
+	    query.setString(0, ""+_folderid);
+	    query.setString(1, ""+_userid);
+		ffiles = query.list();
+		System.out.println("ffiles size="+ffiles.size());
+		for(Uploadfiles ff:ffiles)
+			System.out.println("-----###-----"+ff.toString());
+		return ffiles;
+	}
+	
+	@Override
 	public List<Uploadfilefolders> loadAllUploadfilefolders() {
 		List<Uploadfilefolders> flist = new ArrayList<Uploadfilefolders>();
 		Session s = sessionFactory.getCurrentSession(); 

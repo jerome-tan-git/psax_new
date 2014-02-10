@@ -100,6 +100,11 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	}
 	public String upload(){
 		System.out.println("---------------upload---------------");
+		String folderid = this.request.getParameter("folderid");
+		int fid = 0;
+		if(folderid!=null && folderid.length()>0)
+			fid = Integer.parseInt(folderid);
+		
 		
 		String userid = this.uInfo.getUserid();
 		System.out.println("GET userid--->"+userid);
@@ -122,6 +127,7 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 				uploadfiles.setFname(ufn);
 				uploadfiles.setUserid(Integer.parseInt(userid));
 				uploadfiles.setUploadtime(CONSTANT.getNowTime());
+				uploadfiles.setFolderid(fid);
 				try {
 					um.addUploadfiles(uploadfiles);
 				} catch (ClassNotFoundException e) {
@@ -153,6 +159,42 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 		}
 
 		this.loadFolder();
+	}
+	
+	private void buildLoadedFolderFiles(int _folderid,int _userid){
+		this.upflist = new ArrayList<Uploadfiles>();
+		try {
+//			this.setUpflist(um.loadUploadedFilesByFolderid(_folderid));
+			if(_userid>0)
+				this.setUpflist(um.loadUploadedFilesByFolderidUserid(_folderid, _userid));
+			else
+				this.setUpflist(um.loadUploadedFilesByFolderid(_folderid));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for(Uploadfiles uf:this.upflist){
+			String time = uf.getUploadtime();
+			time = time.substring(0,10);
+			uf.setUploadtime(time);
+			System.out.println("---------->>>"+uf.toString());
+		}
+
+	}
+	
+	public String loadFolderFile(){
+		String folderid = this.request.getParameter("folderid");
+		if(folderid!=null && folderid.length()>0){
+			int fid = Integer.parseInt(folderid);
+			String userid = this.uInfo.getUserid();
+			System.out.println("GET userid------>"+userid);
+			if(userid!=null && userid.length()>0)
+				this.buildLoadedFolderFiles(fid,Integer.parseInt(userid));
+			else
+				this.buildLoadedFolderFiles(fid, 0);
+		}
+		return "success";
 	}
 
 	public String loadFolder(){

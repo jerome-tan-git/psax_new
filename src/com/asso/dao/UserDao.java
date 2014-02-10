@@ -34,6 +34,8 @@ public interface UserDao {
 	List<Uploadfilefolders> loadAllUploadfilefolders();
 	void save(Uploadfilefolders _upff);
 	void delete(Uploadfilefolders _upff);
+	List<Uploadfiles> loadUploadfilesByFolderId(int _folderid);
+	List<Uploadfiles> loadUploadfilesByFolderIdUserId(int _folderid, int _userid);
 	
 	
 	

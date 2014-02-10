@@ -53,6 +53,12 @@ public interface UserManager {
 	void deleteUploadfolder(Uploadfilefolders upff)
 			throws ClassNotFoundException, SQLException;
 
+	List<Uploadfiles> loadUploadedFilesByFolderid(int _folderid)
+			throws ClassNotFoundException, SQLException;
+
+	List<Uploadfiles> loadUploadedFilesByFolderidUserid(int _folderid,
+			int _userid) throws ClassNotFoundException, SQLException;
+
 
 
 

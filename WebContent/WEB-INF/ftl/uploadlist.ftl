@@ -234,7 +234,7 @@ transitional.dtd">
 					<div class="sub_header_description">
 						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
 						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
-						<span class="page">企业管理</span>
+						<span class="page"><a href="./uploadfoldersmanager.action">企业管理</a></span>
 					</div>
 
 				</div>
@@ -269,7 +269,16 @@ transitional.dtd">
 					<#assign user=Session.user_>	
 				<div style="border-bottom: 1px solid #ccc;margin-left:10px;margin-right:10px;margin-bottom:10px">&nbsp;</div>
 				<div style="margin-left:9px;position:relative;">
+				<#if upflist?exists>
+					<#list upflist as upf>
+						<#if (upf_index==0)>
+						<#assign fid=upf.folderid>
+						<form id="uploadForm" action="./useruploadfiles.action?folderid=${fid?default("")}">						
+						</#if>
+					</#list>
+				<#else>
 					<form id="uploadForm" action="./useruploadfiles.action">
+				</#if>
 						<input type="file" id="file_upload_1" name="uploadfiles"/>
 						<input type="hidden" name="userid" value="${user.id?default("")}"/>
 						

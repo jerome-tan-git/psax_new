@@ -115,8 +115,6 @@
 														
 						<ul class="pager">
 						  
-						 
-						  				  
 						</ul>
 					</div>
 				</div>

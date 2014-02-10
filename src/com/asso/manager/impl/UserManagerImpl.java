@@ -123,6 +123,18 @@ public class UserManagerImpl implements UserManager {
 		System.out.println("loadUploadedFilesByUserid, input userid ------"+_userid);
 		return userDao.loadUploadfilesByUserId(_userid);	
 	}
+	
+	@Override
+	public List<Uploadfiles> loadUploadedFilesByFolderid(int _folderid) throws ClassNotFoundException, SQLException{		
+		System.out.println("loadUploadedFilesByFolderid, input folderid ------"+_folderid);
+		return userDao.loadUploadfilesByFolderId(_folderid);	
+	}
+	
+	@Override
+	public List<Uploadfiles> loadUploadedFilesByFolderidUserid(int _folderid, int _userid) throws ClassNotFoundException, SQLException{		
+		System.out.println("loadUploadedFilesByFolderid, input folderid ------"+_folderid+",  userid ------"+_userid);
+		return userDao.loadUploadfilesByFolderIdUserId(_folderid, _userid);	
+	}
 
 	@Override
 	public void deleteUploadedFile(int _uploadedfileid) throws ClassNotFoundException, SQLException{

@@ -230,15 +230,16 @@ transitional.dtd">
 			<div class="clearfix">
 			<#if upfflist?exists>
 				<#list upfflist as upff>
+				<a href="./uploadfolderfilesmanager.action?folderid=${upff.id}">
 					<div class="member_block_folder blue">
-						<div class="member_block_upload_folder_title">${upff.foldername}</div>
-												
+						<div class="member_block_upload_folder_title">${upff.foldername}</div>						
 					</div>		
-					<div></div>
+				</a>
 				</#list>
 			</#if>
+			<div></div>
 			</div>
-				
+			
 				<#if Session.user_?exists>
 					<#assign user=Session.user_>	
 				<div style="border-bottom: 1px solid #ccc;margin-left:10px;margin-right:10px;margin-bottom:10px">&nbsp;</div>
@@ -254,7 +255,7 @@ transitional.dtd">
 					</form>
 				</div>	
 				</#if>
-				
+			
 			</div>
 			<!-- Teaser End -->
 
