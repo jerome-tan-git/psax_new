@@ -61,6 +61,8 @@
 				        <button type="submit" class="btn btn-primary">保存</button>
 				      </div>
 			      </form>
+			      
+			       
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
@@ -117,6 +119,74 @@
 						  
 						</ul>
 					</div>
+					
+				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom: 1px solid #D6D6D6;position: relative;">
+				  <h3><small>企业用户文件 </small></h3>				 
+				  <div style="padding-right: 28px;margin-bottom: 23px;">
+					<span class="glyphicon glyphicon-plus pull-right hand deleteExam" >查看</span>	
+				  </div>
+				</div>
+				<div class="col-md-12">				
+					<form method="post" action="listUploads.action">
+						 <div class="form-group">
+						  	<div><label class="col-sm-12">用户</label></div>
+						  	<#if allusers?exists>				    	
+						    <div class="col-sm-8">
+								<select name="userid" class="form-control">
+								<#list allusers as user>
+									<#if user?exists && (user.id>0)>
+								  		<option class="e_c" value="${user.id}">${user.username}</option>
+								  	</#if>
+								</#list>
+								</select>
+							</div>
+							</#if>					
+						  </div>
+						  
+						  <div class="form-group">
+						  	<div><label class="col-sm-12">文件夹</label></div>
+						  	<#if upfflist?exists>											    	
+						    <div class="col-sm-8">						    					
+								<select name="uploadfolderId" class="form-control">
+								<#list upfflist as upff>	
+									<#if upff?exists>
+									  	<option class="e_c" value="${upff.id}">${upff.foldername}</option>
+									</#if>
+								</#list>
+								</select>							
+							</div>
+							</#if>						
+						  </div>
+					
+					<br/><br/><br/><br/><br/><br/><br/><br/>	
+						
+						<div class="form-group">
+						    <div style="padding-right: 28px;margin-bottom: 23px;">
+								<input type="submit" value="确认" />
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="col-md-12">
+					<#if upflist?exists>
+						<#list upflist as upf>
+						<#if upf?exists>
+						<div class="panel panel-default exam_container">
+						  <div class="panel-heading clearfix">
+						  		<div class="exam_title_list pull-left ">${upf.uploadtime}&nbsp;&nbsp;&nbsp;${upf.fname}</div>						  		
+						  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>						  		
+						  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>							  	
+							</div>
+						</div>
+						</#if>
+						</#list>																	
+					</#if>														
+					<ul class="pager">						  
+					</ul>
+				</div>
+				
+				
 				</div>
 			</div>
 		</div>

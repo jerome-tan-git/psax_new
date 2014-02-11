@@ -59,6 +59,10 @@
 				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom: 1px solid #D6D6D6;position: relative;">
 				  <h1><small>用户下载文件</small></h1>
 				  
+				  <div style="padding-right: 28px;margin-bottom: 23px;">
+					<span class="glyphicon glyphicon-plus pull-right hand deleteExam" onclick="showUserDialog('','','')">添加新表格</span>
+				  </div>
+				  
 				</div>
 					<div class="col-md-12">
 					<form action="updatedownloadfiles.action" method="post">

@@ -91,8 +91,8 @@
 			<result name="success" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>	
 			<interceptor-ref name="mystack" />		 
 		</action>
-		<action name="listUploads" class="com.asso.action.UserBuilt" method="loadFolder">  
-			<result name="list" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
+		<action name="listUploads" class="com.asso.action.UserBuilt" method="loadAlluffs">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
 			<interceptor-ref name="mystack" />		 
 		</action>
 		<action name="useruploadfiles" class="com.asso.action.UserBuilt" method="upload">  

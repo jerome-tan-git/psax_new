@@ -36,6 +36,8 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	private User user;
 	private List<Uploadfiles> upflist;
 	private List<Uploadfilefolders> upfflist;
+	private List<User> allusers;
+	
 
 	public UserBuilt(){
 		um = (UserManager) SpringFactory.getObject("userManager");
@@ -71,6 +73,12 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	}
 	public void setUpfflist(List<Uploadfilefolders> upfflist) {
 		this.upfflist = upfflist;
+	}
+	public List<User> getAllusers() {
+		return allusers;
+	}
+	public void setAllusers(List<User> allusers) {
+		this.allusers = allusers;
 	}
 
 	public String manager(){
@@ -209,9 +217,8 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 		return "success";
 	}
 
-	public String loadFolder(){
+	public String loadFolder(){		
 		
-		System.out.println("TEST ~~~~~，，，，，，，，，~~~~~");
 		this.upfflist = new ArrayList<Uploadfilefolders>();
 		try {
 			upfflist = um.loadUploadeFileFolders();
@@ -220,12 +227,39 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		for(Uploadfilefolders upff:upfflist ){
-			System.out.println("FOLDER: "+upff.toString());
-		}
-		System.out.println("TEST ~~~~~，，，，，，，，，~~~~~");
-		
+//		for(Uploadfilefolders upff:upfflist ){
+//			System.out.println("FOLDER: "+upff.toString());
+//		}		
 		return "list";
+	}
+	
+	private void loadAllUsers(){
+		this.allusers = new ArrayList<User>();
+		try {
+			this.allusers = um.loadusers();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String loadAlluffs(){
+		String userid = this.uInfo.getUserid();
+		String folderid = this.uInfo.getUploadfolderId();
+		System.out.println("~~~loadAlluffs~~~userid="+userid+", folderid="+folderid);
+		int uid = 0;
+		int fid = 0;
+		this.upflist = new ArrayList<Uploadfiles>();
+		if(userid!=null && userid.length()>0 )
+			uid = Integer.parseInt(userid);	
+		if(folderid!=null && folderid.length()>0)
+			fid = Integer.parseInt(folderid);
+		if(uid>0)
+			this.buildLoadedFolderFiles(fid, uid);
+		this.loadFolder();
+		this.loadAllUsers();
+		return "success";
 	}
 	
 	public String addfolder(){		
