@@ -37,7 +37,7 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	private List<Uploadfiles> upflist;
 	private List<Uploadfilefolders> upfflist;
 	private List<User> allusers;
-	
+	private Uploadfilefolders folder;
 
 	public UserBuilt(){
 		um = (UserManager) SpringFactory.getObject("userManager");
@@ -79,6 +79,12 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	}
 	public void setAllusers(List<User> allusers) {
 		this.allusers = allusers;
+	}
+	public Uploadfilefolders getFolder() {
+		return folder;
+	}
+	public void setFolder(Uploadfilefolders folder) {
+		this.folder = folder;
 	}
 
 	public String manager(){
@@ -158,6 +164,59 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 			this.loadFolder();
 			return "upload0";
 		}
+		
+	}
+	
+	public String uploaduploads(){
+		System.out.println("---------------uploaduploads---------------");
+//		String upfolderid = this.uInfo.getUploadfolderId();
+//		String userid = this.uInfo.getUserid();
+//		int fid = 0; int uid=0;
+//		if(upfolderid!=null && upfolderid.length()>0)
+//			fid = Integer.parseInt(upfolderid);
+//		if(userid!=null && userid.length()>0)
+//			uid = Integer.parseInt(userid);
+		
+		
+//		--------------uploaduploads---------------
+//		GET uploadfile name--->e.png
+//		GET uploadfile--->./ckimages/829_ZQ==.png
+//		GET uploadfiles--->0:-1:./ckimages/829_ZQ==.png:2014-02-11 19:11:e.png:-1
+		
+		
+		String[] upfileNames = this.uInfo.getUploadfilenames();
+		if(upfileNames!=null){
+			for(String ufn:upfileNames){
+				System.out.println("GET uploadfile name--->"+ufn);
+			}
+			
+			String[] upfiles = this.uInfo.getUploadfiles();
+			if(upfileNames.length!=upfiles.length)
+				System.out.println("ERROR!!!!---->upfileNames.length!=upfiles.length");
+			for(int i=0;i<upfiles.length; i++){
+				String uf = upfiles[i];
+				String ufn = upfileNames[i];
+				System.out.println("GET uploadfile--->"+uf);
+				Uploadfiles uploadfiles = new Uploadfiles();
+				uploadfiles.setFile(uf);
+				uploadfiles.setFname(ufn);				
+				uploadfiles.setUserid(-1);
+				uploadfiles.setUploadtime(CONSTANT.getNowTime());
+				uploadfiles.setFolderid(-1);
+				System.out.println("GET uploadfiles--->"+uploadfiles.toString());
+//				try {
+//					um.addUploadfiles(uploadfiles);
+//				} catch (ClassNotFoundException e) {
+//					e.printStackTrace();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+			}		
+		}		
+			
+//		this.buildLoadedFolderFiles(fid, uid);
+					
+		return "upload";
 		
 	}
 	
@@ -251,12 +310,19 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 		int uid = 0;
 		int fid = 0;
 		this.upflist = new ArrayList<Uploadfiles>();
-		if(userid!=null && userid.length()>0 )
-			uid = Integer.parseInt(userid);	
-		if(folderid!=null && folderid.length()>0)
+		if(userid!=null && userid.length()>0 ){
+			uid = Integer.parseInt(userid);
+			this.user = new User();
+			this.user.setId(uid);
+		}
+		if(folderid!=null && folderid.length()>0){
 			fid = Integer.parseInt(folderid);
+			this.folder = new Uploadfilefolders();
+			this.folder.setId(fid);
+		}
 		if(uid>0)
 			this.buildLoadedFolderFiles(fid, uid);
+		
 		this.loadFolder();
 		this.loadAllUsers();
 		return "success";

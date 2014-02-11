@@ -84,11 +84,13 @@
 			<div class="row" style="width: 100%;">
 				<#include "../commons/marginmenu.ftl">
 				
-				<div class="col-md-8">
+				<div class="col-md-4">
 					
-				
-				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom: 1px solid #D6D6D6;position: relative;">
-				  <h1><small>企业下载文件夹管理</small></h1>
+
+				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom: 1px solid #D6D6D6;position: relative; height: 35px;">
+				<div style="width:200px;float: left;font-size: 12pt;">
+				  <span>企业下载文件夹管理</span>
+				  </div>
 				  <!--
 				  <div style="float: right;position: absolute;right: 20px;top: 10px;font-size: 13pt;color: #333;">
 				  	<a href="./managerArt.action"><span class="glyphicon glyphicon-plus"></span></a> 新建
@@ -120,56 +122,74 @@
 						</ul>
 					</div>
 					
+
+
+				
+				
+				</div><!-- div col = 8-->
+				
+				<div class="col-md-4">
 				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom: 1px solid #D6D6D6;position: relative;">
 				  <h3><small>企业用户文件 </small></h3>				 
-				  <div style="padding-right: 28px;margin-bottom: 23px;">
-					<span class="glyphicon glyphicon-plus pull-right hand deleteExam" >查看</span>	
-				  </div>
+				  
 				</div>
-				<div class="col-md-12">				
-					<form method="post" action="listUploads.action">
-						 <div class="form-group">
-						  	<div><label class="col-sm-12">用户</label></div>
-						  	<#if allusers?exists>				    	
-						    <div class="col-sm-8">
-								<select name="userid" class="form-control">
-								<#list allusers as user>
-									<#if user?exists && (user.id>0)>
-								  		<option class="e_c" value="${user.id}">${user.username}</option>
-								  	</#if>
-								</#list>
-								</select>
-							</div>
-							</#if>					
-						  </div>
-						  
-						  <div class="form-group">
-						  	<div><label class="col-sm-12">文件夹</label></div>
-						  	<#if upfflist?exists>											    	
-						    <div class="col-sm-8">						    					
-								<select name="uploadfolderId" class="form-control">
-								<#list upfflist as upff>	
-									<#if upff?exists>
-									  	<option class="e_c" value="${upff.id}">${upff.foldername}</option>
-									</#if>
-								</#list>
-								</select>							
-							</div>
-							</#if>						
-						  </div>
-					
-					<br/><br/><br/><br/><br/><br/><br/><br/>	
+				<form method="post" action="listUploads.action" class="form-horizontal" role="form">
+					<div class="col-md-12">				
+					<div class="form-group">
+					    <label for="inputEmail3" class="col-sm-3 control-label">用户</label>
+					    <div class="col-sm-9">
+					      <#if allusers?exists>				    	
+					    
+							<select name="userid" class="form-control">
+							<#list allusers as s_user>
+								<#if s_user?exists && (s_user.id>0)>
+									<#if user?exists && (user.id>0) && (user.id==s_user.id)>
+										<option class="e_c" value="${s_user.id}" selected>${s_user.username}</option>
+									<#else>
+										<option class="e_c" value="${s_user.id}">${s_user.username}</option>
+									</#if>							  		
+							  	</#if>
+							</#list>
+							</select>
 						
-						<div class="form-group">
-						    <div style="padding-right: 28px;margin-bottom: 23px;">
-								<input type="submit" value="确认" />
-							</div>
-						</div>
-					</form>
+						</#if>	
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputPassword3" class="col-sm-3 control-label">文件夹</label>
+					    <div class="col-sm-9">
+					      <#if upfflist?exists>											    	
+						   			
+							<select name="uploadfolderId" class="form-control">
+							<#list upfflist as upff>	
+								<#if upff?exists>
+									<#if folder?exists && (folder.id==upff.id)>
+									<option class="e_c" value="${upff.id}" selected>${upff.foldername}</option>
+									<#else>
+								  	<option class="e_c" value="${upff.id}">${upff.foldername}</option>
+								  	</#if>
+								</#if>
+							</#list>
+							</select>							
+							
+							</#if>	
+					    </div>
+					    
+
+					  </div>
+					  <div class="form-group">
+						    <div class="col-sm-10" style="float:right;padding-right: 15px;">
+						      <button type="submit" class="btn btn-default"  style="float:right">确认</button>
+						    </div>
+					 </div>
 				</div>
-				
+				</form>
 				<div class="col-md-12">
 					<#if upflist?exists>
+					<div class="page-header" style="margin-top: -15px;border-bottom: 1px solid #D6D6D6;position: relative;font-size: 12pt;">
+					  <span>共有${upflist?size}个文件</span>				 
+					  
+					</div>
 						<#list upflist as upf>
 						<#if upf?exists>
 						<div class="panel panel-default exam_container">
@@ -186,8 +206,16 @@
 					</ul>
 				</div>
 				
-				
 				</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			</div>
 		</div>
 

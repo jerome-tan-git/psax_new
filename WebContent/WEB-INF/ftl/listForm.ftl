@@ -13,6 +13,9 @@
 		<script src="./js/ckeditor/adapters/jquery.js"></script>
 		<script src="./js/backend.js"></script>
 		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+		<script src="./js/jquery.uploadify.js"></script>		
+		<script src="./js/uploadfile_list.js"></script>
 		<script>
 		var selectIndex = -1;
 		CKEDITOR.disableAutoInline = true;
@@ -63,9 +66,19 @@
 					<span class="glyphicon glyphicon-plus pull-right hand deleteExam" onclick="showUserDialog('','','')">添加新表格</span>
 				  </div>
 				  
-				</div>
+				 <div style="border-bottom: 1px solid #ccc;margin-left:10px;margin-right:10px;margin-bottom:10px">&nbsp;</div>
+						<div style="margin-left:9px;position:relative;">
+							<form id="uploadForm" action="./foruseruploadfiles.action">
+								<input type="file" id="file_upload_1" name="uploadfiles"/>
+								
+							</form>
+						</div>
+				 </div>
 					<div class="col-md-12">
 					<form action="updatedownloadfiles.action" method="post">
+					<!--<input type="file" name="formfile" id="file_upload_1"/>	
+					<input type="hidden" class="all_realPath" name="formurl" />-->
+					
 					<#if formlist?exists>
 						<#list formlist as form>
 						<#if form?exists>

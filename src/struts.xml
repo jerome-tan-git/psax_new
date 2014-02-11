@@ -100,6 +100,10 @@
 			<result name="upload0" type="freemarker">/WEB-INF/ftl/uploadfolderslist.ftl</result>
 			<interceptor-ref name="mystack" />			 
 		</action>
+		<action name="foruseruploadfiles" class="com.asso.action.UserBuilt" method="uploaduploads">  
+			<result name="upload" type="freemarker">/WEB-INF/ftl/listForm.ftl</result>			
+			<interceptor-ref name="mystack" />			 
+		</action>
 		<action name="addfolder" class="com.asso.action.UserBuilt" method="addfolder">  
 			<result name="list" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
 			<interceptor-ref name="mystack" />		 
