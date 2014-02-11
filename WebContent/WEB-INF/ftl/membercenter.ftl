@@ -222,15 +222,37 @@ transitional.dtd">
 
 			<!-- Teaser Start -->
 			<div class="section" id="content" class="tag_line" style="padding-top: 30px">
+				
+				
+				<#if Session?exists>
+					<#if Session.user_?exists>
+						<#assign user=Session.user_>						
+						<#if hasCorpForm(user.id)==1>
+							<a href="./hello?mode=edit">
+						<#else>
+							<a href="./hello?formid=9">
+						</#if>
+					<#else>
+						<a href="./hello?formid=9">
+					</#if>
+				</#if>								
+				<div class="member_block qyxx">
+					<div class="member_block_icon qyxx">&nbsp;</div>
+					<div class="member_block_icon_bg qyxx_bg">&nbsp;</div>
+					<div class="member_block_title">企业信息</div>
+				</div>
+				</a>
+				<a href="./usercenter.action">				
+				<div class="member_block jbxx">
+					<div class="member_block_icon jbxx">&nbsp;</div>
+					<div class="member_block_icon_bg jbxx_bg">&nbsp;</div>
+					<div class="member_block_title">基本信息</div>
+				</div>
+				</a>
 				<div class="member_block blue">
 					<div class="member_block_icon gkbs">&nbsp;</div>
 					<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
 					<div class="member_block_title">公开办事</div>
-				</div>
-				<div class="member_block jgdt">
-					<div class="member_block_icon jgdt">&nbsp;</div>
-					<div class="member_block_icon_bg jgdt_bg">&nbsp;</div>
-					<div class="member_block_title">监管动态</div>
 				</div>
 				<!--<a href="./upload_list.html">-->
 				<!--<a href="./uploadfilesmanager.action">-->
@@ -238,23 +260,7 @@ transitional.dtd">
 				<div class="member_block qygl">
 					<div class="member_block_icon qygl">&nbsp;</div>
 					<div class="member_block_icon_bg  qygl_bg">&nbsp;</div>
-					<div class="member_block_title">企业管理</div>
-				</div>
-				</a>
-				<!--<a href="./notice.html">-->
-				<a href="./listnotice.action">
-				<div class="member_block tz">
-					<div class="member_block_icon tz">&nbsp;</div>
-					<div class="member_block_icon_bg tz_bg">&nbsp;</div>
-					<#if Session?exists>
-						<#if Session.user_?exists>
-						<#assign user=Session.user_>						
-						<div class="unread">${stats(user.id)}&nbsp;<img src="./images/iconmonstr-email-4-icon-16.png" /></div>
-						<#else>
-						<div class="unread">&nbsp;</div>
-						</#if>
-					</#if>
-					<div class="member_block_title">通知</div>
+					<div class="member_block_title">食品生产管理</div>
 				</div>
 				</a>
 				<!--<a href="./download.html">-->
@@ -272,29 +278,26 @@ transitional.dtd">
 					<div class="member_block_title">考试中心</div>
 				</div>
 				</a>
-				<a href="./usercenter.action">				
-				<div class="member_block jbxx">
-					<div class="member_block_icon jbxx">&nbsp;</div>
-					<div class="member_block_icon_bg jbxx_bg">&nbsp;</div>
-					<div class="member_block_title">基本信息</div>
+				<div class="member_block jgdt">
+					<div class="member_block_icon jgdt">&nbsp;</div>
+					<div class="member_block_icon_bg jgdt_bg">&nbsp;</div>
+					<div class="member_block_title">监管动态</div>
 				</div>
-				</a>
-				<#if Session?exists>
-					<#if Session.user_?exists>
+				
+				<!--<a href="./notice.html">-->
+				<a href="./listnotice.action">
+				<div class="member_block tz">
+					<div class="member_block_icon tz">&nbsp;</div>
+					<div class="member_block_icon_bg tz_bg">&nbsp;</div>
+					<#if Session?exists>
+						<#if Session.user_?exists>
 						<#assign user=Session.user_>						
-						<#if hasCorpForm(user.id)==1>
-							<a href="./hello?mode=edit">
+						<div class="unread">${stats(user.id)}&nbsp;<img src="./images/iconmonstr-email-4-icon-16.png" /></div>
 						<#else>
-							<a href="./hello?formid=9">
+						<div class="unread">&nbsp;</div>
 						</#if>
-					<#else>
-						<a href="./hello?formid=9">
 					</#if>
-				</#if>								
-				<div class="member_block qyxx">
-					<div class="member_block_icon qyxx">&nbsp;</div>
-					<div class="member_block_icon_bg qyxx_bg">&nbsp;</div>
-					<div class="member_block_title">企业信息</div>
+					<div class="member_block_title">通知</div>
 				</div>
 				</a>
 			</div>
