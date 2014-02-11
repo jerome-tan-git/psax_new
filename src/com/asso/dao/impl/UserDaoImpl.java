@@ -306,6 +306,7 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public void save(Uploadfiles _uploadfiles) {
+		System.out.println("UserDaoImpl--------_uploadfiles="+_uploadfiles.toString());
 		Session s = sessionFactory.getCurrentSession(); 
 	     s.beginTransaction();
 	     s.save(_uploadfiles);

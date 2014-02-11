@@ -235,9 +235,25 @@ transitional.dtd">
 						<div class="member_block_upload_folder_title">${upff.foldername}</div>						
 					</div>		
 				</a>
+				<div></div>
+				</#list>
+			</#if>			
+			</div>
+			<div class="clearfix">
+			<#if upflist?exists>
+				<#list upflist as upf>
+					<div class="member_block_upload blue">
+						<div class="member_upload_icon">&nbsp;</div>
+						<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
+						<div class="member_block_upload_title">${upf.fname}</div>
+						<div class="member_block_upload_desc">${upf.uploadtime}</div>
+						<div class="del_upload">
+							<a href="./uploadfilesmanager.action?upfid=${upf.id}">x</a>
+						</div>
+					</div>		
+					<div></div>
 				</#list>
 			</#if>
-			<div></div>
 			</div>
 			
 				<#if Session.user_?exists>

@@ -233,7 +233,8 @@ transitional.dtd">
 					<div class="member_block_title">监管动态</div>
 				</div>
 				<!--<a href="./upload_list.html">-->
-				<a href="./uploadfilesmanager.action">
+				<!--<a href="./uploadfilesmanager.action">-->
+				<a href="./uploadfoldersmanager.action">
 				<div class="member_block qygl">
 					<div class="member_block_icon qygl">&nbsp;</div>
 					<div class="member_block_icon_bg  qygl_bg">&nbsp;</div>

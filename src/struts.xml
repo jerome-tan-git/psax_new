@@ -95,6 +95,11 @@
 			<result name="list" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
 			<interceptor-ref name="mystack" />		 
 		</action>
+		<action name="useruploadfiles" class="com.asso.action.UserBuilt" method="upload">  
+			<result name="upload1" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>
+			<result name="upload0" type="freemarker">/WEB-INF/ftl/uploadfolderslist.ftl</result>
+			<interceptor-ref name="mystack" />			 
+		</action>
 		<action name="addfolder" class="com.asso.action.UserBuilt" method="addfolder">  
 			<result name="list" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
 			<interceptor-ref name="mystack" />		 
@@ -103,11 +108,12 @@
 			<result name="list" type="freemarker">/WEB-INF/ftl/listUploads.ftl</result>	
 			<interceptor-ref name="mystack" />		 
 		</action>		
-		
+		<!-- 
 		<action name="useruploadfiles" class="com.asso.action.UserBuilt" method="upload">  
 			<result name="upload" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>
 			<interceptor-ref name="mystack" />			 
 		</action>
+		 -->
 		<action name="listtodownloads" class="com.asso.action.UserDownloads">  
 			<result name="success" type="freemarker">/WEB-INF/ftl/downloadlist.ftl</result>
 			<result name="list" type="freemarker">/WEB-INF/ftl/listForm.ftl</result>	
