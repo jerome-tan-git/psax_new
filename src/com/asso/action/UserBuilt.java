@@ -16,7 +16,9 @@ import org.springframework.stereotype.Component;
 import util.CONSTANT;
 import util.SpringFactory;
 
+import com.asso.manager.FormManager;
 import com.asso.manager.UserManager;
+import com.asso.model.Form;
 import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
 import com.asso.model.User;
@@ -30,6 +32,7 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	
 	private UserRegisterInfo uInfo = new UserRegisterInfo();
 	private UserManager um;
+	private FormManager fm;
 	private HttpServletRequest request;	
 	private Map session;
 	
@@ -38,6 +41,7 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	private List<Uploadfilefolders> upfflist;
 	private List<User> allusers;
 	private Uploadfilefolders folder;
+	private List<Form> formlist;
 
 	public UserBuilt(){
 		um = (UserManager) SpringFactory.getObject("userManager");
@@ -50,6 +54,14 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	public void setUm(UserManager um) {
 		this.um = um;
 	}
+	public FormManager getFm() {
+		return fm;
+	}
+	@Resource(name="formManager")
+	public void setFm(FormManager fm) {
+		this.fm = fm;
+	}
+
 	public UserRegisterInfo getuInfo() {
 		return uInfo;
 	}
@@ -79,6 +91,12 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	}
 	public void setAllusers(List<User> allusers) {
 		this.allusers = allusers;
+	}	
+	public List<Form> getFormlist() {
+		return formlist;
+	}
+	public void setFormlist(List<Form> formlist) {
+		this.formlist = formlist;
 	}
 	public Uploadfilefolders getFolder() {
 		return folder;
@@ -169,14 +187,6 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 	
 	public String uploaduploads(){
 		System.out.println("---------------uploaduploads---------------");
-//		String upfolderid = this.uInfo.getUploadfolderId();
-//		String userid = this.uInfo.getUserid();
-//		int fid = 0; int uid=0;
-//		if(upfolderid!=null && upfolderid.length()>0)
-//			fid = Integer.parseInt(upfolderid);
-//		if(userid!=null && userid.length()>0)
-//			uid = Integer.parseInt(userid);
-		
 		
 //		--------------uploaduploads---------------
 //		GET uploadfile name--->e.png
@@ -197,13 +207,31 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 				String uf = upfiles[i];
 				String ufn = upfileNames[i];
 				System.out.println("GET uploadfile--->"+uf);
-				Uploadfiles uploadfiles = new Uploadfiles();
-				uploadfiles.setFile(uf);
-				uploadfiles.setFname(ufn);				
-				uploadfiles.setUserid(-1);
-				uploadfiles.setUploadtime(CONSTANT.getNowTime());
-				uploadfiles.setFolderid(-1);
-				System.out.println("GET uploadfiles--->"+uploadfiles.toString());
+//				Uploadfiles uploadfiles = new Uploadfiles();
+//				uploadfiles.setFile(uf);
+//				uploadfiles.setFname(ufn);				
+//				uploadfiles.setUserid(-1);
+//				uploadfiles.setUploadtime(CONSTANT.getNowTime());
+//				uploadfiles.setFolderid(-1);
+//				System.out.println("GET uploadfiles--->"+uploadfiles.toString());
+				
+				Form uploadformfile = new Form();				
+				uploadformfile.setFrontendtpl(ufn);
+				uploadformfile.setPath(uf);
+				if(ufn.contains("."))
+					uploadformfile.setDisplayname(ufn.substring(0,ufn.indexOf(".")));
+				else
+					uploadformfile.setDisplayname(ufn);
+				uploadformfile.setIsshow(1);
+				System.out.println("GET uploadformfile--->"+uploadformfile.toString());
+				
+				try {
+					fm.addForm(uploadformfile);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 //				try {
 //					um.addUploadfiles(uploadfiles);
 //				} catch (ClassNotFoundException e) {
@@ -215,10 +243,33 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 		}		
 			
 //		this.buildLoadedFolderFiles(fid, uid);
-					
+		this.build2DownloadFiles();	
 		return "upload";
 		
 	}
+	
+	private void build2DownloadFiles(){		
+		List<Form> flist = new ArrayList<Form>();		
+			try {
+				flist = fm.loadForms();			
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
+		
+		this.formlist = new ArrayList<Form>();
+		for(Form f:flist){
+			System.out.println("---------->>>"+f.toString());
+			if(f.getDisplayname()!=null && f.getDisplayname().length()>0
+					&& f.getFrontendtpl()!=null && f.getFrontendtpl().length()>0
+					&& f.getPath()!=null && f.getPath().length()>0)
+				this.formlist.add(f);
+		}
+	}
+	
+	
+	
 	
 	private void buildLoadedFiles(int _userid){
 		this.upflist = new ArrayList<Uploadfiles>();

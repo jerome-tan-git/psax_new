@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="./css/backend.css" />
 		<link rel="stylesheet" type="text/css" href="./css/docs.css" />
-		
+		<link rel="stylesheet" type="text/css" href="./css/uploadify.css" />
 		<script type="text/javascript" src="./js/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
 		<script src="./js/ckeditor/ckeditor.js"></script>
@@ -59,18 +59,17 @@
 				<#include "../commons/marginmenu.ftl">
 				
 				<div class="col-md-8">
-				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom: 1px solid #D6D6D6;position: relative;">
-				  <h1><small>用户下载文件</small></h1>
+				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom:0px solid #D6D6D6;position: relative;">
+				  <span style="font-size:13pt">用户下载文件</span>
 				  
-				  <div style="padding-right: 28px;margin-bottom: 23px;">
+				  <div style="padding-right: 28px;margin-bottom: 23px;width:200px; float:right">
 					<span class="glyphicon glyphicon-plus pull-right hand deleteExam" onclick="showUserDialog('','','')">添加新表格</span>
 				  </div>
 				  
-				 <div style="border-bottom: 1px solid #ccc;margin-left:10px;margin-right:10px;margin-bottom:10px">&nbsp;</div>
+				 <div style="border-bottom: 1px solid #ccc;margin-right:10px;margin-bottom:10px;margin-top: 10px;"></div>
 						<div style="margin-left:9px;position:relative;">
-							<form id="uploadForm" action="./foruseruploadfiles.action">
+							<form id="uploadForm" action="./foruseruploadfiles.action" style="margin-left: -10px;">
 								<input type="file" id="file_upload_1" name="uploadfiles"/>
-								
 							</form>
 						</div>
 				 </div>
