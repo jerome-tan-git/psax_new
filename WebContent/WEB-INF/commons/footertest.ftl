@@ -22,13 +22,20 @@
 							<li>
 								<strong>电子邮件</strong>
 								<br />
-								<a href="#">XXXX@XXXXX.com</a>
+								<a href="mailto:psax@psax.com.cn">psax@psax.com.cn</a>
 							</li>
 							<li>
 								<strong>电话</strong>
 								<br />
 								<p>
 									+(86)-021-61183721/61183273
+								</p>
+							</li>
+							<li>
+								<strong>传真</strong>
+								<br />
+								<p>
+									+(86)-021-61183723
 								</p>
 							</li>
 							<li>
@@ -48,20 +55,18 @@
 						<!-- <p>Learn more about the Theme template features</p> -->
 						<ul class="userlinks">
 							<li>
-								<a href="#">肉制品报告</a>
+								<a href="#">生产许可咨询</a>
 							</li>
 							<li>
-								<a href="#">标准备案</a>
+								<a href="#">企业标准备案</a>
 							</li>
 							<li>
-								<a href="#">添加剂报告</a>
+								<a href="#">食品添加剂备案</a>
 							</li>
 							<li>
 								<a href="#">委托加工备案</a>
 							</li>
-							<li>
-								<a href="#">资料下载</a>
-							</li>
+							
 						</ul>
 					</div>
 				</div>

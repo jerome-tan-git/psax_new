@@ -103,7 +103,7 @@ a:hover {
 .thumb_img {
 	float: left;
 	margin: 0px 20px 0px 0px;
-	width: 320px;height:320px
+	width: 320px;height:427px
 }
 .description {
 	display:block;
@@ -1903,4 +1903,21 @@ top: 137px;
 left: 0px;
 width: 160px;
 text-align: center;
+}
+
+.slider_content h2 {
+font-weight: bold;
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-family: "微软雅黑",Arial,"宋体";
+font-size: 44pt;
+font-weight: bold;
+line-height: 1.0em;
+margin-bottom: 20px;
+color: #2f353e;
+}
+
+.slider_content h2.home_left
+{
+
+	margin-right: 49px;
 }
