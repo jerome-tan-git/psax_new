@@ -233,19 +233,22 @@ transitional.dtd">
 		<div class="teaser_container clearfix">
 		<div class="one_third">
 		    <div class="teaser_box">
+		        <a href="./listArticles.action?categoryid=14">
 		        <div style="margin-bottom: 20px">
 		        	<img src="./images/services_icon_1.png" alt="img" />
 		        </div>
-		        <h3>资料下载</h3>
+		        <h3>资料下载</h3>		        
 		        <p>In hac habitasse platea dictumst. Aliquam in est leo. Aliquam ut 
 		        urna pulvinar ipsum ultricies fringilla et sed magna. Duis faucibus 
 		        lorem at eros cursus fermentum.</p><br />
-		        <a href="#" class="button">更多</a>
+		        </a>
+		        <a href="./listArticles.action?categoryid=14" class="button">更多</a>
 		    </div>
 		</div>
 		    
 		<div class="one_third">
 		    <div class="teaser_box">
+		        <a href="./page.action?categoryid=1">
 		        <div style="margin-bottom: 20px">
 		        	<img src="./images/services_icon_2.png" alt="img" />
 		        </div>
@@ -253,12 +256,14 @@ transitional.dtd">
 		        <p>In hac habitasse platea dictumst. Aliquam in est leo. Aliquam ut 
 		        urna pulvinar ipsum ultricies fringilla et sed magna. Duis faucibus 
 		        lorem at eros cursus fermentum.</p><br />
-		        <a href="#" class="button">更多</a>
+		        </a>
+		        <a href="./page.action?categoryid=1" class="button">更多</a>
 		    </div>
 		</div>
 		
 		<div class="one_third_last">
 		    <div class="teaser_box">
+		    	<a href="./page.action?categoryid=2">
 		        <div style="margin-bottom: 20px">
 		        	<img src="./images/services_icon_3.png" alt="img" />
 		        </div>
@@ -266,7 +271,8 @@ transitional.dtd">
 		        <p>In hac habitasse platea dictumst. Aliquam in est leo. Aliquam ut 
 		        urna pulvinar ipsum ultricies fringilla et sed magna. Duis faucibus 
 		        lorem at eros cursus fermentum.</p><br />
-		        <a href="#" class="button">更多</a>
+		        </a>
+		        <a href="./page.action?categoryid=2" class="button">更多</a>
 		    </div>
 		</div>
 		</div>
