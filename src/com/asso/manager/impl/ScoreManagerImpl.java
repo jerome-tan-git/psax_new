@@ -1,23 +1,15 @@
 package com.asso.manager.impl;
 
 import java.sql.SQLException;
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
 import com.asso.dao.ScoreDao;
-import com.asso.dao.UserDao;
-import com.asso.dao.impl.ScoreDaoImpl;
-import com.asso.dao.impl.UserDaoImpl;
 import com.asso.manager.ScoreManager;
-import com.asso.manager.UserManager;
-import com.asso.model.MemberInfo;
 import com.asso.model.Score;
 import com.asso.model.ScoreExamItem;
 import com.asso.model.ScoreExamRef;
-import com.asso.model.User;
 
 @Component("scoreManager")
 public class ScoreManagerImpl implements ScoreManager {

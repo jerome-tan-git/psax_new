@@ -8,9 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.asso.dao.UserDao;
-import com.asso.dao.impl.UserDaoImpl;
 import com.asso.manager.UserManager;
-import com.asso.model.Article;
 import com.asso.model.MemberInfo;
 import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;

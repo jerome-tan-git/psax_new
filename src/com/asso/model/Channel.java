@@ -1,7 +1,5 @@
 package com.asso.model;
 
-import java.sql.Date;
-
 public class Channel implements java.io.Serializable{
 	
 	private static final long serialVersionUID = -7323032372076449024L;

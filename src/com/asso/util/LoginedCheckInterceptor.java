@@ -9,7 +9,12 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 public class LoginedCheckInterceptor extends AbstractInterceptor  {
 
-	 /** 拦截请求并进行登录有效性验证 */
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 拦截请求并进行登录有效性验证 */
     public String intercept(ActionInvocation ai) throws Exception {
         
     	//取得请求的URL

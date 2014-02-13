@@ -11,18 +11,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
-import util.HibernateUtil;
-import util.ObjectToClass;
-
 import com.asso.dao.ExamDao;
-import com.asso.dao.UserDao;
-import com.asso.model.Article;
 import com.asso.model.Exam;
 import com.asso.model.ExamItem;
 import com.asso.model.ExamRef;
-import com.asso.model.Member;
-import com.asso.model.MemberInfo;
-import com.asso.model.User;
 
 @Component("examDao")//≥ı ºªØuserDao
 public class ExamDaoImpl implements ExamDao {
@@ -37,6 +29,7 @@ public class ExamDaoImpl implements ExamDao {
         this.sessionFactory = sessionFactory;
     }
     
+	@SuppressWarnings("unchecked")
 	private ExamItem loadExamItemsWithExamItemId(int eid) {				
 		List<ExamItem> items = new ArrayList<ExamItem>();		
 //		 Session s = sessionFactory.openSession(); 
@@ -52,6 +45,7 @@ public class ExamDaoImpl implements ExamDao {
 		return items.get(0);//prevent null
 	}
 	
+	@SuppressWarnings("unchecked")
 	private List<ExamRef> loadExamRefsWithExamItemid(int itemid) {		
 		List<ExamRef> refs = new ArrayList<ExamRef>();		
 //		 Session s = sessionFactory.openSession(); 
@@ -74,7 +68,8 @@ public class ExamDaoImpl implements ExamDao {
 	     Query query = s.createQuery("select id from exam e where e.groupid = ?")
 			    		.setParameter(0, groupid);
 //	     query.setCacheable(true); 
-         List<Object> list = query.list();  
+         @SuppressWarnings("unchecked")
+		List<Object> list = query.list();  
 //         s.close();
 			    
 	     if(list.size() > 0) {
@@ -92,7 +87,8 @@ public class ExamDaoImpl implements ExamDao {
 	     Query query = s.createQuery("select id from examitem er where er.examid = ?")
 			    		.setParameter(0, eid);
 //	     query.setCacheable(true); 
-        List<Object> list = query.list();  
+        @SuppressWarnings("unchecked")
+		List<Object> list = query.list();  
 //        s.close();
 			    
 	    if(list.size() > 0) {
@@ -234,6 +230,7 @@ public class ExamDaoImpl implements ExamDao {
 			this.delete(ref);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Exam loadExamById(int _examid) {
 		
@@ -256,7 +253,8 @@ public class ExamDaoImpl implements ExamDao {
 	    String hql = "select id,name from Exam";      
         Query query = s.createQuery(hql);        
         
-        List<Object[]> exams = query.list();		 
+        @SuppressWarnings("unchecked")
+		List<Object[]> exams = query.list();		 
         System.out.println("  check  rz="+exams.size());
         for(Object[] object : exams){     
 
@@ -278,7 +276,8 @@ public class ExamDaoImpl implements ExamDao {
 	    String hql = "from ExamRef where id=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+_id); 
-        List<ExamRef> ref = query.list();
+        @SuppressWarnings("unchecked")
+		List<ExamRef> ref = query.list();
 //        for(ExamRef o : ref){   
 //            System.out.println(o.toString());
 //        }   		
@@ -293,7 +292,8 @@ public class ExamDaoImpl implements ExamDao {
 	    String hql = "from ExamRef where itemid=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+_id);        
-        List<ExamRef> ref = query.list();
+        @SuppressWarnings("unchecked")
+		List<ExamRef> ref = query.list();
         System.out.println("Get reflist size="+ref.size());
         for(ExamRef o : ref){   
             System.out.println(">>>"+o.toString());
@@ -309,7 +309,8 @@ public class ExamDaoImpl implements ExamDao {
 	    String hql = "from ExamItem where id=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+_id); 
-        List<ExamItem> item = query.list();
+        @SuppressWarnings("unchecked")
+		List<ExamItem> item = query.list();
 //        for(ExamItem o : item){   
 //            System.out.println(o.toString());
 //        }   		
@@ -323,7 +324,8 @@ public class ExamDaoImpl implements ExamDao {
 	    String hql = "from ExamItem where question=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+_question); 
-        List<ExamItem> item = query.list();
+        @SuppressWarnings("unchecked")
+		List<ExamItem> item = query.list();
 //        for(ExamItem o : item){   
 //            System.out.println(o.toString());
 //        }   		
@@ -337,7 +339,8 @@ public class ExamDaoImpl implements ExamDao {
 	    String hql = "from ExamItem where category=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+cid); 
-        List<ExamItem> items = query.list();
+        @SuppressWarnings("unchecked")
+		List<ExamItem> items = query.list();
 //        for(ExamItem o : items){   
 //            System.out.println(o.toString());
 //        }   		
@@ -351,7 +354,8 @@ public class ExamDaoImpl implements ExamDao {
 	    String hql = "from ExamItem where examid=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+eid); 
-        List<ExamItem> items = query.list();
+        @SuppressWarnings("unchecked")
+		List<ExamItem> items = query.list();
 //        for(ExamItem o : items){   
 //            System.out.println(o.toString());
 //        }   		

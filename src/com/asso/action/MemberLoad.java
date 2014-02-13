@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.ApplicationContext;
+
+//import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import util.SpringFactory;
@@ -21,8 +22,12 @@ import com.opensymphony.xwork2.ModelDriven;
 
 @Scope("prototype")
 @Component("memberload") 
-public class MemberLoad extends ActionSupport implements ModelDriven  {
+public class MemberLoad extends ActionSupport implements ModelDriven<Object>  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UserRegisterInfo uInfo = new UserRegisterInfo();
 	private UserManager um;
 //	private ApplicationContext ctx;

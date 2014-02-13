@@ -51,4 +51,6 @@ public interface DocManager {
 	List<Doc> loadDocsByUser(int _userid) throws ClassNotFoundException,
 			SQLException;
 
+	boolean checkCorpInfoFilled(int _userid);
+
 }

@@ -106,6 +106,7 @@
 	</bean>
 	<bean id="bbsManager" class="com.asso.manager.impl.BbsManagerImpl">		
 	</bean>
+	
 	<bean name="userDao" class="com.asso.dao.impl.UserDaoImpl">            
     </bean>
     <bean name="examDao" class="com.asso.dao.impl.ExamDaoImpl">            
@@ -122,6 +123,7 @@
     </bean>
     <bean name="bbsDao" class="com.asso.dao.impl.BbsDaoImpl">            
     </bean>
+    
     <!-- 
 	<aop:config>
 		<aop:pointcut id="bussinessService"

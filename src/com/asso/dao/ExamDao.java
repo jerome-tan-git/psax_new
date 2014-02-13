@@ -2,12 +2,9 @@ package com.asso.dao;
 
 import java.util.HashMap;
 import java.util.List;
-
 import com.asso.model.Exam;
 import com.asso.model.ExamItem;
 import com.asso.model.ExamRef;
-import com.asso.model.MemberInfo;
-import com.asso.model.User;
 
 public interface ExamDao {
 	

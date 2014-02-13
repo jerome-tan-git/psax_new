@@ -1,7 +1,7 @@
 package util;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+//import java.io.UnsupportedEncodingException;
+//import java.net.URLDecoder;
 import java.util.List;
 
 import freemarker.template.TemplateMethodModel;
@@ -9,6 +9,7 @@ import freemarker.template.TemplateModelException;
 
 public class PicURLparse implements TemplateMethodModel {
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object exec(List arg0) throws TemplateModelException {
 		String str = "";

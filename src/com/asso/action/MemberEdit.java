@@ -4,30 +4,35 @@ import java.sql.SQLException;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.ApplicationContext;
+//import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.asso.manager.UserManager;
 import com.asso.model.MemberInfo;
-import com.asso.model.User;
+//import com.asso.model.User;
 import com.asso.vo.MemberUpdateInfo;
-import com.asso.vo.UserRegisterInfo;
+//import com.asso.vo.UserRegisterInfo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+
 import util.SpringFactory;
 
 
 @Scope("prototype")
 @Component("memberedit") 
-public class MemberEdit extends ActionSupport implements ModelDriven {
+public class MemberEdit extends ActionSupport implements ModelDriven<Object> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private MemberInfo memberinfo = new MemberInfo();
 	private MemberUpdateInfo muinfo = new MemberUpdateInfo();
 	
 	private UserManager um;
-	private ApplicationContext ctx;
+//	private ApplicationContext ctx;
 	
 	public MemberEdit(){
 //		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");		
@@ -87,7 +92,6 @@ public class MemberEdit extends ActionSupport implements ModelDriven {
 	
 	@Override
 	public Object getModel() {
-		// TODO Auto-generated method stub
 		return this.memberinfo;
 	}
 

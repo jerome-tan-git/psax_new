@@ -10,10 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
-import util.ObjectToClass;
-
 import com.asso.dao.UserDao;
-import com.asso.model.Form;
 import com.asso.model.Member;
 import com.asso.model.MemberInfo;
 import com.asso.model.Uploadfilefolders;
@@ -66,6 +63,7 @@ public class UserDaoImpl implements UserDao {
 		Session s = sessionFactory.getCurrentSession(); 
 		Query query = s.createQuery("select username,password,nickname,id from User u where u.username = :un")
 		   		.setParameter("un", _user.getUsername());		    
+		@SuppressWarnings("unchecked")
 		List<Object[]> list = query.list();		    
 			    
 		System.out.println("  loadUserWithNamePassword  rz="+list.size());
@@ -85,6 +83,7 @@ public class UserDaoImpl implements UserDao {
 		return u;		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public User loadUser(int _userid){
 		User u = new User();
@@ -102,6 +101,7 @@ public class UserDaoImpl implements UserDao {
         }        
         return u;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> loadAllUsers(){	
 		
@@ -121,7 +121,8 @@ public class UserDaoImpl implements UserDao {
 			
 			Query query = s.createQuery("select username,password from User u where u.username = :un")
 		    		.setParameter("un", user.getUsername());		    
-		    List<Object[]> list = query.list();		    
+		    @SuppressWarnings("unchecked")
+			List<Object[]> list = query.list();		    
 //		    s.close();		    
 		    System.out.println("  checkUserExistsWithNamePassword  rz="+list.size());
 		    if(list.size() > 0) {
@@ -148,7 +149,8 @@ public class UserDaoImpl implements UserDao {
 		 Session s = sessionFactory.getCurrentSession(); 
 		 Query query = s.createQuery("select id from User u where u.username = ?")
 			    		.setParameter(0, user.getUsername());
-        List<Object> list = query.list();
+        @SuppressWarnings("unchecked")
+		List<Object> list = query.list();
 //	     s.close();    
 	     if(list.size() > 0) {
 			  id = (Integer) list.get(0);
@@ -166,7 +168,8 @@ public class UserDaoImpl implements UserDao {
 		 Session s = sessionFactory.getCurrentSession(); 
 	     Query query = s.createQuery("select id from Member m where m.userid = ?")
 			    		.setParameter(0, userId);
-        List<Object> list = query.list();  
+        @SuppressWarnings("unchecked")
+		List<Object> list = query.list();  
 //	     s.close();	    
 	     if(list.size() > 0) {
 			  id = (Integer) list.get(0);
@@ -230,6 +233,7 @@ public class UserDaoImpl implements UserDao {
 //	     s.getTransaction().commit();
 //	     s.close();
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MemberInfo> loadMemberInfoWithUserId(User user) {
 		
@@ -250,6 +254,7 @@ public class UserDaoImpl implements UserDao {
 		return minfos;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Uploadfiles> loadUploadfilesByUserId(int _userid) {
 		List<Uploadfiles> ufiles = new ArrayList<Uploadfiles>();
@@ -264,6 +269,7 @@ public class UserDaoImpl implements UserDao {
 		return ufiles;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Uploadfiles> loadUploadfilesByFolderId(int _folderid) {
 		List<Uploadfiles> ffiles = new ArrayList<Uploadfiles>();
@@ -278,6 +284,7 @@ public class UserDaoImpl implements UserDao {
 		return ffiles;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Uploadfiles> loadUploadfilesByFolderIdUserId(int _folderid, int _userid) {
 		List<Uploadfiles> ffiles = new ArrayList<Uploadfiles>();
@@ -293,6 +300,7 @@ public class UserDaoImpl implements UserDao {
 		return ffiles;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Uploadfilefolders> loadAllUploadfilefolders() {
 		List<Uploadfilefolders> flist = new ArrayList<Uploadfilefolders>();

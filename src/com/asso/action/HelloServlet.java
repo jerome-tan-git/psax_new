@@ -38,6 +38,10 @@ import freemarker.template.TemplateException;
 public class HelloServlet  extends HttpServlet{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private FormManager fm;	
 	private DocManager dm;	
 	private String jsonText3;

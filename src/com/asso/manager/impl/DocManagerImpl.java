@@ -97,19 +97,19 @@ public class DocManagerImpl implements DocManager {
 				
 		return fvid;
 	}
-	private int getFieldValueId(int _docid, int _fieldid){
-		int fvid = 0;
-		List<FieldValue> rlist = this.docDao.loadFieldValue(_docid, _fieldid);
-		if(rlist!=null && rlist.size()>0){
-			if(rlist.size()==1)
-				fvid = rlist.get(0).getFieldvalueid();
-			else
-				fvid = rlist.get(rlist.size()-1).getFieldvalueid();
-		}else
-			System.out.println("No fieldvalueid picked! New add!");
-				
-		return fvid;
-	}
+//	private int getFieldValueId(int _docid, int _fieldid){
+//		int fvid = 0;
+//		List<FieldValue> rlist = this.docDao.loadFieldValue(_docid, _fieldid);
+//		if(rlist!=null && rlist.size()>0){
+//			if(rlist.size()==1)
+//				fvid = rlist.get(0).getFieldvalueid();
+//			else
+//				fvid = rlist.get(rlist.size()-1).getFieldvalueid();
+//		}else
+//			System.out.println("No fieldvalueid picked! New add!");
+//				
+//		return fvid;
+//	}
 	
 	@Override
 	public void updateFieldValueByFieldName(String _fn, String _value, int _docid, int _fvindex){
@@ -228,6 +228,16 @@ public class DocManagerImpl implements DocManager {
 			SQLException {
 		List<Doc> rlist = null;
 		return rlist;
+	}
+	
+	@Override
+	public boolean checkCorpInfoFilled(int _userid){
+		List<Doc> list = docDao.loadDocsByUserForm(_userid, 9);
+		System.out.println("~~~~~~~~~~~checkCorpInfoFilled size="+list.size()+", formid=9, userid="+_userid);
+		if(list.size()>0)
+			return true;
+		else
+			return false;
 	}
 
 //	@Override

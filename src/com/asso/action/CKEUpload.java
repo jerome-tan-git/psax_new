@@ -2,18 +2,19 @@ package com.asso.action;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import util.CONSTANT;
-
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CKEUpload extends ActionSupport {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String contentType = "text/html;charset=utf-8";
 	private File upload; // 上传的文件
 	private String uploadFileName; // 文件名称
@@ -59,7 +60,7 @@ public class CKEUpload extends ActionSupport {
 		// D:\apache-tomcat-6.0.18\webapps\struts2_upload\images
 		System.out.println("realpath: " + realpath);
 		String imagePath = "";
-		boolean success = false;
+		boolean issuccess = false;
 		String fileN = uploadFileName;
 		String fileSuffix = "";
 		if (uploadFileName.indexOf('.')!=-1)
@@ -79,13 +80,13 @@ public class CKEUpload extends ActionSupport {
 			System.out.println(savefile.getName());
 			FileUtils.copyFile(upload, savefile);
 			imagePath = "./ckuploadimages/"+savefile.getName();
-			success = true;
+			issuccess = true;
 
 		}
 		}
 		catch(Exception e)
 		{
-			success = false;
+			issuccess = false;
 		}
 		out.write("<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Insert title here</title>");
     	out.write("<script>");

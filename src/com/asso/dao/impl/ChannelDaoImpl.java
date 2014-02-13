@@ -10,17 +10,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
-import util.ObjectToClass;
-
 import com.asso.dao.ChannelDao;
-import com.asso.dao.UserDao;
 import com.asso.model.Category;
 import com.asso.model.Channel;
-import com.asso.model.Exam;
-import com.asso.model.ExamRef;
-import com.asso.model.Member;
-import com.asso.model.MemberInfo;
-import com.asso.model.User;
 
 @Component("channelDao")
 public class ChannelDaoImpl implements ChannelDao {
@@ -56,6 +48,7 @@ public class ChannelDaoImpl implements ChannelDao {
 	     s.getTransaction().commit();
 //	     s.close();
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Channel> loadChannels() {
 		List<Channel> list = new ArrayList<Channel>();
@@ -92,7 +85,8 @@ public class ChannelDaoImpl implements ChannelDao {
 	    String hql = "from Category where channelid=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+channelid); 
-        List<Category> rlist = query.list();
+        @SuppressWarnings("unchecked")
+		List<Category> rlist = query.list();
 //        s.close();	    
 	    return rlist;
 	}
@@ -103,7 +97,8 @@ public class ChannelDaoImpl implements ChannelDao {
 		Session s = sessionFactory.getCurrentSession();
 	    String hql = "from Category ";      
         Query query = s.createQuery(hql);
-        List<Category> rlist = query.list();
+        @SuppressWarnings("unchecked")
+		List<Category> rlist = query.list();
 //        s.close();	    
 	    return rlist;
 //		ArrayList<Category> rlist = new ArrayList<Category>();
@@ -144,7 +139,8 @@ public class ChannelDaoImpl implements ChannelDao {
 	    String hql = "from Category where id=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+categoryid); 
-        List<Category> rlist = query.list();
+        @SuppressWarnings("unchecked")
+		List<Category> rlist = query.list();
         if(rlist.size()==1){
         	cat = rlist.get(0);        	
         }        	

@@ -1,8 +1,5 @@
 package com.asso.vo;
 
-import java.util.HashMap;
-import java.util.List;
-
 public class ExamBuiltInfo {
 	
 	private int examid;

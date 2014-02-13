@@ -73,7 +73,7 @@ public class CONSTANT {
 		
 		HashSet<Integer> rzlist = new HashSet<Integer>();
 		Collection<Integer> result = new ArrayList<Integer>();
-		Integer[] index = new Integer[_rzSize];
+//		Integer[] index = new Integer[_rzSize];
 //		System.out.println("mm0----------_rzSize="+_rzSize+", _orlist.size="+_orlist.size());
 		if(_orlist.size()>_rzSize){
 			while(rzlist.size()<_rzSize){  

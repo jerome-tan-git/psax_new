@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import test.FieldObject;
-import test.ParseObjects;
+//import test.FieldObject;
+//import test.ParseObjects;
 import util.CONSTANT;
 import util.SpringFactory;
 
@@ -30,6 +30,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class test extends ActionSupport implements ServletRequestAware,SessionAware{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private HttpServletRequest request;
 	private FormManager fm;	
 	private DocManager dm;	
@@ -60,7 +64,6 @@ public class test extends ActionSupport implements ServletRequestAware,SessionAw
 		
 		Map root = new HashMap();
 		root.put("message", "Hello FreeMarker!");
-		
 		
 		
 		return "test";

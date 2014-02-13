@@ -1,12 +1,7 @@
 package com.asso.dao;
 
 import java.util.List;
-
-import com.asso.model.Article;
-import com.asso.model.Category;
-import com.asso.model.Channel;
 import com.asso.model.Comment;
-import com.asso.model.Message;
 import com.asso.model.Topic;
 
 public interface BbsDao {

@@ -1,9 +1,5 @@
 package com.asso.model;
 
-import java.sql.SQLException;
-
-import com.asso.manager.impl.UserManagerImpl;
-
 public class User {
 	
 	private int id;

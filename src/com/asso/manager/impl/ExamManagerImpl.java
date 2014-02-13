@@ -9,15 +9,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.asso.dao.ExamDao;
-import com.asso.dao.UserDao;
-import com.asso.dao.impl.ExamDaoImpl;
-import com.asso.dao.impl.UserDaoImpl;
 import com.asso.manager.ExamManager;
-import com.asso.manager.UserManager;
 import com.asso.model.Exam;
 import com.asso.model.ExamItem;
 import com.asso.model.ExamRef;
-import com.asso.model.MemberInfo;
 import com.asso.model.User;
 
 @Component("examManager")

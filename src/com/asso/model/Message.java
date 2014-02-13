@@ -1,7 +1,5 @@
 package com.asso.model;
 
-import java.sql.Date;
-import java.util.List;
 
 public class Message implements java.io.Serializable{
 	

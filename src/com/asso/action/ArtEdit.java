@@ -2,8 +2,6 @@ package com.asso.action;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +38,10 @@ import com.opensymphony.xwork2.ModelDriven;
 @Component("artedit") 
 public class ArtEdit extends ActionSupport implements ModelDriven<Object>,ServletRequestAware,SessionAware{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArticleManager am;	
 	private ChannelManager cm;	
 	private ArtInfo ainfo = new ArtInfo();
@@ -58,8 +60,8 @@ public class ArtEdit extends ActionSupport implements ModelDriven<Object>,Servle
 	private String additionFileName;
 	
 	private List<Article> artlist = new ArrayList<Article>();//in Session
-	private List<Article> pageartlist = new ArrayList<Article>();// in Session
-	private List<Integer> delartids = new ArrayList<Integer>(); //in Session
+//	private List<Article> pageartlist = new ArrayList<Article>();// in Session
+//	private List<Integer> delartids = new ArrayList<Integer>(); //in Session
 //	private List<String> sequuids = new ArrayList<String>();
 	
 	

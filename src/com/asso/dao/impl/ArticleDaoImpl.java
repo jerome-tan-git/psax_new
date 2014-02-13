@@ -5,18 +5,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
-import util.HibernateUtil;
-
 import com.asso.dao.ArticleDao;
 import com.asso.model.Article;
-import com.asso.model.Category;
-import com.asso.model.Channel;
 import com.asso.model.Message;
 
 @Component("articleDao")
@@ -74,7 +69,8 @@ public class ArticleDaoImpl implements ArticleDao {
 		Session s = sessionFactory.getCurrentSession();
 	    String hql = "from Article";      
         Query query = s.createQuery(hql); 
-        List<Article> rlist = query.list();
+        @SuppressWarnings("unchecked")
+		List<Article> rlist = query.list();
 //        s.close();	    
 	    return rlist;
 	}
@@ -86,7 +82,8 @@ public class ArticleDaoImpl implements ArticleDao {
 	    String hql = "from Article where categoryid=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+categoryid); 
-        List<Article> rlist = query.list();
+        @SuppressWarnings("unchecked")
+		List<Article> rlist = query.list();
 //        s.close();	
         
 	    return rlist;
@@ -98,10 +95,12 @@ public class ArticleDaoImpl implements ArticleDao {
 	    String hql = "from Article where id=?";      
         Query query = s.createQuery(hql); 
         query.setString(0, ""+articleid); 
-        List<Article> rlist = query.list();              	    
+        @SuppressWarnings("unchecked")
+		List<Article> rlist = query.list();              	    
 	    return rlist;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Message> loadMessagesByUserid(int userid){
 		List<Message> rlist = new ArrayList<Message>();

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import com.asso.dao.DocDao;
 import com.asso.model.Doc;
 import com.asso.model.FieldValue;
-import com.asso.model.Fields;
 
 @Component("docDao")
 public class DocDaoImpl implements DocDao{
@@ -105,7 +104,8 @@ public class DocDaoImpl implements DocDao{
 		Session s = sessionFactory.getCurrentSession();
 		Query query = s.createQuery("select docid from Doc d where d.createdate = :s1")
 	    		.setParameter("s1", _date);	    		
-	    List<Object> list = query.list();
+	    @SuppressWarnings("unchecked")
+		List<Object> list = query.list();
 	    System.out.println("  getFormId  rz="+list.size());
 	    if(list.size() == 1) {
 	    	did = (Integer) list.get(0);
@@ -120,6 +120,7 @@ public class DocDaoImpl implements DocDao{
 		return did;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<FieldValue> loadFieldValue(int _docid, int _fieldid, int _fvindex){
 		List<FieldValue> rlist = new ArrayList<FieldValue>();
@@ -136,6 +137,7 @@ public class DocDaoImpl implements DocDao{
 		return rlist;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<FieldValue> loadFieldValue(int _docid, int _fieldid){
 		List<FieldValue> rlist = new ArrayList<FieldValue>();
@@ -151,6 +153,7 @@ public class DocDaoImpl implements DocDao{
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<FieldValue> loadFieldValueListByDocId(int _docid){
 		List<FieldValue> rlist = new ArrayList<FieldValue>();
@@ -163,6 +166,7 @@ public class DocDaoImpl implements DocDao{
 		return rlist;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Doc> loadDocs(int _formid){		
 		List<Doc> rlist = new ArrayList<Doc>();
@@ -175,6 +179,7 @@ public class DocDaoImpl implements DocDao{
         return rlist;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Doc loadDoc(int _docid){	
 		Doc doc = new Doc();
@@ -193,6 +198,7 @@ public class DocDaoImpl implements DocDao{
         return doc;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Doc> loadDocsByUser(int _userid){
 		List<Doc> rlist = new ArrayList<Doc>();
@@ -204,6 +210,7 @@ public class DocDaoImpl implements DocDao{
         return rlist;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Doc> loadDocs(int _userid, int _formid){
 		List<Doc> rlist = new ArrayList<Doc>();
@@ -252,6 +259,16 @@ public class DocDaoImpl implements DocDao{
 		return c;
 	}
 
-
+	@Override
+	public List<Doc> loadDocsByUserForm(int _userid, int _formid){
+		List<Doc> rlist = new ArrayList<Doc>();
+		Session s = sessionFactory.getCurrentSession();
+		String hql = "from Doc where userid=? and formid=?";      
+        Query query = s.createQuery(hql); 
+        query.setString(0, ""+_userid); 
+        query.setString(1, ""+_formid); 
+        rlist = query.list();
+        return rlist;
+	}
 
 }

@@ -1,6 +1,5 @@
 package com.asso.model;
 
-import java.sql.Date;
 
 public class Exam implements java.io.Serializable{
 	

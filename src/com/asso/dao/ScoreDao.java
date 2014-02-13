@@ -1,12 +1,10 @@
 package com.asso.dao;
 
-import java.util.List;
 
-import com.asso.model.MemberInfo;
 import com.asso.model.Score;
 import com.asso.model.ScoreExamItem;
 import com.asso.model.ScoreExamRef;
-import com.asso.model.User;
+
 
 public interface ScoreDao {
 	public void save(Score score);

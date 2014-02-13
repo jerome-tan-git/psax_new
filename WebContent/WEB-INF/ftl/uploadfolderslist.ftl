@@ -213,7 +213,10 @@ transitional.dtd">
 					<div class="sub_header_description">
 						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
 						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
-						<span class="page">企业管理</span>
+						<span class="page"><a href="./uploadfoldersmanager.action">企业管理</a></span>
+						<#if folder?exists>
+							<span class="page">${folder.id}</span>
+						</#if>
 					</div>
 
 				</div>
@@ -232,7 +235,7 @@ transitional.dtd">
 				<#list upfflist as upff>
 				<a href="./uploadfolderfilesmanager.action?folderid=${upff.id}">
 					<div class="member_block_folder blue">
-						<div class="member_block_upload_folder_title">${upff.foldername}</div>						
+						<div class="member_block_upload_folder_title">${upff.id}####${upff.foldername}</div>						
 					</div>		
 				</a>
 				<div></div>
@@ -246,9 +249,9 @@ transitional.dtd">
 						<div class="member_upload_icon">&nbsp;</div>
 						<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
 						<div class="member_block_upload_title">${upf.fname}</div>
-						<div class="member_block_upload_desc">${upf.uploadtime}</div>
+						<div class="member_block_upload_desc">${upf.uploadtime}**${upf.id}**${upf.folderid}</div>
 						<div class="del_upload">
-							<a href="./uploadfilesmanager.action?upfid=${upf.id}">x</a>
+							<a href="./uploadfilesmanager.action?upfid=${upf.id}&folderid=${upf.folderid}">x</a>
 						</div>
 					</div>		
 					<div></div>
@@ -263,6 +266,9 @@ transitional.dtd">
 					<form id="uploadForm" action="./useruploadfiles.action">
 						<input type="file" id="file_upload_1" name="uploadfiles"/>
 						<input type="hidden" name="userid" value="${user.id?default("")}"/>
+						<#if folder?exists>
+							<input type="hidden" name="uploadfolderId" value="${folder.id?default("")}"/>
+						</#if>
 						
 						<!--div style="position:absolute;top: 0px;left: 113px;">
 							<input type="image" src="./images/bt_save.png" name="image" />

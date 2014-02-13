@@ -7,16 +7,26 @@ public class SpringFactory implements ApplicationContextAware{
   
     private static ApplicationContext context;  
       
-    @Override  
+    
+	@Override  
     public void setApplicationContext(ApplicationContext applicationContext)  
             throws BeansException {  
-        this.context=applicationContext;  
+//        this.setContext(applicationContext);
+		SpringFactory.setContext(applicationContext);
     }  
       
   
     public static Object getObject(String id) {  
         Object object = null;  
-        object = context.getBean(id);  
+        object = getContext().getBean(id);  
         return object;  
-    }  
+    }
+
+
+	public static ApplicationContext getContext() {
+		return context;
+	}
+	public static void setContext(ApplicationContext context) {
+		SpringFactory.context = context;
+	}  
 }  

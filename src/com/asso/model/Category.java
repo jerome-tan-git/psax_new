@@ -1,6 +1,5 @@
 package com.asso.model;
 
-import java.sql.Date;
 
 public class Category implements java.io.Serializable{
 	

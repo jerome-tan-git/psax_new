@@ -34,6 +34,10 @@ import com.opensymphony.xwork2.ModelDriven;
 @Component("formedit") 
 public class FormEdit extends ActionSupport implements ModelDriven<Object>,ServletRequestAware,SessionAware{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private FormManager fm;	
 	private DocManager dm;	
 	

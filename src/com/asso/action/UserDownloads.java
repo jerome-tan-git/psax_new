@@ -19,12 +19,12 @@ import util.SpringFactory;
 
 import com.asso.manager.ArticleManager;
 import com.asso.manager.FormManager;
-import com.asso.model.Article;
+//import com.asso.model.Article;
 import com.asso.model.Form;
 import com.asso.model.Message;
 import com.asso.model.User;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
+//import com.opensymphony.xwork2.ModelDriven;
 
 @Scope("prototype")
 @Component("userdownloads") 

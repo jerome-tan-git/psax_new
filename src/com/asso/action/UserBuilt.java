@@ -28,8 +28,12 @@ import com.opensymphony.xwork2.ModelDriven;
 
 @Scope("prototype")
 @Component("userbuilt") 
-public class UserBuilt extends ActionSupport implements ModelDriven,ServletRequestAware,SessionAware {
+public class UserBuilt extends ActionSupport implements ModelDriven<Object>,ServletRequestAware,SessionAware {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UserRegisterInfo uInfo = new UserRegisterInfo();
 	private UserManager um;
 	private FormManager fm;
@@ -126,9 +130,22 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 				}
 			}
 			
-			this.buildLoadedFiles(u.getId());
+			String upff = this.request.getParameter("folderid");
+			if(upff!=null && upff.length()>0){
+				int fid = Integer.parseInt(upff);
+				this.folder = new Uploadfilefolders();
+				this.folder.setId(fid);
+				this.buildLoadedFolderFiles(fid, this.user.getId());
+				if(fid>0){
+					System.out.println("~~~success1~~~  folderid="+fid+"   goto uploadlist.ftl");
+					return "success1";
+				}
+			}else{
+				this.buildLoadedFiles(u.getId());
+			}
 		}		
-		return SUCCESS;
+		System.out.println("~~~success0~~~  , goto uploadfolderslist.ftl");
+		return "success0";
 	}
 	
 	private void addUploads(String[] upfileNames, int uid, int fid){
@@ -163,11 +180,13 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 		System.out.println("---------------upload---------------");
 		String upfolderid = this.uInfo.getUploadfolderId();
 		String userid = this.uInfo.getUserid();
+		System.out.println("GET userid1="+userid+",folderid1="+upfolderid);
 		int fid = 0; int uid=0;
 		if(upfolderid!=null && upfolderid.length()>0)
 			fid = Integer.parseInt(upfolderid);
 		if(userid!=null && userid.length()>0)
 			uid = Integer.parseInt(userid);
+		System.out.println("GET userid2="+uid+",folderid2="+fid);
 		
 		String[] upfileNames = this.uInfo.getUploadfilenames();
 		if(upfileNames!=null){
@@ -175,11 +194,13 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 		}		
 			
 		this.buildLoadedFolderFiles(fid, uid);
-		if(fid>0){			
+		if(fid>0){		
+			System.out.println("~~~~~~~~~~folderid="+fid+"   upload1, ---> uploadlist.ftl");
 			return "upload1";
 		}
 		else{			
 			this.loadFolder();
+			System.out.println("~~~~~~~~~~folderid="+fid+"   upload0, ---> uploadfolderslist.ftl");
 			return "upload0";
 		}
 		
@@ -309,20 +330,40 @@ public class UserBuilt extends ActionSupport implements ModelDriven,ServletReque
 			uf.setUploadtime(time);
 			System.out.println("---------->>>"+uf.toString());
 		}
-
+		
+		if(_folderid==0)
+			this.buildLoadedFolderes();
+	}
+	
+	private void buildLoadedFolderes(){
+		this.upfflist = new ArrayList<Uploadfilefolders>();
+		try {
+			this.setUpfflist(um.loadUploadeFileFolders());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String loadFolderFile(){
+		System.out.println("~~~~~~~~~~~~~~~~~loadFolderFile~~~~~~~~~~~~~~~~~~~~~~~~");
+		User user = new User();
+		user = (User)this.request.getSession().getAttribute("user_");
 		String folderid = this.request.getParameter("folderid");
+		System.out.println("GET user(session)------>"+user.toString());
 		if(folderid!=null && folderid.length()>0){
-			int fid = Integer.parseInt(folderid);			
-			User user = new User();
-			user = (User)this.request.getSession().getAttribute("user_");
-//			System.out.println("GET user(session)------>"+user.toString());			
+			int fid = Integer.parseInt(folderid);	
+			this.folder = new Uploadfilefolders();
+			this.folder.setId(fid);			
+			
+			System.out.println("GET folderid------>"+folder.getId());
 			if(user.getId()>0)
 				this.buildLoadedFolderFiles(fid,user.getId());
 			else
 				this.buildLoadedFolderFiles(fid, 0);
+		}else{			
+			this.buildLoadedFolderFiles(0, user.getId());
 		}
 		return "success";
 	}

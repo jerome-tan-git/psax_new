@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.asso.dao.BbsDao;
 import com.asso.manager.BbsManager;
-import com.asso.model.Article;
 import com.asso.model.Comment;
-import com.asso.model.Message;
 import com.asso.model.Topic;
 
 @Component("bbsManager")

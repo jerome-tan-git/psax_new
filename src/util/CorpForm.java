@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 
 import com.asso.manager.DocManager;
 import com.asso.model.Doc;
-import com.asso.model.Message;
 
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;

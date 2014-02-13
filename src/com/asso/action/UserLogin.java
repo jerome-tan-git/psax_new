@@ -6,34 +6,39 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
+//import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.struts2.ServletActionContext;
+//import org.apache.commons.io.FileUtils;
+//import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
-import org.springframework.context.ApplicationContext;
+//import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+//import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import util.SpringFactory;
 
+import com.asso.manager.DocManager;
 import com.asso.manager.UserManager;
 import com.asso.model.User;
 import com.asso.vo.UserRegisterInfo;
-import com.opensymphony.xwork2.ActionContext;
+//import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Scope("prototype")
 @Component("userlogin") 
-public class UserLogin extends ActionSupport implements ModelDriven,ServletRequestAware,SessionAware{
+public class UserLogin extends ActionSupport implements ModelDriven<Object>,ServletRequestAware,SessionAware{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UserRegisterInfo uInfo = new UserRegisterInfo();
 	private UserManager um;	
 	private User user; 
@@ -46,19 +51,29 @@ public class UserLogin extends ActionSupport implements ModelDriven,ServletReque
 	private HttpServletRequest request;	
 	private Map session;
 
+	private DocManager dm;
+	
 
 	public UserLogin(){
 		um = (UserManager) SpringFactory.getObject("userManager");
+		dm = (DocManager) SpringFactory.getObject("docManager");
 	}
 	
 	public UserManager getUm() {
 		return um;
 	}
-	@Resource(name="userManager")//直接注入，替代初始化userManager
+	@Resource(name="userManager")
 	public void setUm(UserManager um) {
 		this.um = um;
 	}
-	
+	public DocManager getDm() {
+		return dm;
+	}
+	@Resource(name="docManager")
+	public void setDm(DocManager dm) {
+		this.dm = dm;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -211,7 +226,9 @@ public class UserLogin extends ActionSupport implements ModelDriven,ServletReque
 		
 		if(rz==1){
 			this.setSession2(this.request.getSession());
-			  
+			int userid = um.getUserId(u); 
+			if(!dm.checkCorpInfoFilled(userid))
+				return "first";
 			return "success";
 		}
 		return "failure";

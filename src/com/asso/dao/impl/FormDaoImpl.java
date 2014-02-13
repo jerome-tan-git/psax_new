@@ -66,7 +66,8 @@ public class FormDaoImpl implements FormDao{
 		Session s = sessionFactory.getCurrentSession();
 		Query query = s.createQuery("select id from Form f where f.displayname = :s1")
 	    		.setParameter("s1", _formname);	    		
-	    List<Object> list = query.list();
+	    @SuppressWarnings("unchecked")
+		List<Object> list = query.list();
 	    System.out.println("  getFormId  rz="+list.size());
 	    if(list.size() == 1) {
 	    	fid = (Integer) list.get(0);
@@ -81,6 +82,7 @@ public class FormDaoImpl implements FormDao{
 		return fid;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Fields> loadFieldsByFormId(int _formid){
 		List<Fields> rlist = new ArrayList<Fields>();
@@ -91,6 +93,7 @@ public class FormDaoImpl implements FormDao{
         rlist = query.list();
 		return rlist;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public Form loadForm(int _formid){
 		Form form = new Form();
@@ -109,6 +112,7 @@ public class FormDaoImpl implements FormDao{
         form.setFields(this.loadFieldsByFormId(_formid));
         return form;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Form> loadAllForms(){		
 		List<Form> rlist = new ArrayList<Form>();
@@ -118,6 +122,7 @@ public class FormDaoImpl implements FormDao{
         rlist = query.list();
         return rlist;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Form> load2showForms(){		
 		List<Form> rlist = new ArrayList<Form>();
@@ -129,6 +134,7 @@ public class FormDaoImpl implements FormDao{
         return rlist;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Fields getFieldIdByName(String _name){
 		Fields fields = new Fields();

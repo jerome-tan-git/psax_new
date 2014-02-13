@@ -92,8 +92,6 @@ public class ExamSubmit extends ActionSupport implements ServletRequestAware,Ses
 		HashMap<String,List<String>> answerMap = (HashMap<String,List<String>>)this.session.get("answerMap");
 		Set<String> answerItems = answerMap.keySet();
 		HashMap<String,String> itemsRefsRelation = (HashMap<String,String>)this.session.get("itemsRefsRelation");
-		Set<String> refkeys = itemsRefsRelation.keySet();
-				
 		for(String ansid:answerItems)
 			System.out.println("items id in answerMap---------"+ansid);
 		HashSet<String> toModifyItemIds = new HashSet<String>();	//新增没计算入？？？
@@ -209,6 +207,7 @@ public class ExamSubmit extends ActionSupport implements ServletRequestAware,Ses
 	/* Set session : pageindex(EPage_d+dpi)---donelist */
 	private void calculatePageScore(){
 		this.donelist = new HashMap<ExamItem,Integer>();
+		@SuppressWarnings("unchecked")
 		List<String> chosenlist = (List<String>) this.session.get("chosenRefIds");
 		for(HashMap<ExamItem,List<ExamRef>> examitem : this.pageitemlistf){
 			if( examitem!=null){
@@ -449,6 +448,7 @@ public class ExamSubmit extends ActionSupport implements ServletRequestAware,Ses
 	}
 	
 	private void clearSession(){
+		@SuppressWarnings("unchecked")
 		Set<String> sessionKeys = this.session.keySet();
 		for(String key:sessionKeys)
 			System.out.println("key---(session)---"+key);
@@ -569,8 +569,11 @@ public class ExamSubmit extends ActionSupport implements ServletRequestAware,Ses
 		System.out.println("GOT score id ="+sid);
 		
 		/*SAVE ScoreExamItem*/
+		@SuppressWarnings("unchecked")
 		HashMap<ExamItem,Integer> totalDoneList = (HashMap<ExamItem,Integer>) this.session.get("totalDoneList");
+		@SuppressWarnings("unchecked")
 		ArrayList<String> chosenRefIds = (ArrayList<String>) this.session.get("chosenRefIds");
+		@SuppressWarnings("unchecked")
 		HashMap<String,String> itemsRefsRelation = (HashMap<String,String>)this.session.get("itemsRefsRelation");
 		
 		for(int i=0; i<this.pageitemlistf.size(); i++){

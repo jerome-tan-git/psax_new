@@ -17,9 +17,12 @@ import com.opensymphony.xwork2.ModelDriven;
 
 @Scope("prototype")
 @Component("memberbuilt") 
-public class MemberBuilt extends ActionSupport implements ModelDriven {
+public class MemberBuilt extends ActionSupport implements ModelDriven<Object> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UserRegisterInfo uInfo = new UserRegisterInfo();
-
 	private UserManager um;
 	private ApplicationContext ctx;
 	
@@ -72,7 +75,6 @@ public class MemberBuilt extends ActionSupport implements ModelDriven {
 	
 	@Override
 	public Object getModel() {
-		// TODO Auto-generated method stub
 		return this.uInfo;
 	}
 

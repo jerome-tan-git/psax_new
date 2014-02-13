@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+//import java.util.Map;
+//import java.util.Set;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+//import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 //import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,19 +21,20 @@ import org.springframework.stereotype.Component;
 import util.CONSTANT;
 import util.SpringFactory;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+
+//import com.alibaba.fastjson.JSON;
+//import com.alibaba.fastjson.JSONObject;
 import com.asso.manager.ExamManager;
-import com.asso.manager.ScoreManager;
+//import com.asso.manager.ScoreManager;
 import com.asso.model.Exam;
 import com.asso.model.ExamItem;
 import com.asso.model.ExamRef;
-import com.asso.model.JSExamRef;
-import com.asso.model.Score;
-import com.asso.model.User;
+//import com.asso.model.JSExamRef;
+//import com.asso.model.Score;
+//import com.asso.model.User;
 import com.asso.vo.ExamBuiltInfo;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
+//import com.opensymphony.xwork2.ModelDriven;
 
 @Scope("prototype")
 @Component("pageexamitemslist") 
@@ -245,7 +247,7 @@ public class PageExamItemsList extends ActionSupport implements ServletRequestAw
 			if(ilist.size()>index0){
 				if(ilist.size()>=index1){					
 					for(int i=index0; i<=index1; i++){
-						System.out.println("1) item id="+ilist.get(i).getId()+", No. "+i);
+						System.out.println("1) item id="+ilist.get(i).getId()+", No. "+i);						
 						List<ExamRef> refs = new ArrayList<ExamRef>();
 						try {
 							refs = this.loadReflistByItemid(ilist.get(i).getId());
@@ -392,7 +394,7 @@ public class PageExamItemsList extends ActionSupport implements ServletRequestAw
 	private List<ExamItem> dedupeEIlist(List<ExamItem> _eil){
 		System.out.println("------Before dedupe, size="+_eil.size());
 		List<ExamItem> eil = new ArrayList<ExamItem>();
-		List<Integer> seq = new ArrayList<Integer>();
+//		List<Integer> seq = new ArrayList<Integer>();
 		HashSet<Integer> itemidList = new HashSet<Integer>();
 		HashSet<String> itemQuestionList = new HashSet<String>();
 		for(ExamItem ei:_eil){

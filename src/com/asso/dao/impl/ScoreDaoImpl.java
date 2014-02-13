@@ -1,6 +1,5 @@
 package com.asso.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,16 +9,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
-import util.ObjectToClass;
-
 import com.asso.dao.ScoreDao;
-import com.asso.dao.UserDao;
-import com.asso.model.Member;
-import com.asso.model.MemberInfo;
 import com.asso.model.Score;
 import com.asso.model.ScoreExamItem;
 import com.asso.model.ScoreExamRef;
-import com.asso.model.User;
 
 @Component("scoreDao")//≥ı ºªØuserDao
 public class ScoreDaoImpl implements ScoreDao {
@@ -91,7 +84,8 @@ public class ScoreDaoImpl implements ScoreDao {
 	    		.setParameter("s3", score.getUserid())
 	    		.setParameter("s4", score.getExamdate());
 	    		
-	    List<Object> list = query.list();		    
+	    @SuppressWarnings("unchecked")
+		List<Object> list = query.list();		    
 //	    s.close();		    
 	    System.out.println("  getScoreId  rz="+list.size());
 	    if(list.size() == 1) {

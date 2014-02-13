@@ -18,13 +18,10 @@ import util.SpringFactory;
 
 import com.asso.manager.ArticleManager;
 import com.asso.manager.ChannelManager;
-import com.asso.manager.UserManager;
 import com.asso.model.Article;
 import com.asso.model.Category;
 import com.asso.model.Channel;
-import com.asso.model.User;
 import com.asso.vo.ChCatInfo;
-import com.asso.vo.UserRegisterInfo;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Scope("prototype")

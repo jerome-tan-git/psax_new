@@ -8,12 +8,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.asso.dao.ArticleDao;
-import com.asso.dao.ChannelDao;
 import com.asso.manager.ArticleManager;
-import com.asso.manager.ChannelManager;
 import com.asso.model.Article;
-import com.asso.model.Category;
-import com.asso.model.Channel;
 import com.asso.model.Message;
 
 @Component("articleManager")

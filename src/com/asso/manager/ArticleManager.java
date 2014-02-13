@@ -4,8 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.asso.model.Article;
-import com.asso.model.Category;
-import com.asso.model.Channel;
 import com.asso.model.Message;
 
 public interface ArticleManager {

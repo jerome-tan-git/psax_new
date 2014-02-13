@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+//import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 //import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ import util.DownloadImage;
 import util.SpringFactory;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+//import com.alibaba.fastjson.JSONObject;
 import com.asso.manager.ExamManager;
 import com.asso.manager.ScoreManager;
 import com.asso.model.Exam;
@@ -226,11 +226,13 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 	}
 	private String resetCKString(String _orStr){	
 		if(_orStr.contains("http://latex.codecogs.com")){
+			@SuppressWarnings("deprecation")
 			String realpath = this.request.getRealPath(CONSTANT.CKeditorUrlPath);
 			return DownloadImage.filterString(_orStr, realpath,CONSTANT.CKeditorUrlPath);
 		}else
 			return _orStr;			
 	}
+	@SuppressWarnings("unchecked")
 	private void addItemforUpdate(){
 		System.out.println("----INTO addItemforUpdate()");
 		ExamItem item = new ExamItem ();
@@ -310,14 +312,14 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 		em.add(ei);
 		return ei;
 	}
-	private ExamItem updateExamItem() throws ClassNotFoundException, SQLException{
-		ExamItem ei = new ExamItem();
-		ei.setExamid(this.eInfo.getExamid());
-		ei.setCategory(this.eInfo.getCategory());
-		ei.setQuestion(this.eInfo.getQuestion());
-		em.edit(ei);
-		return ei;
-	}
+//	private ExamItem updateExamItem() throws ClassNotFoundException, SQLException{
+//		ExamItem ei = new ExamItem();
+//		ei.setExamid(this.eInfo.getExamid());
+//		ei.setCategory(this.eInfo.getCategory());
+//		ei.setQuestion(this.eInfo.getQuestion());
+//		em.edit(ei);
+//		return ei;
+//	}
 
 
 	private void addExamChoiceRefs2(int _itemid, String[] _refstring,String[] _answers){
@@ -356,52 +358,37 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 		
 	}
 	
-	private void addExamChoiceRefs3(int _itemid, String[] _refstring, String[] _answers){
-		System.out.println("_itemid, _refstring(length),_answer(length)="+_itemid+":"+
-				_refstring.length+":"+_answers.length);
-		List<ExamRef> refs = new ArrayList<ExamRef>();
-//		ArrayList<Integer> ans = new ArrayList<Integer>();
-//		for(String a:_answers)
-//			ans.add(Integer.parseInt(a));
+//	private void addExamChoiceRefs3(int _itemid, String[] _refstring, String[] _answers){
+//		System.out.println("_itemid, _refstring(length),_answer(length)="+_itemid+":"+
+//				_refstring.length+":"+_answers.length);
+//		List<ExamRef> refs = new ArrayList<ExamRef>();
 //
 //		for(int i=0; i<_refstring.length; i++){
 //			ExamRef e_ref = new ExamRef();
 //			e_ref.setItemid(_itemid);
 //			e_ref.setRef(_refstring[i]);
 //			e_ref.setIstrue(0);
-//			for(Integer a:ans){
-//				if(a==i){
-//					e_ref.setIstrue(0);
+//			for(String ans:_answers){
+//				int n = Integer.parseInt(ans);
+//				if(n==i){
+//					e_ref.setIstrue(1);
 //					break;
 //				}
 //			}
-//			
-		for(int i=0; i<_refstring.length; i++){
-			ExamRef e_ref = new ExamRef();
-			e_ref.setItemid(_itemid);
-			e_ref.setRef(_refstring[i]);
-			e_ref.setIstrue(0);
-			for(String ans:_answers){
-				int n = Integer.parseInt(ans);
-				if(n==i){
-					e_ref.setIstrue(1);
-					break;
-				}
-			}
-			refs.add(e_ref);			
-		}
-		for(ExamRef ref:refs)
-			System.out.println("------------ref-"+ref.toString());
-
-		try {
-			em.add(refs);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+//			refs.add(e_ref);			
+//		}
+//		for(ExamRef ref:refs)
+//			System.out.println("------------ref-"+ref.toString());
+//
+//		try {
+//			em.add(refs);
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
 
 	private void addExamYesNoRefs2(int _itemid, String _answer){
@@ -437,14 +424,14 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 		
 	}
 	
-	private void editExamItem() throws ClassNotFoundException, SQLException{
-		ExamItem ei = new ExamItem();
-		ei.setId(this.eInfo.getExamitemid());
-		ei.setExamid(this.eInfo.getExamid());
-		ei.setCategory(this.eInfo.getCategory());
-		ei.setQuestion(this.eInfo.getQuestion());
-		em.edit(ei);		
-	}
+//	private void editExamItem() throws ClassNotFoundException, SQLException{
+//		ExamItem ei = new ExamItem();
+//		ei.setId(this.eInfo.getExamitemid());
+//		ei.setExamid(this.eInfo.getExamid());
+//		ei.setCategory(this.eInfo.getCategory());
+//		ei.setQuestion(this.eInfo.getQuestion());
+//		em.edit(ei);		
+//	}
 	private ExamItem editExamItem(int _itemid) throws ClassNotFoundException, SQLException{
 		System.out.println("INPUT itemid="+_itemid+",eInfo.getExamid()="+this.eInfo.getExamid()+
 				",eInfo.getCategory()="+this.eInfo.getCategory()+
@@ -458,47 +445,47 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 		return ei;
 	}
 	
-	private void editExamref() throws ClassNotFoundException, SQLException{
-		ExamRef ref = new ExamRef();
-		ref.setId(this.eInfo.getRefid());
-		ref.setRef(this.eInfo.getRef());
-		ref.setItemid(this.eInfo.getExamitemid());
-		ref.setIstrue(this.eInfo.getIstrue());
-		em.edit(ref);		
-	}
-	
-	private void deleteExamitem() throws ClassNotFoundException, SQLException{
-		ExamItem ei = new ExamItem();
-		ei.setId(this.eInfo.getExamitemid());
-//		ei.setExamid(this.eInfo.getExamid());
-//		ei.setCategory(this.eInfo.getCategory());
-//		ei.setQuestion(this.eInfo.getQuestion());
-		em.delete(ei);
-	}
-	
-	private void deleteExamref() throws ClassNotFoundException, SQLException{
-		ExamRef ref = new ExamRef();
-		ref.setId(this.eInfo.getRefid());
+//	private void editExamref() throws ClassNotFoundException, SQLException{
+//		ExamRef ref = new ExamRef();
+//		ref.setId(this.eInfo.getRefid());
 //		ref.setRef(this.eInfo.getRef());
 //		ref.setItemid(this.eInfo.getExamitemid());
 //		ref.setIstrue(this.eInfo.getIstrue());
-		em.delete(ref);
-	}
+//		em.edit(ref);		
+//	}
 	
-	private void deleteExamrefsByitemid() throws ClassNotFoundException, SQLException{
-		ExamItem ei = new ExamItem();
-		ei.setId(this.eInfo.getExamitemid());
-		em.deleteRefsByItem(ei);	
-	}
+//	private void deleteExamitem() throws ClassNotFoundException, SQLException{
+//		ExamItem ei = new ExamItem();
+//		ei.setId(this.eInfo.getExamitemid());
+////		ei.setExamid(this.eInfo.getExamid());
+////		ei.setCategory(this.eInfo.getCategory());
+////		ei.setQuestion(this.eInfo.getQuestion());
+//		em.delete(ei);
+//	}
+	
+//	private void deleteExamref() throws ClassNotFoundException, SQLException{
+//		ExamRef ref = new ExamRef();
+//		ref.setId(this.eInfo.getRefid());
+////		ref.setRef(this.eInfo.getRef());
+////		ref.setItemid(this.eInfo.getExamitemid());
+////		ref.setIstrue(this.eInfo.getIstrue());
+//		em.delete(ref);
+//	}
+	
+//	private void deleteExamrefsByitemid() throws ClassNotFoundException, SQLException{
+//		ExamItem ei = new ExamItem();
+//		ei.setId(this.eInfo.getExamitemid());
+//		em.deleteRefsByItem(ei);	
+//	}
 	private void deleteExamref(int _refid) throws ClassNotFoundException, SQLException{
 		ExamRef ref = new ExamRef();
 		ref.setId(_refid);
 		em.delete(ref);	
 	}
 	
-	private void loadRef() throws ClassNotFoundException, SQLException{
-		this.ref = em.loadRef(this.eInfo.getRefid());		
-	}
+//	private void loadRef() throws ClassNotFoundException, SQLException{
+//		this.ref = em.loadRef(this.eInfo.getRefid());		
+//	}
 	
 	private void loadReflist() throws ClassNotFoundException, SQLException{
 		this.reflist = em.loadRefs(this.eInfo.getExamitemid());
@@ -508,16 +495,16 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 		reflist = em.loadRefs(itemid);		
 		return reflist;
 	}
-	private List<ExamRef> addSeq4Reflist(List<ExamRef> _erlist) {		
-		for(int i=0; i<_erlist.size(); i++){
-			if(_erlist.get(i).getRef()!=null && _erlist.get(i).getRef().length()>0){
-				String ref =CONSTANT.alphas[i]+") "+ _erlist.get(i).getRef();
-				System.out.println("-----Updated REF="+ref); 
-				_erlist.get(i).setRef(ref);
-			}			
-		}
-		return _erlist;
-	}
+//	private List<ExamRef> addSeq4Reflist(List<ExamRef> _erlist) {		
+//		for(int i=0; i<_erlist.size(); i++){
+//			if(_erlist.get(i).getRef()!=null && _erlist.get(i).getRef().length()>0){
+//				String ref =CONSTANT.alphas[i]+") "+ _erlist.get(i).getRef();
+//				System.out.println("-----Updated REF="+ref); 
+//				_erlist.get(i).setRef(ref);
+//			}			
+//		}
+//		return _erlist;
+//	}
 	
 	private void loadItem() throws ClassNotFoundException, SQLException{
 		this.setItem(em.loadItem(this.eInfo.getExamitemid()));		
@@ -526,26 +513,26 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 		return em.loadItemByQ(this.eInfo.getQuestion()).getId();		
 	}
 	
-	private void loadItemlistByCatid() throws ClassNotFoundException, SQLException{
-		this.setItemlist(em.loadItemlistByCatid(this.eInfo.getCategory()));
-	}
-	private void loadItemlistByExamid() throws ClassNotFoundException, SQLException{
-		this.setItemlist(em.loadItemlistByExamid(this.eInfo.getExamitemid()));		
-	}
+//	private void loadItemlistByCatid() throws ClassNotFoundException, SQLException{
+//		this.setItemlist(em.loadItemlistByCatid(this.eInfo.getCategory()));
+//	}
+//	private void loadItemlistByExamid() throws ClassNotFoundException, SQLException{
+//		this.setItemlist(em.loadItemlistByExamid(this.eInfo.getExamitemid()));		
+//	}
 	
-	private void loadItemf() throws ClassNotFoundException, SQLException{	
-		this.setItem(em.loadItem(this.eInfo.getExamitemid()));
-		HashMap<ExamItem,List<ExamRef>> family = new HashMap<ExamItem,List<ExamRef>>();
-		family.put(this.getItem(),this.loadReflistByItemid(this.item.getId()));
-		this.setItemf(family);		
-	}
-	private HashMap<ExamItem,List<ExamRef>> loadItemfWithId(int _itemid) throws ClassNotFoundException, SQLException{
-		HashMap<ExamItem,List<ExamRef>> family = new HashMap<ExamItem,List<ExamRef>>();
-		ExamItem i = new ExamItem();
-		i = em.loadItem(_itemid);
-		family.put(i,this.loadReflistByItemid(i.getId()));
-		return family;
-	}
+//	private void loadItemf() throws ClassNotFoundException, SQLException{	
+//		this.setItem(em.loadItem(this.eInfo.getExamitemid()));
+//		HashMap<ExamItem,List<ExamRef>> family = new HashMap<ExamItem,List<ExamRef>>();
+//		family.put(this.getItem(),this.loadReflistByItemid(this.item.getId()));
+//		this.setItemf(family);		
+//	}
+//	private HashMap<ExamItem,List<ExamRef>> loadItemfWithId(int _itemid) throws ClassNotFoundException, SQLException{
+//		HashMap<ExamItem,List<ExamRef>> family = new HashMap<ExamItem,List<ExamRef>>();
+//		ExamItem i = new ExamItem();
+//		i = em.loadItem(_itemid);
+//		family.put(i,this.loadReflistByItemid(i.getId()));
+//		return family;
+//	}
 	private HashMap<ExamItem,List<ExamRef>> loadItemfWithItem(ExamItem _item) throws ClassNotFoundException, SQLException{
 		HashMap<ExamItem,List<ExamRef>> family = new HashMap<ExamItem,List<ExamRef>>();
 		
@@ -554,16 +541,16 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 		return family;
 	}
 
-	private void loadItemlistf() throws ClassNotFoundException, SQLException{
-		List<HashMap<ExamItem,List<ExamRef>>> list = new ArrayList<HashMap<ExamItem,List<ExamRef>>>();
-		List<ExamItem> ilist = new ArrayList<ExamItem>();
-		ilist = em.loadItemlistByExamid(this.eInfo.getExamid());
-		System.out.println("after em.loadItemlistByExamid, size="+ilist.size());
-		for(ExamItem i:ilist){			
-			list.add(this.loadItemfWithItem(i));
-		}		
-		this.setItemlistf(list);
-	}
+//	private void loadItemlistf() throws ClassNotFoundException, SQLException{
+//		List<HashMap<ExamItem,List<ExamRef>>> list = new ArrayList<HashMap<ExamItem,List<ExamRef>>>();
+//		List<ExamItem> ilist = new ArrayList<ExamItem>();
+//		ilist = em.loadItemlistByExamid(this.eInfo.getExamid());
+//		System.out.println("after em.loadItemlistByExamid, size="+ilist.size());
+//		for(ExamItem i:ilist){			
+//			list.add(this.loadItemfWithItem(i));
+//		}		
+//		this.setItemlistf(list);
+//	}
 	private void loadExams() throws ClassNotFoundException, SQLException{
 		List<Exam> list = new ArrayList<Exam>();
 		list = em.loadExams();		
@@ -943,8 +930,7 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 	
 	private List<ExamItem> dedupeEIlist(List<ExamItem> _eil){
 		System.out.println("------Before dedupe, size="+_eil.size());
-		List<ExamItem> eil = new ArrayList<ExamItem>();
-		List<Integer> seq = new ArrayList<Integer>();
+		List<ExamItem> eil = new ArrayList<ExamItem>();		
 		HashSet<Integer> itemidList = new HashSet<Integer>();
 		for(ExamItem ei:_eil){
 			int size1 = itemidList.size();
@@ -1009,10 +995,8 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 		try {
 			this.addExam();
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -1057,13 +1041,11 @@ public class ExamItemsList extends ActionSupport implements ModelDriven<Object>,
 	
 	@Override
 	public Object getModel() {
-		// TODO Auto-generated method stub
 		return this.eInfo;
 	}
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		 this.request=request;		
 		 
 	}

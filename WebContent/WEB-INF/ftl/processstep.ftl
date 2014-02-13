@@ -4,7 +4,7 @@ transitional.dtd">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-		<title>上海市浦东新区食品生产安全管理协会</title>
+		<title>jQa</title>
 		<link rel="stylesheet" type="text/css" href="./css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="./css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="./css/flexslider.css" />
@@ -17,8 +17,6 @@ transitional.dtd">
 		<link rel="stylesheet" type="text/css" href="./css/portfolio.css" />
 		<link rel="stylesheet" type="text/css" href="./css/quicksand.css" />
 		<link rel="stylesheet" type="text/css" href="./css/skin.css" />
-		<link rel="stylesheet" type="text/css" href="./css/uploadify.css" />
-
 
 		<script type="text/javascript" src="./js/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/jquery-migrate.js"></script>
@@ -32,9 +30,7 @@ transitional.dtd">
 		<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
 
 		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script src="./js/jquery.uploadify.js"></script>
-		<script src="./js/uploadfile_list.js"></script>
-		
+
 		<style type="text/css">
 			html, body, p {
 				margin: 0;
@@ -57,26 +53,13 @@ transitional.dtd">
 
 		</style>
 		<script type="text/javascript">
-		function deleteItem(instanceID, fileID) {
-			//#DF6F6F
-			$('#' + fileID).animate({
-				borderColor : "#cc0000",
-				color : "#cc0000"
-			}, 200);
-			$('#' + instanceID).uploadify('cancel', fileID);
-		}
 			$(document).ready(function() {
-				
-				
-				
-				
-				
 
 				// bancy bo=x
 				// jQuery("a#example6").fancybox({
-					// 'titlePosition' : 'outside',
-					// 'overlayColor' : '#000',
-					// 'overlayOpacity' : 0.9
+				// 'titlePosition' : 'outside',
+				// 'overlayColor' : '#000',
+				// 'overlayOpacity' : 0.9
 				// });
 				//slider
 				// var sudoSlider = jQuery("#testimonail").sudoSlider({
@@ -145,29 +128,22 @@ transitional.dtd">
 						backgroundColor : "#fff"
 					}, 500);
 				});
-				
-				$(".click_down").click(function(){
+
+				$(".click_down").click(function() {
 					var toHeight = $(".exam_no_container").outerHeight();
 					var beginHeight = $(".exam_no_outer").outerHeight();
-					if(beginHeight == 0)
-					{
-						   $(".exam_no_outer").animate({
-								height : toHeight + "px"
-							}, 1000, "easeOutExpo",
-							function()
-							{
-								$(".click_down").attr("src","images/up.png");
-							});
-					}
-					else
-					{
-							$(".exam_no_outer").animate({
-								height : 0 + "px"
-							}, 1000, "easeOutExpo",
-							function()
-							{
-								$(".click_down").attr("src","images/down.png");
-							});
+					if (beginHeight == 0) {
+						$(".exam_no_outer").animate({
+							height : toHeight + "px"
+						}, 1000, "easeOutExpo", function() {
+							$(".click_down").attr("src", "images/up.png");
+						});
+					} else {
+						$(".exam_no_outer").animate({
+							height : 0 + "px"
+						}, 1000, "easeOutExpo", function() {
+							$(".click_down").attr("src", "images/down.png");
+						});
 					}
 				});
 			});
@@ -183,130 +159,118 @@ transitional.dtd">
 					}
 				}
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
+		</script>
+		<script>
+			$(document).ready(function() {
+				var tmpH = $(".step_left").outerHeight();
+				
+				if($(".step_content").outerHeight()>$(".step_left").outerHeight())
+				{
+					tmpH = $(".step_content").outerHeight();
+				}
+				
+				$(".step_div_bg").css("height",tmpH+"px");
+				}
+			);
 		</script>
 	</head>
 	<body>
 		<div id="page_wrap">
 			<!-- Header Start -->
 			<div class="header">
-		    <#include "../commons/logo.ftl">
-		  	<#include "../commons/menubar.ftl">
-			<#include "../commons/smallmenu.ftl"> 
-				<!-- <nav>
-				<div id="myslidemenu" class="jqueryslidemenu">
-				<ul>
-				<li><a class="active" href="./index.html">首页</a></li>
-				<li><a href="./about.html">关于我们</a></li>
-				<li><a href="./index.html">舆情动态</a></li>
-
-				<li><a href="./portfolio.html">公开办事</a>
-				<ul>
-				<li><a href="./portfolio_3col.html">肉制品报告</a></li>
-				<li><a href="./portfolio_3col.html">标准备案</a></li>
-				<li><a href="./portfolio_2col.html">添加剂报告</a></li>
-				<li><a href="./portfolio_1col.html">委托加工备案</a></li>
-				</ul>
-				</li>
-				<li><a href="./blog.html">政策法规</a></li>
-				<li><a href="./contact.html">咨询服务</a></li>
-				</ul>
-				</div>
-				</nav> -->
+			    <#include "../commons/logo.ftl">
+			  	<#include "../commons/menubar.ftl">
+				<#include "../commons/smallmenu.ftl"> 				
 			</div>
 			<!-- Header End -->
 
 			<div class="clear"></div>
 
 			<!-- Flex Slider Start -->
-			<div class="sub_header  exam_bg">
+			<div class="sub_header">
 
 				<div class="sub_header_title">
-					<h2>企业管理</h2>
+					<h2>公开办事</h2>
 					<div class="sub_header_description">
-						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
-						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
-						<span class="page"><a href="./uploadfoldersmanager.action">企业管理</a></span>
-						<#if folder?exists>
-						<span class="page">${folder.id}</span>
-						</#if>	
+						<span><a href="./index.html">首页 &raquo;</a></span>
+						<span class="page">公开办事&nbsp;&raquo;</span>
+						<span class="page">企业标准备案</span>
 					</div>
 
 				</div>
 				<div class="exam_type">
-					
+
 				</div>
-				
+
 			</div>
 
 			<!-- Flex Slider End -->
 
 			<!-- Teaser Start -->
-			<div class="section" id="content" class="tag_line" style="padding-top: 30px">
-			<div class="clearfix">
-			<#if upflist?exists>
-				<#list upflist as upf>
-					<div class="member_block_upload blue">
-						<div class="member_upload_icon">&nbsp;</div>
-						<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
-						<div class="member_block_upload_title">${upf.fname}</div>
-						<div class="member_block_upload_desc">${upf.uploadtime}</div>
-						<div class="del_upload">
-							<a href="./uploadfilesmanager.action?upfid=${upf.id}&folderid=${upf.folderid}">x</a>
+			<div class="section" id="content" class="tag_line" style="padding-top: 0px;padding-bottom: 0px">
+
+				<div class="demo">
+					<div class="step_left clearfix">
+					<#if processstep?exists>					
+						<div class="step_line_blank">&nbsp;</div>
+						<#if (processstep.id==1)>
+						<div  class="step_menu">
+							<div class="now_step">1.第一步</div>
+						<#else>
+						<div  class="step_menu_done">
+							<div class="step_text">1.第一步</div>
+						</#if>						
 						</div>
-					</div>		
-					<div></div>
-				</#list>
-			</#if>
-			</div>
-				
-				<#if Session.user_?exists>
-					<#assign user=Session.user_>	
-				<div style="border-bottom: 1px solid #ccc;margin-left:10px;margin-right:10px;margin-bottom:10px">&nbsp;</div>
-				<div style="margin-left:9px;position:relative;">
-				
-					<form id="uploadForm" action="./useruploadfiles.action">
-				
-						<input type="file" id="file_upload_1" name="uploadfiles"/>
-						<input type="hidden" name="userid" value="${user.id?default("")}"/>
-					<#if folder?exists && folder.id?exists>
-						<input type="hidden" name="uploadfolderId" value="${folder.id?default("")}"/>
-					<#else>
-						<#if upflist?exists>
-						<#list upflist as upf>
-							<#if (upf_index==0)>
-								<#assign fid=upf.folderid>
-							<input type="hidden" name="uploadfolderId" value="${fid?default("")}"/>												
-							</#if>
-						</#list>
-						</#if>
-					</#if>	
-				<!--
-				<#if upflist?exists>
-					<#list upflist as upf>
-						<#if (upf_index==0)>
-						<#assign fid=upf.folderid>
-						<input type="hidden" name="uploadfolderId" value="${fid?default("")}"/>												
-						</#if>
-					</#list>
-				</#if>
-					-->	
-						<!--div style="position:absolute;top: 0px;left: 113px;">
-							<input type="image" src="./images/bt_save.png" name="image" />
-						</div-->
-						<!--<input type="submit" value="save">-->
-					</form>
-				</div>	
-				</#if>
-				
+						<div class="step_line">&nbsp;</div>
+						
+						<#if (processstep.id==2)>
+						<div  class="step_menu">
+							<div class="now_step">2.第二步</div>
+						<#else>
+							<#if (processstep.id>2)></#if>						
+							<div  class="step_menu_done">
+								<div class="step_text">2.第二步</div>
+							<#else>
+							<div  class="step_menu_todo">
+								<div class="step_text">2.第二步</div>
+							</#if>	
+						</div>
+						<div class="step_line">&nbsp;</div>
+						
+						<#if (processstep.id==3)>
+						<div  class="step_menu_done">
+							<div class="step_text">3.第三步</div>
+						</div>
+						</#if>	
+						<div class="step_line">&nbsp;</div>
+						<div  class="step_menu">
+							<div class="now_step">4.第四步</div>
+						</div>
+						<div class="step_line">&nbsp;</div>
+						<div  class="step_menu_todo">
+							<div class="step_text">5.第五步</div>
+						</div>
+						<div class="step_line">&nbsp;</div>
+						<div  class="step_menu_todo">
+							<div class="step_text">6.第六步</div>
+						</div>
+						<div class="step_line_blank">&nbsp;</div>
+					</#if>
+					</div>
+					<div class="step_div_bg">&nbsp;</div>
+					<div class="step_content clearfix">
+						<div class="step_title">
+							资料准备
+						</div>
+						<div>
+							准备企业标准备案登记表、企业标准正文、企业标准编制说明、产品工艺流程、产品配方、产品型式检验报告复印件（一年内的）、法人委托书、受委托人身份证复印件、工商营业执照复印件、生产许可证（已取得相关产品的生产许可证）复印件等资料，具体视申报情况而定。
+						</div>
+						<a href="./progress_1.html"><div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;">
+						下一步
+						</div></a>
+					</div>
+				</div>
+
 			</div>
 			<!-- Teaser End -->
 

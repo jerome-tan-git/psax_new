@@ -1,25 +1,21 @@
 package com.asso.action;
 
-import java.sql.SQLException;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.asso.model.User;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 
 @Scope("prototype")
 @Component("checksession") 
 public class CheckSession extends ActionSupport implements SessionAware {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map session;
 	
 	@Override

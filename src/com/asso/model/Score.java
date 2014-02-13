@@ -1,7 +1,5 @@
 package com.asso.model;
 
-import java.sql.Date;
-
 public class Score {
 	
 	private int id;

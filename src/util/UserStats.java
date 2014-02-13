@@ -1,7 +1,7 @@
 package util;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+//import java.io.UnsupportedEncodingException;
+//import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,10 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.asso.manager.ArticleManager;
-import com.asso.manager.FormManager;
+//import com.asso.manager.FormManager;
 import com.asso.model.Message;
-import com.asso.model.User;
+//import com.asso.model.User;
+
 
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;
@@ -31,6 +32,7 @@ public class UserStats implements TemplateMethodModel {
 		this.am = am;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object exec(List arg0) throws TemplateModelException {
 		int unreadInfoPieces = 0;

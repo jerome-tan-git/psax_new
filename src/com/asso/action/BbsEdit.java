@@ -29,6 +29,10 @@ import com.opensymphony.xwork2.ModelDriven;
 @Component("bbsedit") 
 public class BbsEdit extends ActionSupport implements ModelDriven<Object>,ServletRequestAware,SessionAware{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private BbsManager bm;	
 	private UserManager um;	
 	private BbsInfo binfo = new BbsInfo();

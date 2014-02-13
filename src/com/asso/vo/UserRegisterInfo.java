@@ -1,7 +1,5 @@
 package com.asso.vo;
 
-import java.io.File;
-
 public class UserRegisterInfo {
 	
 	private String username;

@@ -1,10 +1,6 @@
 package com.asso.dao;
 
 import java.util.List;
-
-import com.asso.model.Article;
-import com.asso.model.Category;
-import com.asso.model.Channel;
 import com.asso.model.Doc;
 import com.asso.model.FieldValue;
 
@@ -39,6 +35,8 @@ public interface DocDao {
 	List<FieldValue> loadFieldValue(int _docid, int _fieldid, int _fvindex);
 
 	List<FieldValue> loadFieldValue(int _docid, int _fieldid);
+
+	List<Doc> loadDocsByUserForm(int _userid, int _formid);
 	
 
 }

@@ -47,6 +47,9 @@
 			<result name="cat15" type="freemarker">/WEB-INF/ccpage/exam_home.ftl</result>	
 			<result name="cat16" type="redirect">bbs_alltopiclist.action</result>							 
 		</action>
+		<action name="process" class="com.asso.action.Process">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/processstep.ftl</result>
+		</action>
 		 
 		 
 		<action name="gologin" class="com.asso.action.UserLogin" method="gologin">  
@@ -61,7 +64,8 @@
 			<!-- <result name="success">login_result.jsp</result> -->
 			<result name="success" type="freemarker">/WEB-INF/ftl/membercenter.ftl</result>
 			<!-- <result name="failure">loginFail.jsp</result> -->
-			<result name="failure" type="freemarker">/WEB-INF/ftl/loginError.ftl</result>    
+			<result name="failure" type="freemarker">/WEB-INF/ftl/loginError.ftl</result>
+			<result name="first" type="redirect">/hello?formid=9</result>    
 		</action>
 		<action name="userlogout" class="com.asso.action.UserLogout" >  
 			<result name="success" type="freemarker">/WEB-INF/ccpage/index.ftl</result>
@@ -80,14 +84,17 @@
 			<interceptor-ref name="mystack" />		 
 		</action>		
 		<action name="uploadfilesmanager" class="com.asso.action.UserBuilt" method="manager">  
-			<result name="success" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>	
+			<!-- <result name="succes" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result> -->
+			<result name="success0" type="freemarker">/WEB-INF/ftl/uploadfolderslist.ftl</result>
+			<result name="success1" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>	
 			<interceptor-ref name="mystack" />		 
 		</action>
-		<action name="uploadfoldersmanager" class="com.asso.action.UserBuilt" method="loadFolder">  
-			<result name="list" type="freemarker">/WEB-INF/ftl/uploadfolderslist.ftl</result>	
+		
+		<action name="uploadfoldersmanager" class="com.asso.action.UserBuilt" method="loadFolderFile">
+			<result name="success" type="freemarker">/WEB-INF/ftl/uploadfolderslist.ftl</result>	
 			<interceptor-ref name="mystack" />		 
 		</action>
-		<action name="uploadfolderfilesmanager" class="com.asso.action.UserBuilt" method="loadFolderFile">  
+		<action name="uploadfolderfilesmanager" class="com.asso.action.UserBuilt" method="loadFolderFile">
 			<result name="success" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result>	
 			<interceptor-ref name="mystack" />		 
 		</action>

@@ -4,7 +4,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 
-import test.TestLoad;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 
