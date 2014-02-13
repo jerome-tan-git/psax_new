@@ -235,9 +235,9 @@ transitional.dtd">
 						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
 						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
 						<span class="page"><a href="./uploadfoldersmanager.action">企业管理</a></span>
-						<#if folder?exists>
+						<!--<#if folder?exists>
 						<span class="page">${folder.id}</span>
-						</#if>	
+						</#if>-->	
 					</div>
 
 				</div>

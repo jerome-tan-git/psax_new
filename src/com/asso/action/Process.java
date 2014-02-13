@@ -60,36 +60,158 @@ public class Process extends ActionSupport implements ServletRequestAware,Sessio
 		this.processstep = processstep;
 	}
 
-	private void loadProcessStep(int _stepid){
+	private void loadProcessStep(int _stepid, int _processid){
+		System.out.println("GOT stepid="+_stepid+",_processid"+_processid);
 		this.processstep.setId(_stepid);
-		if(_stepid==1){
-			this.processstep.setContent("告知企业报告要求");
-		}		
-		if(_stepid==2)
-			this.processstep.setContent("企业填写报告");
-		if(_stepid==3)
-			this.processstep.setContent("接收报告");
-		if(_stepid==4)
-			this.processstep.setContent("受理报告");
-		if(_stepid==5)
-			this.processstep.setContent("报告受理登记");
-		if(_stepid==6)
-			this.processstep.setContent("报告汇总至食品所办公室及相关科室");
+		if(_stepid==1){		
+			System.out.println("into 1st level, _stepid"+_stepid+" , _processid"+_processid);
+			if(_processid==2){
+				this.processstep.setTitle("资料准备");
+				this.processstep.setContent("准备企业标准备案登记表、企业标准正文、企业标准编制说明、产品工艺流程、产品配方、产品型式检验报告复印件（一年内的）、法人委托书、受委托人身份证复印件、工商营业执照复印件、生产许可证（已取得相关产品的生产许可证）复印件等资料，具体视申报情况而定。");
+			}
+			else if(_processid==3){
+				this.processstep.setTitle("告知企业报告要求");
+				this.processstep.setContent("通过简报、培训、电话、短信和邮件等方式告知企业报告要求，包括递交流程和填表要点等内容。");
+			}
+			else if(_processid==4){
+				this.processstep.setTitle("告知企业报告要求");
+				this.processstep.setContent("通过简报、培训、电话、短信和邮件等方式告知企业报告要求，包括递交流程和填表要点等内容。");
+			}
+			else{
+				this.processstep.setTitle("待定");
+				this.processstep.setContent("待定");
+			}
+				
+		}
+		if(_stepid==2){
+			System.out.println("into 1st level, _stepid"+_stepid+" , _processid"+_processid);
+			if(_processid==2){
+				this.processstep.setTitle("网上申报");
+				this.processstep.setContent("网址http://xuke.shfda.gov.cn ，注册企业信息，上传准备的资料，下载《食品安全企业标准备案登记表》，同时将资料的电子档发送至浦东新区食药监行政审批科（pudongxpk@smda.gov.cn）；浦东新区食品协会（spxh_pd@163.com）。");
+			}
+			else if(_processid==3){
+				this.processstep.setTitle("企业填写报告");
+				this.processstep.setContent("填写《食品生产企业使用食品添加剂情况自查报告表》，使用复配食品添加剂的申报企业还需填写《食品生产加工企业复配食品添加剂使用情况-附页》。");
+			}
+			else if(_processid==4){
+				this.processstep.setTitle("企业填写报告");
+				this.processstep.setContent("填写《食品生产加工企业受委托加工食品情况自查报告表》。");
+			}
+			else{
+				this.processstep.setTitle("待定");
+				this.processstep.setContent("待定");
+			}
+		
+		}
+		if(_stepid==3){
+			System.out.println("into 1st level, _stepid"+_stepid+" , _processid"+_processid);
+			if(_processid==2){
+				this.processstep.setTitle("符合性审核");
+				this.processstep.setContent("根据现行国家标准、地方标准及相关规定，对申报材料进行符合性审核，并与企业沟通、调整，完成审核工作。浦东新区食品生产安全管理协会，浦东新区秀浦路2388号B座901室，滕立沙，61183723。");
+			}
+			else if(_processid==3){
+				this.processstep.setTitle("接收报告");
+				this.processstep.setContent("企业将填写的报告表邮件、传真或邮递至受理单位。");
+			}
+			else if(_processid==4){
+				this.processstep.setTitle("接收报告");
+				this.processstep.setContent("企业将填写的报告表和其他资料【受委托加工食品生产企业生产许可证复印件、委托加工企业营业执照复印件及食品流通许可证复印件、双方签订有效的委托加工合同复印件（应符合《合同法》的基本要求，包括产品名称、数量规格、质量（原料、成品）要求、合同期限等基本要素）、食品加工生产工艺流程、产品配方、产品标签等】邮件、传真或邮递至受理单位。");
+			}
+			else{
+				this.processstep.setTitle("待定");
+				this.processstep.setContent("待定");
+			}	
+		}
+		if(_stepid==4){
+			System.out.println("into 1st level, _stepid"+_stepid+" , _processid"+_processid);
+			if(_processid==2){
+				this.processstep.setTitle("行政审批");
+				this.processstep.setContent("至浦东新区食药监局递交已完成符合性审核的资料，待行政审批。");
+			}
+			else if(_processid==3){
+				this.processstep.setTitle("受理报告");
+				this.processstep.setContent("根据GB 2760、GB 14880和GB 26687等的要求，对企业递交的报告表进行受理，并与企业沟通。");
+			}
+			else if(_processid==4){
+				this.processstep.setTitle("受理报告");
+				this.processstep.setContent("根据相关要求，对企业的报告表和其他资料进行受理，并与企业沟通。");
+			}
+			else{
+				this.processstep.setTitle("待定");
+				this.processstep.setContent("待定");
+			}	
+		}
+		if(_stepid==5){
+			System.out.println("into 1st level, _stepid"+_stepid+" , _processid"+_processid);
+			if(_processid==2){
+				this.processstep.setTitle("备案手续");
+				this.processstep.setContent("行政审批完成后，编辑企业标准相关资料的标准号及实施日期等内容，备齐全套资料，至浦东新区食药监局完成企业标准备案手续。同时，将最终版的企业标准正文、企业标准编制说明、产品工艺流程、产品配方的电子档发至浦东新区食药监行政审批科（pudongxpk@smda.gov.cn）。");
+			}
+			else if(_processid==3){
+				this.processstep.setTitle("报告受理登记");
+				this.processstep.setContent("企业备好完成的报告表（书面版，需签字、盖章）至受理单位，进行登记、编号。");
+			}
+			else if(_processid==4){
+				this.processstep.setTitle("报告受理登记");
+				this.processstep.setContent("企业备好填写完成的报告表和其他资料（书面版，需签字、盖章）至受理单位，进行登记、编号。");
+			}
+			else{
+				this.processstep.setTitle("待定");
+				this.processstep.setContent("待定");
+			}	
+		}
+		if(_stepid==6){
+			System.out.println("into 1st level, _stepid"+_stepid+" , _processid"+_processid);
+			if(_processid==2){
+				this.processstep.setTitle("不予备案");
+				this.processstep.setContent("对经符合性审核，不具有企业标准备案条件的企业，提交撤消申请（具体视申报情况而定）。<br/>浦东新区食药监局：<br/>北片，合欢路2号 食药监窗口，龚琰，68542222-88260；<br/>南片，城南路1366号 食药监窗口，庄婷婷，68004398/68004270。");
+			}
+			else if(_processid==3 || _processid==4){
+				this.processstep.setTitle("报告汇总至食品所办公室及相关科室");
+				this.processstep.setContent("将企业的报告资料按频次报食品所办公室及相关科室。<br/><br/>受理单位：上海市浦东新区食品生产安全管理协会<br/>地址：上海市浦东新区秀浦路2388号B座901室<br/>联系人：滕立沙   电话/传真：61183723<br/>邮箱：pdspsax@163.com");
+			}			
+			else{
+				this.processstep.setTitle("待定");
+				this.processstep.setContent("待定");
+			}	
+		}
+	}
+	
+	private void loadProcess(int _processid){
+		this.processstep.setProcessid(_processid);
+		if(_processid==1)
+			this.processstep.setProcessname("生产许可咨询");
+		if(_processid==2)
+			this.processstep.setProcessname("企业标准备案");
+		if(_processid==3)
+			this.processstep.setProcessname("食品添加剂备案");
+		if(_processid==4)
+			this.processstep.setProcessname("委托加工备案");
 	}
 
 	@Override
 	public String execute(){
 		
 		this.processstep = new ProcessStep();		
+		String processid = this.request.getParameter("processid");
+		System.out.println("processid---------"+processid);
 		String stepid = this.request.getParameter("stepid");
 		System.out.println("stepid-----------"+stepid);
-		if(stepid!=null && stepid.length()>0){
-			int sid = Integer.parseInt(stepid);
-//			this.processstep = pm.loadStep(sid);
-//			System.out.println("GET processstep------"+processstep.toString());
-			this.loadProcessStep(sid);
-		}
+		int sid = 1;int pid=1;
 		
+		if(processid!=null && processid.length()>0){
+			pid = Integer.parseInt(processid);
+			this.loadProcess(pid);
+		}else
+			return "home";
+		
+		if(stepid!=null && stepid.length()>0){
+			sid = Integer.parseInt(stepid);			
+//			this.processstep = pm.loadStep(sid);
+//			System.out.println("GET processstep------"+processstep.toString());			
+		}
+		this.loadProcessStep(sid,pid);
+		System.out.println("GET processstep------"+processstep.toString());
 		return "success";
 	}
 
@@ -104,7 +226,7 @@ public class Process extends ActionSupport implements ServletRequestAware,Sessio
 	@Override
 	public void setSession(Map<String, Object> _s) {
 		this.session = _s;
-		System.out.println("setSESSION----after--"+_s.toString());
+//		System.out.println("setSESSION----after--"+_s.toString());
 	}
 
 

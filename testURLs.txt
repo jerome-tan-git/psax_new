@@ -83,7 +83,7 @@ http://localhost:8080/psax/bbsbk_topicsdelete.action?topicid=3
 http://localhost:8080/psax/bbsbk_topicslist.action
 http://localhost:8080/psax/uploadfoldersmanager.action
 
-
+./wip.action
 useruploadfiles.action
 
 http://localhost:8080/psax/process.action?stepid=1

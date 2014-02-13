@@ -437,7 +437,9 @@ public class UserBuilt extends ActionSupport implements ModelDriven<Object>,Serv
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return this.loadFolder();		
+//		return this.loadFolder();
+		this.loadAlluffs();
+		return "list";
 	}
 	
 	public String deletefolder(){
@@ -453,7 +455,9 @@ public class UserBuilt extends ActionSupport implements ModelDriven<Object>,Serv
 				e.printStackTrace();
 			}
 		}		
-		return this.loadFolder();
+//		return this.loadFolder();
+		this.loadAlluffs();
+		return "list";
 	}
 	
 	@Override

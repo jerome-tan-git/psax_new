@@ -167,8 +167,43 @@ transitional.dtd">
 		<!-- Flex Slider Start -->
 		<div class="flexslider">
 		    <ul class="slides">
-
+				<li>
+		            <div class="slider_content">
+		            	<a href="./process.action">
+		                <div class="thumb_img" style="background: url('./images/slider_img_1.png') no-repeat;">&nbsp;</div>
+		                <div class="description">
+		                    <h1>公开办事</h1>
+		                    <div class="slide_caption"><span>品质</span>和<span>服务</span>是我们最好的包装</div>
+		                    <p>品质和服务是我们最好的包装 | 品质和服务是我们最好的包装 | 品质和服务是我们最好的包装</p>
+		            	</div>
+		            	</a>
+		            </div>
+		        </li>
+		        <li> 
+		            <div class="slider_content">
+		            	<a href="./listArticles.action?categoryid=4">
+		                <div class="thumb_img" style="background: url('./images/slider_img_2.png') no-repeat;">&nbsp;</div>
+		                <div class="description">
+		                    <h1>实时动态</h1>
+		                    <div class="slide_caption">致力于为您不断提供<span>更好更新的</span>服务</div>
+		                    <p>致力于为您不断提供更好更新的服务 | 致力于为您不断提供更好更新的服务 </p>
+		                </div>
+		                </a>
+		            </div>
+		        </li>
 		        <li>
+		            <div class="slider_content">
+		            	<a href="./listArticles.action?categoryid=6">
+		                <div class="thumb_img" style="background: url('./images/slider_img_3.png') no-repeat;">&nbsp;</div>
+		                <div class="description">
+		                    <h1>最新政策</h1>
+		                    <div class="slide_caption">我们提供<span>准确</span>和<span>最新</span>的信息</div>
+		                    <p>我们提供准确和最新的信息 | 我们提供准确和最新的信息 | 我们提供准确和最新的信息</p>
+		                </div>
+						</a>
+		            </div>
+		        </li>
+		        <!--<li>
 		            <div class="slider_content">
 		                <div class="thumb_img" style="background: url('./images/home_1.png') no-repeat;">&nbsp;</div>
 		                <div class="description">
@@ -201,8 +236,7 @@ transitional.dtd">
 		                <div class="description">
 		                    <h2 >热忱服务</h2>
 		                    <h2 class="home_left">精心指导</h2> 
-		                    <!--div class="slide_caption"><span>品质</span>和<span>服务</span>是我们最好的包装</div>
-		                    <p>品质和服务是我们最好的包装 | 品质和服务是我们最好的包装 | 品质和服务是我们最好的包装</p-->
+		                   
 		            	</div>
 		            </div>
 		        </li>
@@ -223,7 +257,7 @@ transitional.dtd">
 		                    <h2 class="home_left">共筑安全</h2>
 		            	</div>
 		            </div>
-		        </li>
+		        </li>-->
 		    </ul>
 		</div>
 		<!-- Flex Slider End -->

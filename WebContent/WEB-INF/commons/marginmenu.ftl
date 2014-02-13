@@ -5,7 +5,8 @@
 							<li class="active">
 								<a href="./managerexam.action">考试管理</a>
 								<ul class="nav">
-								    <li><a href="./listitem.action?examid=3">中级食品检验工</a></li>								    
+								    <li><a href="./listitem.action?examid=3">中级食品检验工</a></li>
+								    <li><a href="./listitem.action?examid=2">食品安全法</a></li>								    
 								</ul>
 							</li>
 							<li class="active">

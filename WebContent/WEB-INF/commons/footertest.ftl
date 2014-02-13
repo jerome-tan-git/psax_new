@@ -10,7 +10,7 @@
 							借助社会资源、搭建服务平台，促进浦东食品生产加工行业整体质量安全管理水平与生产能力的提高，
 							为稳定和提升浦东食品生产行业的质量安全水平和市场秩序发挥重要作用。
 						</p>
-						<a href="#">-- 更多</a>
+						<a href="./page.action?categoryid=2">-- 更多</a>
 					</div>
 				</div>
 
@@ -55,16 +55,16 @@
 						<!-- <p>Learn more about the Theme template features</p> -->
 						<ul class="userlinks">
 							<li>
-								<a href="#">生产许可咨询</a>
+								<a href="./process.action?processid=1">生产许可咨询</a>
 							</li>
 							<li>
-								<a href="#">企业标准备案</a>
+								<a href="./process.action?processid=2">企业标准备案</a>
 							</li>
 							<li>
-								<a href="#">食品添加剂备案</a>
+								<a href="./process.action?processid=3">食品添加剂备案</a>
 							</li>
 							<li>
-								<a href="#">委托加工备案</a>
+								<a href="./process.action?processid=4">委托加工备案</a>
 							</li>
 							
 						</ul>

@@ -249,11 +249,13 @@ transitional.dtd">
 					<div class="member_block_title">基本信息</div>
 				</div>
 				</a>
+				<a href="./process.action">	
 				<div class="member_block blue">
 					<div class="member_block_icon gkbs">&nbsp;</div>
 					<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
 					<div class="member_block_title">公开办事</div>
 				</div>
+				</a>	
 				<!--<a href="./upload_list.html">-->
 				<!--<a href="./uploadfilesmanager.action">-->				
 				<!--<a href="./uploadfoldersmanager.action">-->

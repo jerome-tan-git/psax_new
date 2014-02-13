@@ -47,9 +47,7 @@
 			<result name="cat15" type="freemarker">/WEB-INF/ccpage/exam_home.ftl</result>	
 			<result name="cat16" type="redirect">bbs_alltopiclist.action</result>							 
 		</action>
-		<action name="process" class="com.asso.action.Process">  
-			<result name="success" type="freemarker">/WEB-INF/ftl/processstep.ftl</result>
-		</action>
+		
 		 
 		 
 		<action name="gologin" class="com.asso.action.UserLogin" method="gologin">  
@@ -71,6 +69,7 @@
 			<result name="success" type="freemarker">/WEB-INF/ccpage/index.ftl</result>
 		</action>
 		
+
 		<action name="usercenter" class="com.asso.action.UserLogin" method="userCenter">  
 			<result name="success" type="freemarker">/WEB-INF/ftl/usercenter.ftl</result>
 			<interceptor-ref name="mystack" />			 
@@ -82,6 +81,11 @@
 		<action name="userupdateinfo" class="com.asso.action.UserLogin" method="updateInfo">  
 			<result name="success" type="freemarker">/WEB-INF/ftl/usercenter.ftl</result>	
 			<interceptor-ref name="mystack" />		 
+		</action>
+		<action name="process" class="com.asso.action.Process">
+			<result name="home" type="freemarker">/WEB-INF/ftl/processhome.ftl</result>  
+			<result name="success" type="freemarker">/WEB-INF/ftl/processstep.ftl</result>
+			<interceptor-ref name="mystack" />
 		</action>		
 		<action name="uploadfilesmanager" class="com.asso.action.UserBuilt" method="manager">  
 			<!-- <result name="succes" type="freemarker">/WEB-INF/ftl/uploadlist.ftl</result> -->

@@ -4,7 +4,7 @@ transitional.dtd">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-		<title>上海市浦东新区食品生产安全管理协会</title>
+		<title>jQa</title>
 		<link rel="stylesheet" type="text/css" href="./css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="./css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="./css/flexslider.css" />
@@ -17,7 +17,6 @@ transitional.dtd">
 		<link rel="stylesheet" type="text/css" href="./css/portfolio.css" />
 		<link rel="stylesheet" type="text/css" href="./css/quicksand.css" />
 		<link rel="stylesheet" type="text/css" href="./css/skin.css" />
-		<link rel="stylesheet" type="text/css" href="./css/uploadify.css" />
 
 
 		<script type="text/javascript" src="./js/jquery.min.js"></script>
@@ -32,9 +31,7 @@ transitional.dtd">
 		<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
 
 		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script src="./js/jquery.uploadify.js"></script>
-		<script src="./js/uploadfile_list.js"></script>
-		
+
 		<style type="text/css">
 			html, body, p {
 				margin: 0;
@@ -57,17 +54,20 @@ transitional.dtd">
 
 		</style>
 		<script type="text/javascript">
-		function deleteItem(instanceID, fileID) {
-			//#DF6F6F
-			$('#' + fileID).animate({
-				borderColor : "#cc0000",
-				color : "#cc0000"
-			}, 200);
-			$('#' + instanceID).uploadify('cancel', fileID);
-		}
 			$(document).ready(function() {
-				
-			$('.banner').unslider();
+
+				// bancy bo=x
+				// jQuery("a#example6").fancybox({
+					// 'titlePosition' : 'outside',
+					// 'overlayColor' : '#000',
+					// 'overlayOpacity' : 0.9
+				// });
+				//slider
+				// var sudoSlider = jQuery("#testimonail").sudoSlider({
+				// continuous:true,
+				// numeric:false
+				// });
+				$('.banner').unslider();
 
 				//menu_item
 				$(".menu_item").hover(function() {
@@ -167,10 +167,6 @@ transitional.dtd">
 					}
 				}
 			}
-			
-			
-			
-			
 		</script>
 	</head>
 	<body>
@@ -180,26 +176,6 @@ transitional.dtd">
 		    <#include "../commons/logo.ftl">
 		  	<#include "../commons/menubar.ftl">
 			<#include "../commons/smallmenu.ftl"> 
-				<!-- <nav>
-				<div id="myslidemenu" class="jqueryslidemenu">
-				<ul>
-				<li><a class="active" href="./index.html">首页</a></li>
-				<li><a href="./about.html">关于我们</a></li>
-				<li><a href="./index.html">舆情动态</a></li>
-
-				<li><a href="./portfolio.html">公开办事</a>
-				<ul>
-				<li><a href="./portfolio_3col.html">肉制品报告</a></li>
-				<li><a href="./portfolio_3col.html">标准备案</a></li>
-				<li><a href="./portfolio_2col.html">添加剂报告</a></li>
-				<li><a href="./portfolio_1col.html">委托加工备案</a></li>
-				</ul>
-				</li>
-				<li><a href="./blog.html">政策法规</a></li>
-				<li><a href="./contact.html">咨询服务</a></li>
-				</ul>
-				</div>
-				</nav> -->
 			</div>
 			<!-- Header End -->
 
@@ -209,14 +185,10 @@ transitional.dtd">
 			<div class="sub_header  exam_bg">
 
 				<div class="sub_header_title">
-					<h2>企业管理</h2>
+					<h2>公开办事</h2>
 					<div class="sub_header_description">
 						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
-						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
-						<span class="page"><a href="./uploadfoldersmanager.action">企业管理</a></span>
-						<!--<#if folder?exists>
-							<span class="page">${folder.id}</span>
-						</#if>-->
+						<span class="page">公开办事</span>
 					</div>
 
 				</div>
@@ -230,54 +202,79 @@ transitional.dtd">
 
 			<!-- Teaser Start -->
 			<div class="section" id="content" class="tag_line" style="padding-top: 30px">
-			<div class="clearfix">
-			<#if upfflist?exists>
-				<#list upfflist as upff>
-				<a href="./uploadfolderfilesmanager.action?folderid=${upff.id}">
-					<div class="member_block_folder blue">
-						<div class="member_block_upload_folder_title">${upff.foldername}</div>						
-					</div>		
-				</a>
-				<div></div>
-				</#list>
-			</#if>			
+
+				<div class="demo">
+					<ul id="list" class="image-grid_3col">
+					<!--
+					<li data-id="id-4" class="photo">
+				        <a href="./progress_list.html">
+				        <div class="portfolio_content">
+					        <img src="./images/process_5.png" alt="img">
+					        <h4  style="color: rgb(86, 86, 86);">我的任务</h4>
+					        
+					        <div class="link_btn">
+					            <a id="example6" href="./exam_.html" class="zoom" style="opacity: 0;"></a>		            
+					            <div class="overlay" style="opacity: 0;"></div>
+					        </div>
+				        </div>
+				        </a>
+		    		</li>
+		    		-->
+				    <li data-id="id-1" class="photo">
+				        <a href="./process.action?processid=1&stepid=1"><div class="portfolio_content">
+				        <img src="./images/process_1.png" alt="img" style="opacity: 1;">
+				        <h4 style="color: rgb(86, 86, 86);">生产许可咨询</h4>
+				        <div class="link_btn" style="display: block;">
+				            <a id="example6" href="./process.action?processid=1&stepid=1" class="zoom" style="opacity: 0;"></a>
+				            <!--div class="exam_desc" style="opacity: 0;">单选题：10题<br />复选题：80题<br/>是非题：10题</div-->
+				            <div class="overlay" style="opacity: 0;"></div>
+				        </div>
+				        
+				        </div>
+				        </a>
+				    </li>
+				    
+				    <li data-id="id-2" class="scenery">
+				        <a href="./process.action?processid=2&stepid=1"><div class="portfolio_content">
+				        <img src="./images/process_2.png" alt="img" style="opacity: 1;">
+				        <h4 style="color: rgb(86, 86, 86);">企业标准备案</h4>
+				        
+				        <div class="link_btn" style="display: block;">
+				            <a id="example6" href="./process.action?processid=2&stepid=1 class="zoom" style="opacity: 0;"></a>
+				            <!--div class="exam_desc" style="opacity: 0;">单选题：10题<br />复选题：80题<br/>是非题：10题</div-->
+				            <div class="overlay" style="opacity: 0;"></div>
+				        </div>
+				        </div></a>
+				    </li>
+				    
+				    <li data-id="id-3" class="photo">
+				        <a href="./process.action?processid=3&stepid=1"><div class="portfolio_content">
+				        <img src="./images/process_3.png" alt="img">
+				        <h4 style="color: rgb(86, 86, 86);">食品添加剂备案</h4>
+				        
+				        <div class="link_btn">
+				            <a id="example6" href="./process.action?processid=3&stepid=1" class="zoom" style="opacity: 0;"></a>
+				            <!--div class="exam_desc" style="opacity: 0;">单选题：10题<br />复选题：80题<br/>是非题：10题</div-->
+				            <div class="overlay" style="opacity: 0;"></div>
+				        </div>
+				        </div></a>
+				    </li>
+				    <li data-id="id-4" class="photo">
+				        <a href="./process.action?processid=4&stepid=1"><div class="portfolio_content">
+				        <img src="./images/process_4.png" alt="img">
+				        <h4 style="color: rgb(86, 86, 86);">委托加工备案</h4>
+				        
+				        <div class="link_btn">
+				            <a id="example6" href="./process.action?processid=4&stepid=1" class="zoom" style="opacity: 0;"></a>
+				            <!--div class="exam_desc" style="opacity: 0;">单选题：10题<br />复选题：80题<br/>是非题：10题</div-->
+				            <div class="overlay" style="opacity: 0;"></div>
+				        </div>
+				        </div></a>
+				    </li>
+
+				</ul>
 			</div>
-			<div class="clearfix">
-			<#if upflist?exists>
-				<#list upflist as upf>
-					<div class="member_block_upload blue">
-						<div class="member_upload_icon">&nbsp;</div>
-						<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
-						<div class="member_block_upload_title">${upf.fname}</div>
-						<div class="member_block_upload_desc">${upf.uploadtime}</div>
-						<div class="del_upload">
-							<a href="./uploadfilesmanager.action?upfid=${upf.id}&folderid=${upf.folderid}">x</a>
-						</div>
-					</div>		
-					<div></div>
-				</#list>
-			</#if>
-			</div>
-			
-				<#if Session.user_?exists>
-					<#assign user=Session.user_>	
-				<div style="border-bottom: 1px solid #ccc;margin-left:10px;margin-right:10px;margin-bottom:10px">&nbsp;</div>
-				<div style="margin-left:9px;position:relative;">
-					<form id="uploadForm" action="./useruploadfiles.action">
-						<input type="file" id="file_upload_1" name="uploadfiles"/>
-						<input type="hidden" name="userid" value="${user.id?default("")}"/>
-						<#if folder?exists>
-							<input type="hidden" name="uploadfolderId" value="${folder.id?default("")}"/>
-						</#if>
-						
-						<!--div style="position:absolute;top: 0px;left: 113px;">
-							<input type="image" src="./images/bt_save.png" name="image" />
-						</div-->
-						<!--<input type="submit" value="save">-->
-					</form>
-				</div>	
-				</#if>
-			
+
 			</div>
 			<!-- Teaser End -->
 
