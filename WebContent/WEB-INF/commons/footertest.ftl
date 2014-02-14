@@ -45,6 +45,8 @@
 									上海市浦东新区康桥镇秀浦路2388弄B901室
 								</p>
 							</li>
+							
+							
 						</ul>
 					</div>
 				</div>
@@ -84,6 +86,13 @@
 							<img src="./images/flickr_img_7.png" alt="img" />
 							<img src="./images/flickr_img_8.png" alt="img" />
 							<img src="./images/flickr_img_9.png" alt="img" />
+						</div>
+						<ul class="contact">
+							<li>
+								<font size="1pt">© 2014 - 2016</font>
+								<br />
+								<p>上海浦东食品安全生产管理协会 版权所有</p>
+							</li>
 						</div>
 					</div>
 				</div>

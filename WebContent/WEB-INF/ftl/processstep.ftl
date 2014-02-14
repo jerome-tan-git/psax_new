@@ -311,13 +311,15 @@ transitional.dtd">
 							<#if (processstep.id<6)>
 							<#assign nextpid=(processstep.id+1) >
 								<a href="./process.action?processid=${processstep.processid}&stepid=${nextpid}">
-							<#else>
-								<a href="./process.action?processid=${processstep.processid}&stepid=${processstep.id}">
+								<div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;">
+								下一步
+							</div></a>
+						
 							</#if>
+							
+							
 						</#if>						
-						<div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;">
-						下一步
-						</div></a>
+						
 					</div>
 				</div>
 
