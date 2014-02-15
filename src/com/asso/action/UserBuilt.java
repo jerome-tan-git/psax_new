@@ -162,7 +162,15 @@ public class UserBuilt extends ActionSupport implements ModelDriven<Object>,Serv
 			System.out.println("GET uploadfile--->"+uf);
 			Uploadfiles uploadfiles = new Uploadfiles();
 			uploadfiles.setFile(uf);
-			uploadfiles.setFname(ufn);				
+//			uploadfiles.setFname(ufn);	
+			
+			if(uf.contains("./ckimages/")){
+				uploadfiles.setFname(uf.substring(uf.indexOf("ckimages/")+9, uf.length()));
+				System.out.println("~~~~~~~~~~~~~~~~~~!!~~~~fname="+uf.substring(uf.indexOf("ckimages/")+9, uf.length()));
+			}else
+				uploadfiles.setFname(ufn);
+			
+				
 			uploadfiles.setUserid(uid);
 			uploadfiles.setUploadtime(CONSTANT.getNowTime());
 			uploadfiles.setFolderid(fid);
@@ -239,10 +247,18 @@ public class UserBuilt extends ActionSupport implements ModelDriven<Object>,Serv
 				Form uploadformfile = new Form();				
 				uploadformfile.setFrontendtpl(ufn);
 				uploadformfile.setPath(uf);
+				
 				if(ufn.contains("."))
 					uploadformfile.setDisplayname(ufn.substring(0,ufn.indexOf(".")));
 				else
 					uploadformfile.setDisplayname(ufn);
+				
+//				if(uf.contains("./ckimages/")){
+//					uploadformfile.setDisplayname(uf.substring(uf.indexOf("./ckimages/"), uf.length()));
+//					System.out.println("~~~~~~~~~~~~~~~~~~!!~~~~uploadformfile.setDisplayname="+uf.substring(uf.indexOf("./ckimages/"), uf.length()));
+//				}else
+//					uploadformfile.setDisplayname(ufn);
+				
 				uploadformfile.setIsshow(1);
 				System.out.println("GET uploadformfile--->"+uploadformfile.toString());
 				

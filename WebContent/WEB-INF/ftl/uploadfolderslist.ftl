@@ -248,7 +248,7 @@ transitional.dtd">
 					<div class="member_block_upload blue">
 						<div class="member_upload_icon">&nbsp;</div>
 						<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
-						<div class="member_block_upload_title">${upf.fname}</div>
+						<div class="member_block_upload_title">${decode(upf.fname)}</div>
 						<div class="member_block_upload_desc">${upf.uploadtime}</div>
 						<div class="del_upload">
 							<a href="./uploadfilesmanager.action?upfid=${upf.id}&folderid=${upf.folderid}">x</a>
