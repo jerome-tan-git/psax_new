@@ -213,7 +213,7 @@ transitional.dtd">
 	<body>
 <div id="dialog" title="请填写姓名">
 	<form name="go_to_exam" id="go_exam" method="post" >
-		<div class='exam_user_name'>姓名 : &nbsp;&nbsp;<input id='user_name_input' type="text" class="exam_username_input" name="user_name" placeholder="姓名" /></div>
+		<div class='exam_user_name'>姓名 : &nbsp;&nbsp;<input style=" border: 1px solid #ddd;" id='user_name_input' type="text" class="exam_username_input" name="user_name" placeholder="姓名" /></div>
 	</form>
 </div>
 		<div id="page_wrap">

@@ -247,6 +247,7 @@ public class PageExamItemsList extends ActionSupport implements ServletRequestAw
 			if(ilist.size()>index0){
 				if(ilist.size()>=index1){					
 					for(int i=index0; i<=index1; i++){
+						if(ilist.size() <= i) break;
 						System.out.println("1) item id="+ilist.get(i).getId()+", No. "+i);						
 						List<ExamRef> refs = new ArrayList<ExamRef>();
 						try {

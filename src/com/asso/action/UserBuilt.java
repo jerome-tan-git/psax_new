@@ -216,13 +216,7 @@ public class UserBuilt extends ActionSupport implements ModelDriven<Object>,Serv
 	
 	public String uploaduploads(){
 		System.out.println("---------------uploaduploads---------------");
-		
-//		--------------uploaduploads---------------
-//		GET uploadfile name--->e.png
-//		GET uploadfile--->./ckimages/829_ZQ==.png
-//		GET uploadfiles--->0:-1:./ckimages/829_ZQ==.png:2014-02-11 19:11:e.png:-1
-		
-		
+
 		String[] upfileNames = this.uInfo.getUploadfilenames();
 		if(upfileNames!=null){
 			for(String ufn:upfileNames){
@@ -248,16 +242,17 @@ public class UserBuilt extends ActionSupport implements ModelDriven<Object>,Serv
 				uploadformfile.setFrontendtpl(ufn);
 				uploadformfile.setPath(uf);
 				
-				if(ufn.contains("."))
-					uploadformfile.setDisplayname(ufn.substring(0,ufn.indexOf(".")));
-				else
-					uploadformfile.setDisplayname(ufn);
-				
-//				if(uf.contains("./ckimages/")){
-//					uploadformfile.setDisplayname(uf.substring(uf.indexOf("./ckimages/"), uf.length()));
-//					System.out.println("~~~~~~~~~~~~~~~~~~!!~~~~uploadformfile.setDisplayname="+uf.substring(uf.indexOf("./ckimages/"), uf.length()));
-//				}else
+//				if(ufn.contains("."))
+//					uploadformfile.setDisplayname(ufn.substring(0,ufn.indexOf(".")));
+//				else
 //					uploadformfile.setDisplayname(ufn);
+				
+				if(uf.contains("./ckimages/")){
+					String dsname= uf.substring(uf.indexOf("ckimages/")+9, uf.length());					
+					uploadformfile.setDisplayname(dsname);
+					System.out.println("~~~~~~~~~~~~~~~~~~!!~~~~uploadformfile.setDisplayname="+dsname);
+				}else
+					uploadformfile.setDisplayname(ufn);
 				
 				uploadformfile.setIsshow(1);
 				System.out.println("GET uploadformfile--->"+uploadformfile.toString());

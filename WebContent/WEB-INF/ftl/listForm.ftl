@@ -61,11 +61,11 @@
 				<div class="col-md-8">
 				<div class="page-header" style="margin-top: 20px;margin-left: 20px;border-bottom:0px solid #D6D6D6;position: relative;">
 				  <span style="font-size:13pt">用户下载文件</span>
-				  
+				  <!--
 				  <div style="padding-right: 28px;margin-bottom: 23px;width:200px; float:right">
 					<span class="glyphicon glyphicon-plus pull-right hand deleteExam" onclick="showUserDialog('','','')">添加新表格</span>
 				  </div>
-				  
+				  -->
 				 <div style="border-bottom: 1px solid #ccc;margin-right:10px;margin-bottom:10px;margin-top: 10px;"></div>
 						<div style="margin-left:9px;position:relative;">
 							<form id="uploadForm" action="./foruseruploadfiles.action" style="margin-left: -10px;">
@@ -90,7 +90,8 @@
 								  		<input type="checkbox" name="f_${form.formid}" value="${form.formid}" />
 								  	</#if>
 								  		&nbsp;&nbsp;&nbsp;
-								  		${form.displayname}
+								  		${decode(form.displayname)}
+								  		<!--${form.displayname}-->
 							  		</div>							  		
 							  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>							  		
 							  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>

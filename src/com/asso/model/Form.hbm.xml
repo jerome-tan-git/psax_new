@@ -9,10 +9,10 @@
             <generator class="identity" />
         </id>
         <property name="displayname" type="java.lang.String">
-            <column name="displayname" length="50" />
+            <column name="displayname" length="300" />
         </property>        
         <property name="frontendtpl" type="java.lang.String">
-            <column name="frontendtpl" length="50" />
+            <column name="frontendtpl" length="500" />
         </property>
         <property name="path" type="java.lang.String">
             <column name="path" length="500" />
