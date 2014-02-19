@@ -194,7 +194,7 @@
 						<#if upf?exists>
 						<div class="panel panel-default exam_container">
 						  <div class="panel-heading clearfix">
-						  		<div class="exam_title_list pull-left ">${upf.uploadtime}&nbsp;&nbsp;&nbsp;${upf.fname}</div>						  		
+						  		<div class="exam_title_list pull-left ">${upf.uploadtime}&nbsp;&nbsp;&nbsp;${decode(upf.fname)}</div>						  		
 						  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>						  		
 						  		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>							  	
 							</div>

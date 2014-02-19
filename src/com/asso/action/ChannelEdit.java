@@ -170,7 +170,7 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 		return "cat0";
 	}
 
-	private void sortArtlistByDate(List<Article> _list){
+	private List<Article> sortArtlistByDate(List<Article> _list){
 		List<String> toSort = new ArrayList<String>();
 		for(Article art:_list)
 			toSort.add(art.getPubdate());
@@ -179,7 +179,7 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 		List<Article> sortedArtlist = new ArrayList<Article>();
 		for(Integer seq:seqs)
 			sortedArtlist.add(_list.get(seq));
-		this.setArtlist(sortedArtlist);
+		return sortedArtlist;
 	}
 	private void cleanTxt(int _maxlength1,int _maxlength2, List<Article> _list){
 		for(Article art:_list){
@@ -222,21 +222,33 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 			e.printStackTrace();
 		}
 		
-		this.sortArtlistByDate(this.artlist);
+		this.setArtlist(this.sortArtlistByDate(this.artlist));
 		this.cleanTxt(CONSTANT.momentMaxLength,CONSTANT.momentMaxLength,this.artlist);		
 		if(this.artlist.size()>=3){
+			System.out.println("1--大事记artlist---"+this.artlist.get(0).toString());
+			System.out.println("2--大事记artlist---"+this.artlist.get(1).toString());
+			System.out.println("3--大事记artlist---"+this.artlist.get(2).toString());
 			List<Article> rlist = new ArrayList<Article>();
 			rlist.add(this.artlist.get(0));rlist.add(this.artlist.get(1));rlist.add(this.artlist.get(2));
 			this.setArtlist(rlist);
+		}else{
+			this.setArtlist(this.artlist);
 		}
 		
-		this.sortArtlistByDate(this.newslist);
+		this.setNewslist(this.sortArtlistByDate(this.newslist));
 		this.cleanTxt(CONSTANT.momentMaxLength,CONSTANT.momentMaxLength,this.newslist);
 		
 		if(this.newslist.size()>=3){
+			System.out.println("1--news---"+this.newslist.get(0).toString());
+			System.out.println("2--news---"+this.newslist.get(1).toString());
+			System.out.println("3--news---"+this.newslist.get(2).toString());
+			
 			List<Article> rlist = new ArrayList<Article>();
 			rlist.add(this.newslist.get(0));rlist.add(this.newslist.get(1));rlist.add(this.newslist.get(2));
-			this.setArtlist(rlist);
+//			this.setArtlist(rlist);
+			this.setNewslist(rlist);
+		}else{
+			this.setNewslist(this.newslist);
 		}
 	}
 

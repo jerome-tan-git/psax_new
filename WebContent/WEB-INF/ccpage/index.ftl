@@ -391,7 +391,7 @@ transitional.dtd">
 		    	<#list artlist as article>		    
 		    	 <li>
 		        	<div class="row_news">
-			        	<p>${article.absinfo}</p>
+			        	<p>${article.title}</p>
 			        	<span></span>
 		        	</div>
 		        </li>

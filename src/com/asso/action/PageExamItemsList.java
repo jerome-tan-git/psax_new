@@ -238,16 +238,19 @@ public class PageExamItemsList extends ActionSupport implements ServletRequestAw
 		this.calculatePage(ilist.size());
 		
 		this.itemlistSeq = new ArrayList<HashMap<String,List<ExamRef>>>();
-		int index0 = CONSTANT.pageNum*(this.thispage-1);
-		int index1 = CONSTANT.pageNum*this.thispage-1;
+//		int index0 = CONSTANT.pageNum*(this.thispage-1);
+//		int index1 = CONSTANT.pageNum*this.thispage-1;
+		int index0 = CONSTANT.pageUserSize*(this.thispage-1);
+		int index1 = CONSTANT.pageUserSize*this.thispage-1;
+	
 		System.out.println("page="+this.thispage+",index0="+index0+",index1"+index1);
 
-		
-		if(ilist.size()>=CONSTANT.pageSize){
+		if(ilist.size()>=CONSTANT.pageUserSize){
+//		if(ilist.size()>=CONSTANT.pageSize){
 			if(ilist.size()>index0){
 				if(ilist.size()>=index1){					
 					for(int i=index0; i<=index1; i++){
-						if(ilist.size() <= i) break;
+						if(ilist.size() < i) break;
 						System.out.println("1) item id="+ilist.get(i).getId()+", No. "+i);						
 						List<ExamRef> refs = new ArrayList<ExamRef>();
 						try {
