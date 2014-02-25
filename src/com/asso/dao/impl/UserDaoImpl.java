@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.asso.dao.UserDao;
 import com.asso.model.Member;
+import com.asso.model.MemberCenterColumn;
 import com.asso.model.MemberInfo;
 import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
@@ -354,6 +355,24 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MemberCenterColumn> loadAllMemberCenterColumns() {
+		List<MemberCenterColumn> mlist = new ArrayList<MemberCenterColumn>();
+		Session s = sessionFactory.getCurrentSession(); 
+		String hql = "from MemberCenterColumn";
+		System.out.println("---hql----"+hql);		
+        Query query = s.createQuery(hql);
+        mlist = query.list();
+        return mlist;		
+	}
 	
-
+	@Override
+	public void update(MemberCenterColumn mcc) {
+		Session s = sessionFactory.getCurrentSession(); 
+	     s.beginTransaction();
+	     s.update(mcc);
+	     s.flush();
+	     s.getTransaction().commit();
+	}
 }

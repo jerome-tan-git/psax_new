@@ -148,6 +148,16 @@
 			<result name="success" type="redirect">manageruser.action</result>			 
 		</action>
 		
+		<!-- <action name="listmcc" class="com.asso.action.UserLogin" method="loadMcclist"> -->
+		<action name="listmcc" class="com.asso.action.UserEdit" method="loadMcclist">
+			<result name="list" type="freemarker">/WEB-INF/ftl/membercentercolumnslist.ftl</result>
+		</action>
+		<action name="editcolumn" class="com.asso.action.UserEdit" method="updateMcc">
+			<result name="update" type="freemarker">/WEB-INF/ftl/membercentercolumnslist.ftl</result>
+		</action>
+		
+		
+		
 		<action name="manageruser" class="com.asso.action.UserEdit">
 			<result name="list" type="freemarker">/WEB-INF/ftl/userlist.ftl</result>
 		</action>

@@ -21,6 +21,7 @@ import com.asso.manager.ChannelManager;
 import com.asso.model.Article;
 import com.asso.model.Category;
 import com.asso.model.Channel;
+import com.asso.model.MemberCenterColumn;
 import com.asso.vo.ChCatInfo;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -37,6 +38,7 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 	private Category category;
 	private List<Article> artlist = new ArrayList<Article>();
 	private List<Article> newslist = new ArrayList<Article>();
+	private List<MemberCenterColumn> mcclist;
 	private ArticleManager am;	
 	
 	private HttpServletRequest request;	
@@ -86,6 +88,13 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 	public void setNewslist(List<Article> newslist) {
 		this.newslist = newslist;
 	}
+	public List<MemberCenterColumn> getMcclist() {
+		return mcclist;
+	}
+	public void setMcclist(List<MemberCenterColumn> mcclist) {
+		this.mcclist = mcclist;
+	}
+	
 
 	public String addCategory(){		
 		ChCatInfo cinfo = new ChCatInfo(); 
@@ -143,8 +152,11 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 				this.loadArticles();
 				return "cat0";
 			}
-			if(c==1)
+			if(c==1){
+				UserEdit ue = new UserEdit();
+				this.mcclist = ue.selectMcclist();
 				return "cat1";
+			}
 			if(c==2)
 				return "cat2";
 			if(c==15)

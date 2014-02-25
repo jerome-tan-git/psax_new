@@ -65,6 +65,8 @@ public class MemberEdit extends ActionSupport implements ModelDriven<Object> {
 	public void setMuinfo(MemberUpdateInfo muinfo) {
 		this.muinfo = muinfo;
 	}
+	
+
 
 	@Override
 	public String execute(){

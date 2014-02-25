@@ -239,21 +239,63 @@ transitional.dtd">
 				<div class="member_block qyxx">
 					<div class="member_block_icon qyxx">&nbsp;</div>
 					<div class="member_block_icon_bg qyxx_bg">&nbsp;</div>
-					<div class="member_block_title">企业信息</div>
+					<#if mcclist?exists>
+					<#assign hasid=0>
+						<#list mcclist as mcc>
+							<#if (mcc.id==1)>
+								<div class="member_block_title">${mcc.name}</div>
+								<#assign hasid=1>
+							</#if>						
+						</#list>
+						<#if (hasid==0)>
+							<div class="member_block_title">企业信息</div>
+						</#if>
+					<#else>
+						<div class="member_block_title">企业信息</div>
+					</#if>
+					
 				</div>
 				</a>
 				<a href="./usercenter.action">				
 				<div class="member_block jbxx">
 					<div class="member_block_icon jbxx">&nbsp;</div>
 					<div class="member_block_icon_bg jbxx_bg">&nbsp;</div>
-					<div class="member_block_title">基本信息</div>
+					<#if mcclist?exists>
+					<#assign hasid=0>
+						<#list mcclist as mcc>
+							<#if (mcc.id==2)>
+								<div class="member_block_title">${mcc.name}</div>
+								<#assign hasid=1>
+							</#if>						
+						</#list>
+						<#if (hasid==0)>
+							<div class="member_block_title">基本信息</div>
+						</#if>
+					<#else>
+						<div class="member_block_title">基本信息</div>
+					</#if>
+					
 				</div>
 				</a>
 				<a href="./process.action">	
 				<div class="member_block blue">
 					<div class="member_block_icon gkbs">&nbsp;</div>
 					<div class="member_block_icon_bg gkbs_bg">&nbsp;</div>
-					<div class="member_block_title">公开办事</div>
+					<#if mcclist?exists>
+					<#assign hasid=0>
+						<#list mcclist as mcc>
+							<#if (mcc.id==3)>
+								<div class="member_block_title">${mcc.name}</div>
+								<#assign hasid=1>
+							</#if>						
+						</#list>
+						<#if (hasid==0)>
+							<div class="member_block_title">公开办事</div>
+						</#if>
+					<#else>
+						<div class="member_block_title">公开办事</div>
+					</#if>
+					
 				</div>
 				</a>	
 				<!--<a href="./upload_list.html">-->
@@ -263,7 +305,21 @@ transitional.dtd">
 				<div class="member_block qygl">
 					<div class="member_block_icon qygl">&nbsp;</div>
 					<div class="member_block_icon_bg  qygl_bg">&nbsp;</div>
-					<div class="member_block_title">食品生产管理</div>
+					<#if mcclist?exists>
+					<#assign hasid=0>
+						<#list mcclist as mcc>
+							<#if (mcc.id==4)>
+								<div class="member_block_title">${mcc.name}</div>
+								<#assign hasid=1>
+							</#if>						
+						</#list>
+						<#if (hasid==0)>
+							<div class="member_block_title">食品生产管理</div>
+						</#if>
+					<#else>
+						<div class="member_block_title">食品生产管理</div>
+					</#if>
+					
 				</div>
 				</a>				
 				<!--<a href="./download.html">-->
@@ -271,20 +327,62 @@ transitional.dtd">
 				<div class="member_block xz">
 					<div class="member_block_icon xz">&nbsp;</div>
 					<div class="member_block_icon_bg xz_bg">&nbsp;</div>
-					<div class="member_block_title">相关下载</div>
+					<#if mcclist?exists>
+					<#assign hasid=0>
+						<#list mcclist as mcc>
+							<#if (mcc.id==5)>
+								<div class="member_block_title">${mcc.name}</div>
+								<#assign hasid=1>
+							</#if>						
+						</#list>
+						<#if (hasid==0)>
+							<div class="member_block_title">相关下载</div>
+						</#if>
+					<#else>
+						<div class="member_block_title">相关下载</div>
+					</#if>
+					
 				</div>
 				</a>
 				<a href="./page.action?categoryid=15">				
 				<div class="member_block ks">
 					<div class="member_block_icon ks">&nbsp;</div>
 					<div class="member_block_icon_bg ks_bg">&nbsp;</div>
-					<div class="member_block_title">考试中心</div>
+					<#if mcclist?exists>
+					<#assign hasid=0>
+						<#list mcclist as mcc>
+							<#if (mcc.id==6)>
+								<div class="member_block_title">${mcc.name}</div>
+								<#assign hasid=1>
+							</#if>						
+						</#list>
+						<#if (hasid==0)>
+							<div class="member_block_title">考试中心</div>
+						</#if>
+					<#else>
+						<div class="member_block_title">考试中心</div>
+					</#if>
+					
 				</div>
 				</a>
 				<div class="member_block jgdt">
 					<div class="member_block_icon jgdt">&nbsp;</div>
 					<div class="member_block_icon_bg jgdt_bg">&nbsp;</div>
-					<div class="member_block_title">监管动态</div>
+					<#if mcclist?exists>
+					<#assign hasid=0>
+						<#list mcclist as mcc>
+							<#if (mcc.id==7)>
+								<div class="member_block_title">${mcc.name}</div>
+								<#assign hasid=1>
+							</#if>						
+						</#list>
+						<#if (hasid==0)>
+							<div class="member_block_title">监管动态</div>
+						</#if>
+					<#else>
+						<div class="member_block_title">监管动态</div>
+					</#if>
+					
 				</div>
 				
 				<!--<a href="./notice.html">-->
@@ -300,7 +398,21 @@ transitional.dtd">
 						<div class="unread">&nbsp;</div>
 						</#if>
 					</#if>
-					<div class="member_block_title">通知</div>
+					<#if mcclist?exists>
+					<#assign hasid=0>
+						<#list mcclist as mcc>
+							<#if (mcc.id==8)>
+								<div class="member_block_title">${mcc.name}</div>
+								<#assign hasid=1>
+							</#if>						
+						</#list>
+						<#if (hasid==0)>
+							<div class="member_block_title">通知</div>
+						</#if>
+					<#else>
+						<div class="member_block_title">通知</div>
+					</#if>
+					
 				</div>
 				</a>
 			</div>

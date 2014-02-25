@@ -17,6 +17,7 @@ import util.CONSTANT;
 import util.SpringFactory;
 
 import com.asso.manager.UserManager;
+import com.asso.model.MemberCenterColumn;
 import com.asso.model.User;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -38,6 +39,11 @@ public class UserEdit extends ActionSupport implements ServletRequestAware,Sessi
 	private int nextpage;
 	private int lastpage;
 	private int endpage;
+	
+	private List<MemberCenterColumn> mcclist;
+	private MemberCenterColumn memberCenterColumn;
+	private String columnname;
+	private String columnid;
 	
 	private HttpServletRequest request;	
 	private Map session;
@@ -111,7 +117,53 @@ public class UserEdit extends ActionSupport implements ServletRequestAware,Sessi
 	public void setEndpage(int endpage) {
 		this.endpage = endpage;
 	}
-
+	public MemberCenterColumn getMemberCenterColumn() {
+		return memberCenterColumn;
+	}
+	public void setMemberCenterColumn(MemberCenterColumn memberCenterColumn) {
+		this.memberCenterColumn = memberCenterColumn;
+	}
+	public String getColumnname() {
+		return columnname;
+	}
+	public void setColumnname(String columnname) {
+		this.columnname = columnname;
+	}
+	public String getColumnid() {
+		return columnid;
+	}
+	public void setColumnid(String columnid) {
+		this.columnid = columnid;
+	}
+	public List<MemberCenterColumn> getMcclist() {
+		return mcclist;
+	}
+	public void setMcclist(List<MemberCenterColumn> mcclist) {
+		this.mcclist = mcclist;
+	}
+	
+	public String loadMcclist(){
+		this.selectMcclist();
+		return "list";
+	}
+	
+	public List<MemberCenterColumn> selectMcclist(){
+		this.mcclist = new ArrayList<MemberCenterColumn>();
+		try {
+			this.mcclist = um.loadMemberCenterColumns();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(this.mcclist.size()>0){
+			for(MemberCenterColumn mcc:this.mcclist)
+				System.out.println("mcc---->"+mcc.toString());
+		}else
+			System.out.println("loadMemberCenterColumns DATA ERROR, pls INV...");
+		return this.mcclist;
+	}
+	
 	private void buildUsersList(){
 		this.userslist = new ArrayList<User>();		
 		try {
@@ -211,6 +263,27 @@ public class UserEdit extends ActionSupport implements ServletRequestAware,Sessi
 		}
 		return "add";
 	}
+	
+	public String updateMcc(){
+		this.memberCenterColumn = new MemberCenterColumn();
+		System.out.println("input colid----->"+this.columnid);
+		System.out.println("input colname--->"+this.columnname);
+		if(this.columnid!=null && this.columnid.length()>0)
+			this.memberCenterColumn.setId(Integer.parseInt(this.columnid));
+		if(this.columnname!=null && this.columnname.length()>0)
+			this.memberCenterColumn.setName(this.columnname);
+		try {
+			um.updateMemberCenterColumn(this.memberCenterColumn);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.selectMcclist();
+		return "update";
+	}
+	
+	
 
 	@Override
 	public String execute(){

@@ -3,6 +3,8 @@ package com.asso.action;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 //import org.apache.commons.io.FileUtils;
 //import org.apache.struts2.ServletActionContext;
@@ -25,6 +28,7 @@ import util.SpringFactory;
 
 import com.asso.manager.DocManager;
 import com.asso.manager.UserManager;
+import com.asso.model.MemberCenterColumn;
 import com.asso.model.User;
 import com.asso.vo.UserRegisterInfo;
 //import com.opensymphony.xwork2.ActionContext;
@@ -46,6 +50,7 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 	private File ptrt;
 	private String ptrtContentType;
 	private String ptrtFileName;
+	private List<MemberCenterColumn> mcclist = new ArrayList<MemberCenterColumn>();
 	
 	
 	private HttpServletRequest request;	
@@ -104,7 +109,13 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 	public void setPtrtFileName(String ptrtFileName) {
 		this.ptrtFileName = ptrtFileName;
 	}
-
+	public List<MemberCenterColumn> getMcclist() {
+		return mcclist;
+	}
+	public void setMcclist(List<MemberCenterColumn> mcclist) {
+		this.mcclist = mcclist;
+	}
+	
 
 //	private void setUploadfiles(){
 //		
@@ -148,6 +159,10 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 //     }  
 //	
 	
+
+
+	
+
 	private boolean isEmpty(String _str){
 		if(_str!=null && _str.length()>0)
 			return false;
@@ -200,6 +215,26 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 		return "go";
 	}
 
+//	public String loadMcclist(){
+//				
+//			this.mcclist = new ArrayList<MemberCenterColumn>();
+//			try {
+//				this.mcclist = um.loadMemberCenterColumns();
+//			} catch (ClassNotFoundException e) {
+//				e.printStackTrace();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//			if(this.mcclist.size()>0){
+//				for(MemberCenterColumn mcc:this.mcclist)
+//					System.out.println("mcc---->"+mcc.toString());
+//			}else
+//				System.out.println("loadMemberCenterColumns DATA ERROR, pls INV...");
+//		
+//		return "list";
+//	}
+
+	
 	@Override
 	public String execute(){
 		
@@ -229,6 +264,9 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 			int userid = um.getUserId(u); 
 			if(!dm.checkCorpInfoFilled(userid))
 				return "first";
+//			this.loadMcclist();
+			UserEdit ue = new UserEdit();
+			this.mcclist = ue.selectMcclist();
 			return "success";
 		}
 		return "failure";

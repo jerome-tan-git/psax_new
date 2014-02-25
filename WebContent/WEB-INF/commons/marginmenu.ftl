@@ -32,6 +32,7 @@
 								    <li><a href="./manageruser.action">账户管理</a></li>
 								    <li><a href="./listUploads.action">企业管理</a></li>
 								    <li><a href="./listtodownloads.action?isall=1">下载管理</a></li>
+								    <li><a href="./listmcc.action">栏目管理</a></li>
 								</ul>
 							</li>
 							

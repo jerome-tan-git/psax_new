@@ -3,6 +3,7 @@ package com.asso.manager;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.asso.model.MemberCenterColumn;
 import com.asso.model.MemberInfo;
 import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
@@ -58,6 +59,12 @@ public interface UserManager {
 
 	List<Uploadfiles> loadUploadedFilesByFolderidUserid(int _folderid,
 			int _userid) throws ClassNotFoundException, SQLException;
+
+	List<MemberCenterColumn> loadMemberCenterColumns()
+			throws ClassNotFoundException, SQLException;
+
+	void updateMemberCenterColumn(MemberCenterColumn _mcc)
+			throws ClassNotFoundException, SQLException;
 
 
 

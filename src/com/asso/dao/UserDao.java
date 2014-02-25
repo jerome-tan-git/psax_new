@@ -2,6 +2,7 @@ package com.asso.dao;
 
 import java.util.List;
 
+import com.asso.model.MemberCenterColumn;
 import com.asso.model.MemberInfo;
 import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
@@ -36,6 +37,8 @@ public interface UserDao {
 	void delete(Uploadfilefolders _upff);
 	List<Uploadfiles> loadUploadfilesByFolderId(int _folderid);
 	List<Uploadfiles> loadUploadfilesByFolderIdUserId(int _folderid, int _userid);
+	List<MemberCenterColumn> loadAllMemberCenterColumns();
+	void update(MemberCenterColumn mcc);
 	
 	
 	

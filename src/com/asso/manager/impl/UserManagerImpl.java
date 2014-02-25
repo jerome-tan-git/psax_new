@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.asso.dao.UserDao;
 import com.asso.manager.UserManager;
+import com.asso.model.MemberCenterColumn;
 import com.asso.model.MemberInfo;
 import com.asso.model.Uploadfilefolders;
 import com.asso.model.Uploadfiles;
@@ -144,5 +145,17 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public List<Uploadfilefolders> loadUploadeFileFolders() throws ClassNotFoundException, SQLException{	
 		return userDao.loadAllUploadfilefolders();	
+	}
+	
+	@Override
+	public List<MemberCenterColumn> loadMemberCenterColumns() throws ClassNotFoundException, SQLException{		
+		System.out.println("loadMemberCenterColumns ------");
+		return userDao.loadAllMemberCenterColumns();
+	}
+	
+	@Override
+	public void updateMemberCenterColumn(MemberCenterColumn _mcc) throws ClassNotFoundException, SQLException{		
+		System.out.println("updateMemberCenterColumn ------"+_mcc.toString());
+		userDao.update(_mcc);
 	}
 }

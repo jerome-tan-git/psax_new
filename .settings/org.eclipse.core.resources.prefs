@@ -29,6 +29,7 @@ encoding//WebContent/WEB-INF/ftl/listUploads.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/login.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/loginError.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/membercenter.ftl=UTF-8
+encoding//WebContent/WEB-INF/ftl/membercentercolumnslist.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/notice.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/processhome.ftl=UTF-8
 encoding//WebContent/WEB-INF/ftl/processstep.ftl=UTF-8
