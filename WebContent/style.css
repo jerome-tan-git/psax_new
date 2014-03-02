@@ -791,6 +791,10 @@ padding-left:20px;
 {
 	background: #fff url('./images/icons/iconmonstr-user-13-icon-16.png') no-repeat 12px 12px;
 }
+.operation
+{
+	background: #fff url('./images/icons/iconmonstr-flask-5-icon-16.png') no-repeat 12px 12px;
+}
 .help
 {
 	background: #fff url('./images/icons/iconmonstr-help-8-icon-16.png') no-repeat 12px 12px;
@@ -814,6 +818,10 @@ padding-left:20px;
 .pen
 {
 	background: #fff url('./images/icons/iconmonstr-pen-4-icon-16.png') no-repeat 12px 12px;
+}
+.org
+{
+	background: #fff url('./images/icons/iconmonstr-sitemap-5-icon-16.png') no-repeat 12px 12px;
 }
 .shield
 {

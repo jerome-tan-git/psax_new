@@ -21,6 +21,10 @@
 							<div class="list_item pen">
 								大事记
 							</div></a>
+							<a href="./page.action?categoryid=7">
+							<div class="list_item org">
+								组织架构
+							</div></a>
 						</div>
 					</div>
 
@@ -79,7 +83,7 @@
 								</div>
 							</div>
 							<a href="./listArticles.action?categoryid=13">
-							<div class="list_item meeting">
+							<div class="list_item operation">
 								实操视频
 							</div></a>
 							

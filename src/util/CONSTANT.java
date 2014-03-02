@@ -24,12 +24,17 @@ public class CONSTANT {
 	public final static int scorePerMulti = 2;
 	public final static int scorePerJudge = 1;
 	
-	public final static int singleChoiceNum = 10;
-	public final static int multipleChoiceNum = 10;
-	public final static int judgeNum = 10;
+//	public final static int singleChoiceNum = 10;
+//	public final static int multipleChoiceNum = 10;
+//	public final static int judgeNum = 10;
+	public final static int singleChoiceNum = 40;
+	public final static int multipleChoiceNum = 5;
+	public final static int judgeNum = 5;
+	
 	
 	public final static int pageNum = 10;//考题页数
-	public final static int pageSize = 3;//每页考题数量		
+	public final static int pageSize = 5;//每页考题数量	
+//	public final static int pageSize = 3;//每页考题数量		
 	public final static int pageArtSize = 5;//每页文章数量
 	public final static int pageUserSize = 10;//每页用户数量
 	
