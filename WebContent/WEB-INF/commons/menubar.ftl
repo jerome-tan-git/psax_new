@@ -36,12 +36,32 @@
 							<div class="menu_list_header"></div>
 							<a href="./listArticles.action?categoryid=3">
 							<div class="list_item target">
-								社会热点
+								舆情动态<!--社会热点-->
 							</div></a>
+							<!--
 							<a href="./listArticles.action?categoryid=4">
 							<div class="list_item news">
 								实时新闻
 							</div></a>
+							-->
+						</div>
+					</div>
+					<div class="menu_item">
+						<div class="menu_text">
+							政策法规
+						</div>
+						<div class="menu_list">
+							<div class="menu_list_header"></div>
+							<a href="./listArticles.action?categoryid=5">
+							<div class="list_item shield">
+								政策法规<!--行业法规-->
+							</div></a>
+							<!--
+							<a href="./listArticles.action?categoryid=6">
+							<div class="list_item arrow">
+								政策导向
+							</div></a>
+							-->
 						</div>
 					</div>
 					<div class="menu_item">
@@ -89,22 +109,7 @@
 							
 						</div>
 					</div>
-					<div class="menu_item">
-						<div class="menu_text">
-							政策法规
-						</div>
-						<div class="menu_list">
-							<div class="menu_list_header"></div>
-							<a href="./listArticles.action?categoryid=5">
-							<div class="list_item shield">
-								行业法规
-							</div></a>
-							<a href="./listArticles.action?categoryid=6">
-							<div class="list_item arrow">
-								政策导向
-							</div></a>
-						</div>
-					</div>
+					
 					<div class="menu_item">
 						<a href="./wip.action">
 						<div class="menu_text">

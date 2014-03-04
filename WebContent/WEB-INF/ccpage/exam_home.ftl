@@ -260,7 +260,7 @@ transitional.dtd">
 		        
 		        <div class="link_btn" style="display: block;">
 		            <a id="example6" href="#" class="zoom" style="opacity: 0;"></a>
-		            <div class="exam_desc" style="opacity: 0;">单选题：10题<br />复选题：80题<br/>是非题：10题</div>
+		            <div class="exam_desc" style="opacity: 0;">单选题：80题<br />复选题：10题<br/>是非题：10题</div>
 		            <div class="overlay" style="opacity: 0;"></div>
 		        </div>
 		        </div>
@@ -273,7 +273,7 @@ transitional.dtd">
 		        
 		        <div class="link_btn" style="display: block;">
 		            <a id="example6" href="#" class="zoom" style="opacity: 0;"></a>
-		            <div class="exam_desc" style="opacity: 0;">单选题：10题<br />复选题：80题<br/>是非题：10题</div>
+		            <div class="exam_desc" style="opacity: 0;">单选题：80题<br />复选题：10题<br/>是非题：10题</div>
 		            <div class="overlay" style="opacity: 0;"></div>
 		        </div>
 		        </div>
@@ -286,7 +286,7 @@ transitional.dtd">
 		        
 		        <div class="link_btn">
 		            <a id="example6" href="#" class="zoom" style="opacity: 0;"></a>
-		            <div class="exam_desc" style="opacity: 0;">单选题：10题<br />复选题：80题<br/>是非题：10题</div>
+		            <div class="exam_desc" style="opacity: 0;">单选题：80题<br />复选题：10题<br/>是非题：10题</div>
 		            <div class="overlay" style="opacity: 0;"></div>
 		        </div>
 		        </div>

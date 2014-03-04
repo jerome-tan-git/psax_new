@@ -203,11 +203,11 @@ transitional.dtd">
 			<!--
 			<div class="v_space clear">&nbsp;</div>
 			-->
-			<div class="two_third">
+			<div class="two_third" style="width:100%;" >
 			    
 			     <h3>组织架构</h3>
 			    
-			    <div class="description">
+			    <div class="description" style="text-align:center;">
 			        <img src="./images/org.JPG" />
 			        
 				</div>

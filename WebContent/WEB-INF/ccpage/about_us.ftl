@@ -246,12 +246,15 @@ transitional.dtd">
 			        
 				</div>
 				<br /><br />
+				
+				<!--
 			     <h3>组织架构</h3>
 			    
 			    <div class="description">
 			        <img src="./images/org.JPG" />
 			        
-				</div>
+				</div>				
+				-->
 			</div>
 			</div>
 		<!-- Teaser End -->

@@ -196,7 +196,7 @@ transitional.dtd">
 		            	<a href="./listArticles.action?categoryid=6">
 		                <div class="thumb_img" style="background: url('./images/slider_img_3.png') no-repeat;">&nbsp;</div>
 		                <div class="description">
-		                    <h1>最新政策</h1>
+		                    <h1>最新资料</h1>
 		                    <div class="slide_caption">我们提供<span>准确</span>和<span>最新</span>的信息</div>
 		                    <p>我们提供准确和最新的信息 | 我们提供准确和最新的信息 | 我们提供准确和最新的信息</p>
 		                </div>
@@ -316,7 +316,7 @@ transitional.dtd">
 		<div class="v_space"></div>
 		
 		<div class="title_holder">
-		    <h3><span>最新资料</span></h3>
+		    <h3><span>最新动态</span></h3>
 		</div>
 		
 		<div class="demo">
