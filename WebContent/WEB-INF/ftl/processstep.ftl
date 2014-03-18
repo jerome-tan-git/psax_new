@@ -214,84 +214,107 @@ transitional.dtd">
 					<#if processstep?exists>
 							
 						<div class="step_line_blank">&nbsp;</div>
+						
 						<#if (processstep.id==1)>
+						<a href="./process.action?processid=${processstep.processid}&stepid=1">
 						<div  class="step_menu">
 							<div class="now_step">1.第一步</div>
 						<#else>
+						<a href="./process.action?processid=${processstep.processid}&stepid=1">
 						<div  class="step_menu_done">
 							<div class="step_text">1.第一步</div>
+						
 						</#if>						
-						</div>
+						</div></a>						
 						<div class="step_line">&nbsp;</div>
 						
+						
 						<#if (processstep.id==2)>
+						<a href="./process.action?processid=${processstep.processid}&stepid=2">
 						<div  class="step_menu">
 							<div class="now_step">2.第二步</div>
 						<#else>
-							<#if (processstep.id>2)>						
+							<#if (processstep.id>2)>		
+							<a href="./process.action?processid=${processstep.processid}&stepid=2">				
 							<div  class="step_menu_done">
 								<div class="step_text">2.第二步</div>
 							<#else>
+							<a href="./process.action?processid=${processstep.processid}&stepid=2">
 							<div  class="step_menu_todo">
 								<div class="step_text">2.第二步</div>
 							</#if>	
 						</#if>	
-						</div>
+						</div></a>						
 						<div class="step_line">&nbsp;</div>
 						
+						
 						<#if (processstep.id==3)>
+						<a href="./process.action?processid=${processstep.processid}&stepid=3">
 						<div  class="step_menu">
 							<div class="now_step">3.第三步</div>
 						<#else>
 							<#if (processstep.id>3)>						
+							<a href="./process.action?processid=${processstep.processid}&stepid=3">
 							<div  class="step_menu_done">
 								<div class="step_text">3.第三步</div>
 							<#else>
+							<a href="./process.action?processid=${processstep.processid}&stepid=3">
 							<div  class="step_menu_todo">
 								<div class="step_text">3.第三步</div>
 							</#if>	
 						</#if>	
-						</div>							
+						</div></a>
 						<div class="step_line">&nbsp;</div>
 						
+						
 						<#if (processstep.id==4)>
+						<a href="./process.action?processid=${processstep.processid}&stepid=4">
 						<div  class="step_menu">
 							<div class="now_step">4.第四步</div>
 						<#else>
-							<#if (processstep.id>4)>			
+							<#if (processstep.id>4)>		
+							<a href="./process.action?processid=${processstep.processid}&stepid=4">	
 							<div  class="step_menu_done">
 								<div class="step_text">4.第四步</div>
 							<#else>
+							<a href="./process.action?processid=${processstep.processid}&stepid=4">
 							<div  class="step_menu_todo">
 								<div class="step_text">4.第四步</div>
 							</#if>	
 						</#if>	
-						</div>
+						</div></a>						
 						<div class="step_line">&nbsp;</div>
 						
+						
 						<#if (processstep.id==5)>
+						<a href="./process.action?processid=${processstep.processid}&stepid=5">
 						<div  class="step_menu">
 							<div class="now_step">5.第五步</div>
 						<#else>
 							<#if (processstep.id>5)>			
+							<a href="./process.action?processid=${processstep.processid}&stepid=5">
 							<div  class="step_menu_done">
 								<div class="step_text">5.第五步</div>
 							<#else>						
+							<a href="./process.action?processid=${processstep.processid}&stepid=5">
 							<div  class="step_menu_todo">
 								<div class="step_text">5.第五步</div>
 							</#if>
 						</#if>	
-						</div>
+						</div></a>						
 						<div class="step_line">&nbsp;</div>
 						
+						
 						<#if (processstep.id==6)>
+						<a href="./process.action?processid=${processstep.processid}&stepid=6">
 						<div  class="step_menu">
 							<div class="now_step">6.第六步</div>
 						<#else>							
+						<a href="./process.action?processid=${processstep.processid}&stepid=6">
 						<div  class="step_menu_todo">
 							<div class="step_text">6.第六步</div>
 						</#if>	
-						</div>
+						</div></a>						
 						<div class="step_line_blank">&nbsp;</div>
 						
 					</#if>		
