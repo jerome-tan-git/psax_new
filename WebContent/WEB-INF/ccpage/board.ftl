@@ -52,6 +52,27 @@ transitional.dtd">
 			   
     		.iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
     		.iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+    		
+    		div.name_list1{
+    			font-size: 12pt;
+				line-height:1.5;
+				width:20%;
+				padding:5px;
+				border:1px;
+				margin:0 10px;
+				float:right;
+				text-align:right;
+    		}
+    		div.name_list2{
+    			font-size: 12pt;
+				line-height:1.5;
+				width:70%;
+				padding:5px;
+				border:1px;
+				margin:0 10px;
+				float:right;
+				text-align:left;
+    		}
 		</style>
 		<script type="text/javascript">
 			function enterSite() {
@@ -190,7 +211,8 @@ transitional.dtd">
 	    <h2>组织架构</h2>
 	    <div class="sub_header_description">
 	        <span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
-	        <span class="page">组织架构</span>
+	        <span class="page"><a href="./page.action?categoryid=7">组织架构 &raquo;</a></span>
+	        <span class="page">理事会</span>
 		</div>
 	</div>
 	
@@ -205,13 +227,61 @@ transitional.dtd">
 			-->
 			<div class="two_third" style="width:100%;" >
 			    
-			     <h3>组织架构</h3>
+			     <h3>理事会名单</h3>
 			    
-			    <div class="description" style="text-align:center;">
-			        <!--<img src="./images/org.JPG" />-->
-			        <a href="./page.action?categoryid=71"><img src="./images/org1.jpg" /></a>
-			        <img src="./images/org2.jpg" />
-			        
+			   <!-- <div class="description" style="text-align:center;">-->
+			   <div>
+			    	<div class="name_list2">长江原水厂</div>
+			    	<div class="name_list1">名誉会长</div>
+			    	<div class="name_list2">上海市浦东新区计量质量检测所</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">多美滋婴幼儿食品有限公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">海天坊食品制造有限公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海金丝猴食品股份有限公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海嘉里食品工业有限公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海山人食品有限公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海申美饮料食品有限公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海申美饮料食品有限公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海闽龙实业有限公司分公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海界龙实业集团股份有限公司御天包装印务分公司</div>
+			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海辉文生物技术有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">三得利（上海）食品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海清美绿色食品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海长阳面包厂有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海东航美心食品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海水管家健康饮品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">通用磨坊贸易(上海)有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海川崎食品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海庆丰酿造调味品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海新成食品有限公司华洲路分公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海佳丰食品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海杰特食品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海中航包装材料有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海克莉丝汀食品有限公司</div>
+			    	<div class="name_list1">理事</div>
+			    	
 				</div>
 			</div>
 			</div>

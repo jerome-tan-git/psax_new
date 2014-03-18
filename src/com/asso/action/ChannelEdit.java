@@ -165,7 +165,9 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 				return "cat16";
 			
 			if(c==7)
-				return "cat7";
+				return "cat7";			
+			if(c==71)
+				return "cat71";
 			if(c==8)
 				return "cat8";
 			if(c==9)
@@ -226,7 +228,8 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 	}
 	private void loadArticles(){
 		try {
-			this.artlist = am.loadArticles(1);//moment, cat=1
+//			this.artlist = am.loadArticles(1);//moment, cat=1
+			this.artlist = am.loadArticles(5);//policies, cat=5
 			this.newslist = am.loadArticles(3);//news, cat=3
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -237,9 +240,9 @@ public class ChannelEdit extends ActionSupport implements ServletRequestAware,Se
 		this.setArtlist(this.sortArtlistByDate(this.artlist));
 		this.cleanTxt(CONSTANT.momentMaxLength,CONSTANT.momentMaxLength,this.artlist);		
 		if(this.artlist.size()>=3){
-			System.out.println("1--大事记artlist---"+this.artlist.get(0).toString());
-			System.out.println("2--大事记artlist---"+this.artlist.get(1).toString());
-			System.out.println("3--大事记artlist---"+this.artlist.get(2).toString());
+			System.out.println("1--大事记==>policies---artlist---"+this.artlist.get(0).toString());
+			System.out.println("2--大事记==>policies---artlist---"+this.artlist.get(1).toString());
+			System.out.println("3--大事记==>policies---artlist---"+this.artlist.get(2).toString());
 			List<Article> rlist = new ArrayList<Article>();
 			rlist.add(this.artlist.get(0));rlist.add(this.artlist.get(1));rlist.add(this.artlist.get(2));
 			this.setArtlist(rlist);

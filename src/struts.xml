@@ -45,6 +45,7 @@
 			<result name="cat1" type="freemarker">/WEB-INF/ftl/membercenter.ftl</result>
 			<result name="cat2" type="freemarker">/WEB-INF/ccpage/about_us.ftl</result>
 			<result name="cat7" type="freemarker">/WEB-INF/ccpage/orgnization.ftl</result>
+			<result name="cat71" type="freemarker">/WEB-INF/ccpage/board.ftl</result>
 			<result name="cat15" type="freemarker">/WEB-INF/ccpage/exam_home.ftl</result>	
 			<result name="cat16" type="redirect">bbs_alltopiclist.action</result>							 
 		</action>

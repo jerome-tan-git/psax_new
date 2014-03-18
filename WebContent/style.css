@@ -863,7 +863,7 @@ padding-left:20px;
 {
 	width: 115px;
 	border: 1px solid #efefef;
-	margin: auto;
+	margin: 5px;
 	text-align: center;
 	font-size: 15pt;
 	padding-top: 10px;
@@ -1244,6 +1244,7 @@ padding-left:20px;
 	font-size: 12pt;
 	line-height:200%
 }
+
 
 .with_arrow
 {

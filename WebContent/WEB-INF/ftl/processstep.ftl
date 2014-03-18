@@ -308,16 +308,24 @@ transitional.dtd">
 							
 						</div>
 						<#if processstep?exists>
+						<div style="width: 80%">
+						<div style="width: 280px; float:right; right:100px">
 							<#if (processstep.id<6)>
 							<#assign nextpid=(processstep.id+1) >
 								<a href="./process.action?processid=${processstep.processid}&stepid=${nextpid}">
-								<div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;">
+								<div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;float:right">
 								下一步
-							</div></a>
-						
+								</div>
+							</a>						
 							</#if>
-							
-							
+							<#if formSubmitLink?exists>
+								<a href=${formSubmitLink}>
+									<div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;">
+									上传</div>
+								</a>
+							</#if>
+						</div>
+						</div>
 						</#if>						
 						
 					</div>

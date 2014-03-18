@@ -1,4 +1,9 @@
+
+
 <div class="footer">
+
+
+
 				<div class="one_fourth">
 					<div class="widget_container">
 						<h3>协会 <span>简介</span></h3>
@@ -96,6 +101,11 @@
 						</div>
 					</div>
 				</div>
+
+<script type="text/javascript">
+	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F541d6ec3939918ae63fb4274345bf788' type='text/javascript'%3E%3C/script%3E"));
+</script>
 
 				<div class="clear"></div>
 

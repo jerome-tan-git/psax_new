@@ -13,13 +13,14 @@
 								<a href="#">文章管理</a>
 								<ul class="nav">
 								    <li><a href="./bklistArt.action?categoryid=1">大事记</a></li>
-								    <li><a href="./bklistArt.action?categoryid=3">社会热点</a></li>
-								    <li><a href="./bklistArt.action?categoryid=4">实时新闻</a></li>
-								    <li><a href="./bklistArt.action?categoryid=5">行业法规</a></li>
-								    <li><a href="./bklistArt.action?categoryid=6">政策导向</a></li>
+								    <li><a href="./bklistArt.action?categoryid=3">舆情动态</a></li><!-- 社会热点 -->
+								    <!-- <li><a href="./bklistArt.action?categoryid=4">实时新闻</a></li> -->
+								    <li><a href="./bklistArt.action?categoryid=5">政策法规</a></li><!-- 行业法规 -->
+								    <!-- <li><a href="./bklistArt.action?categoryid=6">政策导向</a></li> -->
 								    <li><a href="./bklistArt.action?categoryid=11">会议</a></li>
 								    <li><a href="./bklistArt.action?categoryid=13">实操视频</a></li>
 								    <li><a href="./bklistArt.action?categoryid=14">资料下载</a></li>
+								    <li><a href="./bklistArt.action?categoryid=15">理事会单位</a></li>
 								</ul>
 							</li>
 							<li class="active">

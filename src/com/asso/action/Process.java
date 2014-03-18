@@ -36,6 +36,7 @@ public class Process extends ActionSupport implements ServletRequestAware,Sessio
 	private static final long serialVersionUID = 1L;
 //	private ProcessManager pm;	
 	private ProcessStep processstep;
+	private String formSubmitLink;
 	
 	private HttpServletRequest request;	
 	private Map session;
@@ -59,6 +60,14 @@ public class Process extends ActionSupport implements ServletRequestAware,Sessio
 	public void setProcessstep(ProcessStep processstep) {
 		this.processstep = processstep;
 	}
+
+	public String getFormSubmitLink() {
+		return formSubmitLink;
+	}
+	public void setFormSubmitLink(String formSubmitLink) {
+		this.formSubmitLink = formSubmitLink;
+	}
+
 
 	private void loadProcessStep(int _stepid, int _processid){
 		System.out.println("GOT stepid="+_stepid+",_processid"+_processid);
@@ -111,7 +120,8 @@ public class Process extends ActionSupport implements ServletRequestAware,Sessio
 			}
 			else if(_processid==3){
 				this.processstep.setTitle("接收报告");
-				this.processstep.setContent("企业将填写的报告表邮件、传真或邮递至受理单位。");
+				this.processstep.setContent("企业将填写的报告表直接上传至网站。");
+				this.formSubmitLink="./uploadfolderfilesmanager.action?folderid=11";
 			}
 			else if(_processid==4){
 				this.processstep.setTitle("接收报告");
@@ -149,11 +159,12 @@ public class Process extends ActionSupport implements ServletRequestAware,Sessio
 			}
 			else if(_processid==3){
 				this.processstep.setTitle("报告受理登记");
-				this.processstep.setContent("企业备好完成的报告表（书面版，需签字、盖章）至受理单位，进行登记、编号。");
+				this.processstep.setContent("企业将沟通完成后的报告表上传至网站，并备好报告表（书面版）。");
+				this.formSubmitLink="./uploadfolderfilesmanager.action?folderid=11";
 			}
 			else if(_processid==4){
 				this.processstep.setTitle("报告受理登记");
-				this.processstep.setContent("企业备好填写完成的报告表和其他资料（书面版，需签字、盖章）至受理单位，进行登记、编号。");
+				this.processstep.setContent("企业备好填写完成的报告表和其他资料（书面版，需签字、盖章）至受理单位，进行登记、编号。");				
 			}
 			else{
 				this.processstep.setTitle("待定");
