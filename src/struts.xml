@@ -43,6 +43,7 @@
 		<action name="page" class="com.asso.action.ChannelEdit">  
 			<result name="cat0" type="freemarker">/WEB-INF/ccpage/index.ftl</result>
 			<result name="cat1" type="freemarker">/WEB-INF/ftl/membercenter.ftl</result>
+			<result name="cat11" type="freemarker">/WEB-INF/ccpage/joinus.ftl</result>
 			<result name="cat2" type="freemarker">/WEB-INF/ccpage/about_us.ftl</result>
 			<result name="cat7" type="freemarker">/WEB-INF/ccpage/orgnization.ftl</result>
 			<result name="cat71" type="freemarker">/WEB-INF/ccpage/board.ftl</result>
