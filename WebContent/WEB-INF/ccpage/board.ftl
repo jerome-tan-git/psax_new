@@ -246,9 +246,7 @@ transitional.dtd">
 			    	<div class="name_list2">上海山人食品有限公司</div>
 			    	<div class="name_list1">副会长</div>
 			    	<div class="name_list2">上海申美饮料食品有限公司</div>
-			    	<div class="name_list1">副会长</div>
-			    	<div class="name_list2">上海申美饮料食品有限公司</div>
-			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list1">副会长</div>			    	
 			    	<div class="name_list2">上海闽龙实业有限公司分公司</div>
 			    	<div class="name_list1">副会长</div>
 			    	<div class="name_list2">上海界龙实业集团股份有限公司御天包装印务分公司</div>

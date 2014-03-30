@@ -1,4 +1,4 @@
-			<div style="margin-top: 7px;float: right;margin-right: 15px;">	
+			<div style="margin-top: 7px;float: right;margin-right: 19px;">	
  				<#if Session?exists>
 	 				<#if Session.user_?exists>
 	 					<a href="./userlogout.action" style="color: #333;" >登出</a>
@@ -7,7 +7,6 @@
 	 				</#if> 				
  				</#if>
  				<a style="color: #333;" href="./page.action?categoryid=1">用户中心</a>
- 				<br>
  				<a style="color: #333; " href="./page.action?categoryid=11">申请入会</a>
  			</div>
  			

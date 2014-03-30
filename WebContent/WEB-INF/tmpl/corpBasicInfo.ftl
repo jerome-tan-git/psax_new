@@ -245,9 +245,13 @@ transitional.dtd">
 					    <input class="editor long" form_data="cbi_corpName" name="cbi_corpName" type="text"></input>
 				    </td>
 				    <td bgcolor="#FFFFFF">企业人数</td>
-				    <td colspan="4" bgcolor="#FFFFFF">
+				    <td colspan="2" bgcolor="#FFFFFF">
 					    <div class="display" form_data="cbi_corpHeadCount" ></div>			    
-						<input class="editor long" form_data="cbi_corpHeadCount" name="cbi_corpHeadCount" type="text"></input>
+						<input class="editor short" form_data="cbi_corpHeadCount" name="cbi_corpHeadCount" type="text"></input>
+				    </td>
+				    <td bgcolor="#FFFFFF" width="50px" >企业类别</td>
+				    <td colspan="2" bgcolor="#FFFFFF">					    			    
+						<input form_data="cbi_corpHeadCount" name="cbi_corpHeadCount" type="text"></input>
 				    </td>
 				  </tr>
 				  <tr>
