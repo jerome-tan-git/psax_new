@@ -20,7 +20,7 @@
 								    <li><a href="./bklistArt.action?categoryid=11">会议</a></li>
 								    <li><a href="./bklistArt.action?categoryid=13">实操视频</a></li>
 								    <li><a href="./bklistArt.action?categoryid=14">资料下载</a></li>
-								    <li><a href="./bklistArt.action?categoryid=15">理事会单位</a></li>
+								    <li><a href="./bklistArt.action?categoryid=12">培训</a></li>
 								</ul>
 							</li>
 							<li class="active">

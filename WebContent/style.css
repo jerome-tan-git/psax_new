@@ -986,7 +986,7 @@ padding-left:20px;
 .small_menu{
 	display:none;
 }
-.banner { position: relative; overflow: auto;}
+.banner { position: relative; overflow: auto; height:156px !important}
 .banner li { list-style: none;  }
 .banner ul li { float: left; }
 .row_news{

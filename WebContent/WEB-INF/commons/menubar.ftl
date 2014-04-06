@@ -91,6 +91,7 @@
 							<div class="list_item meeting">
 								会议
 							</div></a>
+							<a href="./listArticles.action?categoryid=12">
 							<div class="list_item help">
 								培训
 								<div class="sub_menu">								
@@ -104,7 +105,7 @@
 										资料下载
 									</div></a>
 								</div>
-							</div>
+							</div></a>
 							<a href="./listArticles.action?categoryid=13">
 							<div class="list_item operation">
 								实操视频

@@ -95,7 +95,7 @@ public class ChannelDaoImpl implements ChannelDao {
 	public List<Category> loadCategories() {
 //		Session s = sessionFactory.openSession();		
 		Session s = sessionFactory.getCurrentSession();
-	    String hql = "from Category ";      
+	    String hql = "from Category where isactive=1";      
         Query query = s.createQuery(hql);
         @SuppressWarnings("unchecked")
 		List<Category> rlist = query.list();

@@ -74,6 +74,7 @@ transitional.dtd">
 			$(document).ready(function() {
 			
 				 jQuery('.nailthumb-container').nailthumb({width:326,height:218});
+				 jQuery('.nailthumb-container_1').nailthumb({width:218,height:146});
 				
 				// bancy bo=x
 				jQuery("a#example6").fancybox({
@@ -341,7 +342,7 @@ transitional.dtd">
 		    	</#list>
 		    <#else>	
 		    <li>
-		        <div class="portfolio_content">
+		        <div class="portfolio_content_1">
 		            <img src="./images/portfolio_3col_img_1.png" alt="img" />
 		            <h4>Graphic Card</h4>
 		            <p><a href="./portfolio_single_page.html">gravida vulputate</a></p>
@@ -387,14 +388,33 @@ transitional.dtd">
 		<div class="banner">
 			
 		    <ul>
+		   
+		    	
+		    	
 		    <#if artlist?exists>
-		    	<#list artlist as article>		    
+		    	<#list artlist as article>	
+		    	<!--	    
 		    	 <li>
 		        	<div class="row_news">
 			        	<p>${article.title}</p>
 			        	<span></span>
 		        	</div>
 		        </li>
+		        -->
+		         <li><a href="./detailArt.action?articleid=${article.id}">
+			        <div class="portfolio_content_1">
+				        <div>
+					        <div class="nailthumb-container_1" style="float:left">				        
+					            <img src="${article.pic}" alt="img" />				        
+					        </div>
+					        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${article.title}<div>
+				        </div>			            
+			           <div class="link_btn">
+			                <a id="example6" href="${article.pic}" class="zoom"></a>			                
+			                <div class="overlay"></div>
+			           </div>			           			            
+			        </div></a>
+			    </li>
 		       </#list>
 		    <#else>
 		        <li>

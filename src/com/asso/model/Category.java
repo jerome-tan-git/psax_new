@@ -8,7 +8,15 @@ public class Category implements java.io.Serializable{
 	private String category;
 	private int parentid;
 	private int channelid;
+	private int isactive;
 	
+	
+	public int getIsactive() {
+		return isactive;
+	}
+	public void setIsactive(int isactive) {
+		this.isactive = isactive;
+	}
 	public int getId() {
 		return id;
 	}
@@ -35,7 +43,8 @@ public class Category implements java.io.Serializable{
 	}
 	
 	public String toString(){
-		return this.getId()+":"+this.getCategory()+":"+this.getParentid()+":"+this.getChannelid();
+		return this.getId()+":"+this.getCategory()+":"+this.getParentid()+":"+this.getChannelid()+":"+this.getIsactive();
+		
 	}
 
 }

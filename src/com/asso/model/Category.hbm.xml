@@ -17,5 +17,8 @@
         <property name="channelid" type="int">
             <column name="channelid" length="11" />
         </property>
+        <property name="isactive" type="int">
+            <column name="isactive" length="11" />
+        </property>
     </class>
 </hibernate-mapping>
