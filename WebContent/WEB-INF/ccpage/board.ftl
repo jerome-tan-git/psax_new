@@ -237,7 +237,7 @@ transitional.dtd">
 			    	<div class="name_list1">副会长</div>
 			    	<div class="name_list2">多美滋婴幼儿食品有限公司</div>
 			    	<div class="name_list1">副会长</div>
-			    	<div class="name_list2">海天坊食品制造有限公司</div>
+			    	<div class="name_list2">上海天坊食品制造有限公司</div>
 			    	<div class="name_list1">副会长</div>
 			    	<div class="name_list2">上海金丝猴食品股份有限公司</div>
 			    	<div class="name_list1">副会长</div>
@@ -249,11 +249,15 @@ transitional.dtd">
 			    	<div class="name_list1">副会长</div>			    	
 			    	<div class="name_list2">上海闽龙实业有限公司分公司</div>
 			    	<div class="name_list1">副会长</div>
+			    	<div class="name_list2">上海新川崎食品有限公司</div>
+			    	<div class="name_list1">副会长</div>
 			    	<div class="name_list2">上海界龙实业集团股份有限公司御天包装印务分公司</div>
 			    	<div class="name_list1">副会长</div>
 			    	<div class="name_list2">上海辉文生物技术有限公司</div>
 			    	<div class="name_list1">理事</div>
-			    	<div class="name_list2">三得利（上海）食品有限公司</div>
+			    	<div class="name_list2">三得利（上海）食品有限公司</div>			    	
+			    	<div class="name_list1">理事</div>
+			    	<div class="name_list2">上海吉元德食品有限公司</div>
 			    	<div class="name_list1">理事</div>
 			    	<div class="name_list2">上海清美绿色食品有限公司</div>
 			    	<div class="name_list1">理事</div>

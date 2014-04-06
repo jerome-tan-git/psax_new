@@ -124,6 +124,13 @@
 						<div class="menu_text">
 							慈善公益
 						</div></a>
+						<div class="menu_list">
+							<div class="menu_list_header"></div>
+							<a href="http://yzjj.changyang.gov.cn/">
+							<div class="list_item intro">
+								英子姐姐助学网
+							</div></a>							
+						</div>
 					</div>
 					<div class="menu_item">
 						<a href="./page.action?categoryid=16">
