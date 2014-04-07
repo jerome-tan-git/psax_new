@@ -86,6 +86,10 @@ public class UserManagerImpl implements UserManager {
 		return userDao.loadAllUsers();
 	}
 	@Override
+	public List<User> loadusersByTradeid(int _tradeid) throws ClassNotFoundException, SQLException{
+		return userDao.loadUsersWithTradeid(_tradeid);
+	}
+	@Override
 	public User loadUser(User user) throws ClassNotFoundException, SQLException{		
 		System.out.println("User input userid ------"+user.getId()+", password-----"+user.getPassword());
 		int r = userDao.checkUserExistsWithNamePassword(user);

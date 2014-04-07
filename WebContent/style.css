@@ -1676,6 +1676,7 @@ input.userinfo
 	font-size: 15pt;
 	color: #666;
 	margin-top: 10px;
+	border: 1px solid #cccccc;
 }
 .userinfo_title
 {

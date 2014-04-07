@@ -44,9 +44,10 @@
 			}</style>
 	</head>
 	<body>
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
+	 	
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">		  
+		  <div class="modal-dialog">		  	  
+		    <div class="modal-content">			   
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		        <h4 class="modal-title" id="myModalLabel">新建/编辑用户</h4>
@@ -77,7 +78,9 @@
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
+			
 		
+		    
 		<div class="navbar-fixed-top" role="banner" style="background-color: #004A8F; width: 100%;">
 			<div class="container">
 				<div class="navbar-header">
@@ -96,6 +99,25 @@
 			<div class="row" style="width: 100%;">
 				<#include "../commons/marginmenu.ftl">
 				<div class="col-md-8">
+				  <div style="float:left; height:30px;
+						padding-left: 15px; padding-bottom: 5px;
+						margin-bottom: 10px;
+						font-size: 10pt; color: #666;						
+						border: 1px #cccccc; ">
+					<form method="post" action="manageruser.action">
+				   	<select name="tradeid">
+				   		<option value="0" <#if (tradeid==0)>selected</#if>>所有用户</option>
+				   		<option value="1" <#if (tradeid==1)>selected</#if>>重点企业专业委员会</option>
+				   		<option value="2" <#if (tradeid==2)>selected</#if>>糖果糕点专业委员会</option>
+				   		<option value="3" <#if (tradeid==3)>selected</#if>>饮料专业委员会</option>
+				   		<option value="4" <#if (tradeid==4)>selected</#if>>副食品专业委员会</option>
+				   		<option value="5" <#if (tradeid==5)>selected</#if>>南北货专业委员会</option>
+				   		<option value="6" <#if (tradeid==6)>selected</#if>>食品相关产品专业委员会</option>
+				   	</select>
+				   	<input type="submit" name="" value="确定"></input>
+				   	</form>
+				  </div>
+				
 					<div style="padding-right: 28px;margin-bottom: 23px;">
 						<span class="glyphicon glyphicon-plus pull-right hand deleteExam" onclick="showUserDialog('','','')">新建用户</span>
 					</div>

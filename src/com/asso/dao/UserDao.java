@@ -39,6 +39,7 @@ public interface UserDao {
 	List<Uploadfiles> loadUploadfilesByFolderIdUserId(int _folderid, int _userid);
 	List<MemberCenterColumn> loadAllMemberCenterColumns();
 	void update(MemberCenterColumn mcc);
+	List<User> loadUsersWithTradeid(int _tradeid);
 	
 	
 	

@@ -113,6 +113,18 @@ public class UserDaoImpl implements UserDao {
         rlist = query.list();
         return rlist;
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> loadUsersWithTradeid(int _tradeid){	
+		
+		List<User> rlist = new ArrayList<User>();
+		Session s = sessionFactory.getCurrentSession();
+		String hql = "from User where tradeid=?";      
+        Query query = s.createQuery(hql);
+        query.setString(0, ""+_tradeid); 
+        rlist = query.list();
+        return rlist;
+	}
 	
 	
 	@Override

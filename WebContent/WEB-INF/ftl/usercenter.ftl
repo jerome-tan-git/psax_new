@@ -258,7 +258,12 @@ transitional.dtd">
 					<div class="userinfo_title">
 						<div>请选择所属委员会</div>
 						<div>
-							<select class="userinfo" name="tradeid">
+							<select class="userinfo" name="tradeid" style="height: 36px;
+								padding: 5px;
+								font-size: 15pt;
+								color: #666;
+								margin-top: 10px;
+								border: 1px solid #cccccc;">
 							<#list committees as committee>
 								<#assign seq=committee_index>
 									<#if (seq==user.tradeid)>
@@ -272,7 +277,7 @@ transitional.dtd">
 					</div>		
 					</#if>			
 					<div class="userinfo_title">
-						<div>头像选择</div>
+						<div>请选择头像</div>
 						<div>
 							<input class="userinfo" type="radio" name="portrait" value="./img/tx_1.png"  
 							<#if user.portrait?exists>

@@ -44,12 +44,13 @@ public class UserEdit extends ActionSupport implements ServletRequestAware,Sessi
 	private MemberCenterColumn memberCenterColumn;
 	private String columnname;
 	private String columnid;
+	private int tradeid;
 	
 	private HttpServletRequest request;	
 	private Map session;
 
 	public UserEdit(){		
-		um = (UserManager) SpringFactory.getObject("userManager");
+		um = (UserManager) SpringFactory.getObject("userManager");		
 	}	
 		
 	public UserManager getUm() {
@@ -140,13 +141,27 @@ public class UserEdit extends ActionSupport implements ServletRequestAware,Sessi
 	}
 	public void setMcclist(List<MemberCenterColumn> mcclist) {
 		this.mcclist = mcclist;
+	}	
+//	public String getTradeid() {
+//		return tradeid;
+//	}
+//	public void setTradeid(String tradeid) {
+//		this.tradeid = tradeid;
+//	}
+	public int getTradeid() {
+		return tradeid;
 	}
-	
+	public void setTradeid(int tradeid) {
+		this.tradeid = tradeid;
+	}
+
 	public String loadMcclist(){
 		this.selectMcclist();
 		return "list";
 	}
 	
+	
+
 	public List<MemberCenterColumn> selectMcclist(){
 		this.mcclist = new ArrayList<MemberCenterColumn>();
 		try {
@@ -168,6 +183,19 @@ public class UserEdit extends ActionSupport implements ServletRequestAware,Sessi
 		this.userslist = new ArrayList<User>();		
 		try {
 			this.userslist = um.loadusers();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		this.pagination();
+		this.partUserList();
+	}
+	private void buildUsersListByTradeid(int _tradeid){
+		this.userslist = new ArrayList<User>();		
+		try {
+			this.userslist = um.loadusersByTradeid(_tradeid);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -287,7 +315,11 @@ public class UserEdit extends ActionSupport implements ServletRequestAware,Sessi
 
 	@Override
 	public String execute(){
-		this.buildUsersList();
+		System.out.println("USerEdit--------this.tradeid---"+this.tradeid);		
+		if(this.tradeid>0)
+			this.buildUsersListByTradeid(this.tradeid);
+		else
+			this.buildUsersList();
 		return "list";		
 	}
 

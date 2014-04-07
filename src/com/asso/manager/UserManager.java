@@ -66,6 +66,9 @@ public interface UserManager {
 	void updateMemberCenterColumn(MemberCenterColumn _mcc)
 			throws ClassNotFoundException, SQLException;
 
+	List<User> loadusersByTradeid(int _tradeid) throws ClassNotFoundException,
+			SQLException;
+
 
 
 
