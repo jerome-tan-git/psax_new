@@ -30,5 +30,8 @@
         <property name="email" type="string">
             <column name="email" length="50" />
         </property>
+        <property name="tradeid" type="int">
+            <column name="tradeid" length="11" />
+        </property>
     </class>
 </hibernate-mapping>

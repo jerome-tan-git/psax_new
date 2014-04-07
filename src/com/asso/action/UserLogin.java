@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
+
 //import org.apache.commons.io.FileUtils;
 //import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -24,6 +25,7 @@ import org.springframework.context.annotation.Scope;
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import util.CONSTANT;
 import util.SpringFactory;
 
 import com.asso.manager.DocManager;
@@ -46,6 +48,7 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 	private UserRegisterInfo uInfo = new UserRegisterInfo();
 	private UserManager um;	
 	private User user; 
+	private ArrayList<String> committees = new ArrayList<String>(); 
 	
 	private File ptrt;
 	private String ptrtContentType;
@@ -62,6 +65,11 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 	public UserLogin(){
 		um = (UserManager) SpringFactory.getObject("userManager");
 		dm = (DocManager) SpringFactory.getObject("docManager");
+		if(CONSTANT.committees.length>0){
+			for(int i=0; i<CONSTANT.committees.length; i++){
+				this.committees.add(CONSTANT.committees[i]);
+			}
+		}
 	}
 	
 	public UserManager getUm() {
@@ -79,6 +87,13 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 		this.dm = dm;
 	}
 
+	
+	public ArrayList<String> getCommittees() {
+		return committees;
+	}
+	public void setCommittees(ArrayList<String> committees) {
+		this.committees = committees;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -174,6 +189,7 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 		this.user = (User)this.request.getSession().getAttribute("user_");
 		System.out.println("updateInfo---session user"+this.user.toString());//null point
 		System.out.println("updateInfo---this.uInfo.getIssave()---"+this.uInfo.getIssave());
+		System.out.println("updateInfo---this.uInfo.getTradeID()---"+this.uInfo.getTradeid());
 		if(this.uInfo.getIssave()!=null){
 			if(this.uInfo.getIssave().equals("±£´æ")){
 				if(!this.isEmpty(this.uInfo.getUsername()))
@@ -188,6 +204,8 @@ public class UserLogin extends ActionSupport implements ModelDriven<Object>,Serv
 					this.user.setPhone(this.uInfo.getPhone());
 				if(!this.isEmpty(this.uInfo.getPortrait()))
 					this.user.setPortrait(this.uInfo.getPortrait());
+				if(!this.isEmpty(this.uInfo.getTradeid()))
+					this.user.setTradeid(Integer.parseInt(this.uInfo.getTradeid()));
 				
 				try {
 					um.update(user);

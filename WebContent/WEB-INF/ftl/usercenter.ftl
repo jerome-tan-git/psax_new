@@ -195,8 +195,12 @@ transitional.dtd">
 				</div>
 				<div class="exam_type">
 					<#if Session.user_?exists>
-					<#assign user=Session.user_>						
+					<#assign user=Session.user_>	
+						<#if user.nickname?exists>					
 						你好，${user.nickname?default("")}
+						<#else>
+						你好！ 
+						</#if>
 	 				<#else> 					
 	 					你好！
 	 				</#if>
@@ -249,7 +253,24 @@ transitional.dtd">
 							<input class="userinfo" type="text" placeholder="" name="phone" 
 							value="${user.phone?default("")}"></input>
 						</div>
-					</div>					
+					</div>	
+					<#if committees?exists>
+					<div class="userinfo_title">
+						<div>请选择所属委员会</div>
+						<div>
+							<select class="userinfo" name="tradeid">
+							<#list committees as committee>
+								<#assign seq=committee_index>
+									<#if (seq==user.tradeid)>
+									<option value="${seq}" selected>${committee}</option>
+									<#else>									
+									<option value="${seq}">${committee}</option>
+									</#if>
+							</#list>								
+							</select>
+						</div>
+					</div>		
+					</#if>			
 					<div class="userinfo_title">
 						<div>头像选择</div>
 						<div>

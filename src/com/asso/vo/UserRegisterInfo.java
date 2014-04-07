@@ -12,6 +12,7 @@ public class UserRegisterInfo {
 	private String phone;
 	private String portrait;
 	private String issave;
+	private String tradeid;
 	
 //	private File portrait;	
 //	private String portraitContentType;	
@@ -96,7 +97,13 @@ public class UserRegisterInfo {
 		this.portrait = portrait;
 	}
 	
-//	public File getPortrait() {
+public String getTradeid() {
+		return tradeid;
+	}
+	public void setTradeid(String tradeid) {
+		this.tradeid = tradeid;
+	}
+	//	public File getPortrait() {
 //		return portrait;
 //	}
 //	public void setPortrait(File portrait) {

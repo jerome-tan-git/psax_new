@@ -10,8 +10,15 @@ public class User {
 	private String portrait;
 	private String phone; 
 	private String email;
+	private int tradeid;
 	
 	
+	public int getTradeid() {
+		return tradeid;
+	}
+	public void setTradeid(int tradeid) {
+		this.tradeid = tradeid;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -71,7 +78,8 @@ public class User {
 	
 	public String toString(){
 		return this.id+":"+this.getUsername()+":"+this.getPassword()+":"+this.level
-				+":"+this.nickname+":"+this.portrait+":"+this.phone+":"+this.email;
+				+":"+this.nickname+":"+this.portrait+":"+this.phone+":"+this.email
+				+":"+this.tradeid;
 	}
 	
 

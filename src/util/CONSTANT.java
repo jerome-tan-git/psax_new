@@ -49,7 +49,10 @@ public class CONSTANT {
 	public final static String uploadImagesPath = "./uploadimg";
 	public final static String uploadFilesPath = "./uploaddoc";
 	
-	
+	public final static String[] committees = {
+		"未选择","重点企业专业委员会","糖果糕点专业委员会","饮料专业委员会",
+		"副食品专业委员会","南北货专业委员会","食品相关产品专业委员会",
+	};
 	public static HashMap<String,Integer> seq;
 	public final static String[] alphas = {
 		"a","b","c","d","e",
