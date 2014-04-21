@@ -385,67 +385,70 @@ transitional.dtd">
 		<div class="title_holder">
 		    <h3><span>最新政策</span></h3><!-- 原：今日头条-->
 		</div>
-		<div class="banner">
-			
-		    <ul>
-		   
-		    	
-		    	
-		    <#if artlist?exists>
+		<!--<div class="banner"><ul>-->
+		<div class="demo">
+		<ul id="list" class="image-grid_3col">
+		   <#if artlist?exists>
 		    	<#list artlist as article>	
-		    	<!--	    
-		    	 <li>
-		        	<div class="row_news">
-			        	<p>${article.title}</p>
-			        	<span></span>
-		        	</div>
-		        </li>
-		        -->
+		    	
 		         <li><a href="./detailArt.action?articleid=${article.id}">
-			        <div class="portfolio_content_1">
-				        <div>
-					        <div class="nailthumb-container_1" style="float:left">				        
-					            <img src="${article.pic}" alt="img" />				        
-					        </div>
-					        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${article.title}<div>
-				        </div>			            
-			           <div class="link_btn">
+			        <div class="portfolio_content">
+			        <div class="nailthumb-container">
+				        <img src="${article.pic}" alt="img" />	
+				    </div>
+				        <h4>${article.title}</h4>			        
+					 
+					  <div class="link_btn">
 			                <a id="example6" href="${article.pic}" class="zoom"></a>			                
 			                <div class="overlay"></div>
-			           </div>			           			            
+			          </div>       
+				        			           			            
 			        </div></a>
 			    </li>
 		       </#list>
 		    <#else>
-		        <li>
-		        	<div class="row_news">
-			        	<p>【食源性疾病成我国头号食品安全问题】卫生部食品安全风险评估重点实验室抽样调查表明，
-			        	食源性疾病是目前我国头号食品安全问题。调查人群的食源性疾病发病次数为0.157次每人
-			        	每年，即每6人中有1人在过去一年中曾发生食源性疾病。食源性疾病高峰在夏季，主要临床
-			        	症状是急性胃肠炎</p>
-			        	<span>-- 新华网</span>
-		        	</div>
-		        </li>
-		        <li>
-		        	<div class="row_news">
-			        	 <p>不久前有经济学者在电视访谈节目中称，转基因玉米让老鼠长肿瘤、美国连牲畜都被禁止喂食
-			        	转基因饲料。转基因食品(行情 专区)的安全性问题再度成为社会焦点。转基因食品致癌或让
-			        	人“绝育无后”？老外不吃转基因食品？对此，记者采访了部分国内外生物技术专家及业内人士，
-			        	求证有关热点问题。</p>
-			        	<span>-- 东方财富网</span>
-		        	</div>
-				</li>
-		        <li>
-		        	<div class="row_news">
-			        	【深圳商报讯】（记者 黄青山 实习生 邹鹏）福田皇冠配餐中心的经营模式，为解决都市人用餐
-			        	的“老大难”问题提供了有力参考，其食品安全管理也是一大亮点。18日，皇冠配餐中心举行“金
-			        	百味食品安全内部培训月”活动，对100多名金百味员工进行专业的食品安全培训，周明明、唐雪
-			        	梅两位深圳市人大代表和深圳市市场监督管理局福田分局相关工作人员，也利用此次机会进行实
-			        	地参观和考察</p>
-			        	<span>-- 网易</span>
-		        	</div>
-				</li>
-			</#if>
+	
+		    <li>
+		        <div class="portfolio_content">
+		            <img src="./images/portfolio_3col_img_1.png" alt="img" />
+		            <h4>Flickr Visualisation</h4>
+		            <p><a href="./portfolio_single_page.html">hendrerit cursus</a></p>
+		            <div class="link_btn">
+		                <a id="example6" href="./images/portfolio_2col_img_1.png" class="zoom"></a>
+		                <a href="./portfolio_single_page.html" class="link_post"></a>
+		                <div class="overlay"></div>
+		            </div>
+		        </div>
+		    </li>
+		    <li>
+		        <div class="portfolio_content">
+		            <img src="./images/portfolio_3col_img_2.png" alt="img" />
+		            <h4>Flickr Visualisation</h4>
+		            <p><a href="./portfolio_single_page.html">hendrerit cursus</a></p>
+		            <div class="link_btn">
+		                <a id="example6" href="./images/portfolio_2col_img_2.png" class="zoom"></a>
+		                <a href="./portfolio_single_page.html" class="link_post"></a>
+		                <div class="overlay"></div>
+		            </div>
+		        </div>
+		    </li>
+		    <li>
+		        <div class="portfolio_content">
+		            <img src="./images/portfolio_3col_img_3.png" alt="img" />
+		            <h4>Media Identity</h4>
+		            <p><a href="./portfolio_single_page.html">Tristique</a></p>
+		            <div class="link_btn">
+		                <a id="example6" href="./images/portfolio_2col_img_3.png" class="zoom"></a>
+		                <a href="./portfolio_single_page.html" class="link_post"></a>
+		                <div class="overlay"></div>
+		            </div>
+		        </div>
+		    </li>
+		    </#if>	
+		    <!--	
+		    
+			-->
+			
 		    </ul>
 
 		</div>
