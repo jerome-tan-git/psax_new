@@ -4,7 +4,7 @@ transitional.dtd">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-		<title>jQa</title>
+		<title>上海市浦东新区食品生产安全管理协会</title>
 		<link rel="stylesheet" type="text/css" href="./css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="./css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="./css/flexslider.css" />
@@ -304,7 +304,7 @@ transitional.dtd">
 						</div></a>						
 						<div class="step_line">&nbsp;</div>
 						
-						
+						<#if (processstep.processid>1)>
 						<#if (processstep.id==6)>
 						<a href="./process.action?processid=${processstep.processid}&stepid=6">
 						<div  class="step_menu">
@@ -316,6 +316,78 @@ transitional.dtd">
 						</#if>	
 						</div></a>						
 						<div class="step_line_blank">&nbsp;</div>
+						</#if>
+						
+						<#if (processstep.processid==1)>
+						
+							<#if (processstep.id==6)>
+							<a href="./process.action?processid=${processstep.processid}&stepid=6">
+							<div  class="step_menu">
+								<div class="now_step">6.第六步</div>
+							<#else>
+								<#if (processstep.id>6)>			
+								<a href="./process.action?processid=${processstep.processid}&stepid=6">
+								<div  class="step_menu_done">
+									<div class="step_text">6.第六步</div>
+								<#else>						
+								<a href="./process.action?processid=${processstep.processid}&stepid=6">
+								<div  class="step_menu_todo">
+									<div class="step_text">6.第六步</div>
+								</#if>
+							</#if>	
+							</div></a>						
+							<div class="step_line">&nbsp;</div>
+							
+							<#if (processstep.id==7)>
+							<a href="./process.action?processid=${processstep.processid}&stepid=7">
+							<div  class="step_menu">
+								<div class="now_step">7.第七步</div>
+							<#else>
+								<#if (processstep.id>7)>			
+								<a href="./process.action?processid=${processstep.processid}&stepid=7">
+								<div  class="step_menu_done">
+									<div class="step_text">7.第七步</div>
+								<#else>						
+								<a href="./process.action?processid=${processstep.processid}&stepid=7">
+								<div  class="step_menu_todo">
+									<div class="step_text">7.第七步</div>
+								</#if>
+							</#if>	
+							</div></a>						
+							<div class="step_line">&nbsp;</div>
+							
+							<#if (processstep.id==8)>
+							<a href="./process.action?processid=${processstep.processid}&stepid=8">
+							<div  class="step_menu">
+								<div class="now_step">8.第八步</div>
+							<#else>
+								<#if (processstep.id>8)>			
+								<a href="./process.action?processid=${processstep.processid}&stepid=8">
+								<div  class="step_menu_done">
+									<div class="step_text">8.第八步</div>
+								<#else>						
+								<a href="./process.action?processid=${processstep.processid}&stepid=8">
+								<div  class="step_menu_todo">
+									<div class="step_text">8.第八步</div>
+								</#if>
+							</#if>	
+							</div></a>						
+							<div class="step_line">&nbsp;</div>
+							
+							<#if (processstep.id==9)>
+							<a href="./process.action?processid=${processstep.processid}&stepid=9">
+							<div  class="step_menu">
+								<div class="now_step">9.第九步</div>
+							<#else>							
+							<a href="./process.action?processid=${processstep.processid}&stepid=9">
+							<div  class="step_menu_todo">
+								<div class="step_text">9.第九步</div>
+							</#if>	
+							</div></a>						
+							<div class="step_line_blank">&nbsp;</div>
+							
+						
+						</#if>				
 						
 					</#if>		
 					</div>
@@ -333,13 +405,24 @@ transitional.dtd">
 						<#if processstep?exists>
 						<div style="width: 80%">
 						<div style="width: 280px; float:right; right:100px">
-							<#if (processstep.id<6)>
-							<#assign nextpid=(processstep.id+1) >
-								<a href="./process.action?processid=${processstep.processid}&stepid=${nextpid}">
-								<div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;float:right">
-								下一步
-								</div>
-							</a>						
+							<#if (processstep.processid>1)>
+								<#if (processstep.id<6)>
+								<#assign nextpid=(processstep.id+1) >
+									<a href="./process.action?processid=${processstep.processid}&stepid=${nextpid}">
+									<div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;float:right">
+									下一步
+									</div>
+								</a>						
+								</#if>
+							<#else>
+								<#if (processstep.id<9)>
+								<#assign nextpid=(processstep.id+1) >
+									<a href="./process.action?processid=${processstep.processid}&stepid=${nextpid}">
+									<div class="next_submit" style="background-color: rgb(245, 250, 255);margin-top: 50px;float:right">
+									下一步
+									</div>
+								</a>						
+								</#if>								
 							</#if>
 							<#if formSubmitLink?exists>
 								<a href=${formSubmitLink}>
