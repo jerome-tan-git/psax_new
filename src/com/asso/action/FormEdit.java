@@ -315,7 +315,9 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 		return SUCCESS;
 	}
 	
-	
+	public String listDocs(){
+		return "listMeat";
+	}
 	public String updateDoc(){
 		
 		User u = new User(); 
