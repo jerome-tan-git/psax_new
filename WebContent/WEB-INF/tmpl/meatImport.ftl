@@ -258,7 +258,7 @@ transitional.dtd">
 				    <td colspan="3" bgcolor="#FFFFFF" width="50px" >原料肉品种</td>
 				    <td colspan="5" bgcolor="#FFFFFF">			
 				    	<div class="display" form_data="mi_meatTypeName" ></div>
-						<input form_data="mi_meatTypeName" name="mi_meatTypeName" type="text"></input>
+						<input class="editor long" form_data="mi_meatTypeName" name="mi_meatTypeName" type="text"></input>
 				    </td>
 				  </tr>
 				  
@@ -287,8 +287,7 @@ transitional.dtd">
 					    <p>厂家定点屠宰证代号：<input class="editor long" type="text" form_data="mi_producerSlaughterNum" name="mi_producerSlaughterNum"></input></p>
 					    <p>厂家动物防疫条件合格证代码编号：<input class="editor long" type="text" form_data="mi_producerDiseasePrevNum" name="mi_producerDiseasePrevNum"></input></p>
 					    <p>厂家动物检疫合格证明（产品A或产品B）：<input class="editor long" type="text" form_data="mi_producerQuarantineNum" name="mi_producerQuarantineNum"></input></p>
-					    <p>流通许可证编号：<input class="editor long" type="text" form_data="mi_circulateNum" name="mi_circulateNum"></input></p>
-						<input class="editor long" form_data="cbi_corpCode" name="cbi_corpCode" type="text"></input>				    
+					    <p>流通许可证编号：<input class="editor long" type="text" form_data="mi_circulateNum" name="mi_circulateNum"></input></p>										    
 				    </td>
 				  </tr>
 				  
@@ -302,6 +301,7 @@ transitional.dtd">
 				  </tr>
 				
 				</table>
+				<!--
 				<div style="width: 300px;float: left;margin-top:5px;">填表日期：
 					<div class="display" form_data="mi_formMadeDate" ></div>
 					<input class="editor" form_data="mi_formMadeDate" name="mi_formMadeDate" type="text" ></input>
@@ -311,11 +311,13 @@ transitional.dtd">
 					<div class="display" form_data="mi_formMaker" ></div>
 					<input class="editor" form_data="mi_formMaker" name="mi_formMaker" type="text"></input>
 				</div>
+				-->
 					<div style="float:right">
 					<input type="hidden" value="${docid}" name="docid" />
+					<input type="hidden" value="${formid}" name="formid" />
 					
- 					<input type="submit" value="保存" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
- 					<input type="submit" value="查看" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
+ 					<input type="submit" value="保存" name="button" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
+ 					<input type="submit" value="查看" name="button" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
  					</div>
 				</form>
 				

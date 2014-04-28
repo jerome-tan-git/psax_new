@@ -41,6 +41,7 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	private FormManager fm;	
 	private DocManager dm;	
 	
+	private String button;
 	private String jsonText3;
 	private Form f;
 	private List<Doc> doclist;
@@ -113,6 +114,13 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	}
 
 
+	public String getButton() {
+		return button;
+	}
+	public void setButton(String button) {
+		this.button = button;
+	}
+	
 	public Form getF() {
 		return f;
 	}
@@ -330,7 +338,7 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 		int fvindex = 0;
 		
 		String smode = request.getParameter("mode");
-		if(smode!=null && smode.length()>0 && smode.equals("edit")){			
+		if(smode!=null && smode.length()>0 && smode.contains("edit")){			
 				try {
 					this.doc = dm.loadLastDocWithFieldValueListByUser(u.getId());
 				} catch (ClassNotFoundException e) {
@@ -339,18 +347,30 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 					e.printStackTrace();
 				}
 				docid = this.doc.getDocid();
-				System.out.println("docid--->"+docid);
+				System.out.println("docid(1)--->"+docid);
+				System.out.println("formid(1)--->"+this.doc.getFormid());
 						
 		}else{
+			System.out.println("docid_1===="+this.request.getParameter("docid"));
+			System.out.println("formid_2===="+this.request.getParameter("formid"));
+			String fid = this.request.getParameter("formid");
+			System.out.println("formid_3===="+fid);
+			
 			if(this.request.getParameter("docid")!=null && this.request.getParameter("docid").length()>0){
 				docid = Integer.parseInt(this.request.getParameter("docid"));
-				System.out.println("docid--->"+this.request.getParameter("docid"));			
+				System.out.println("docid(2)--->"+this.request.getParameter("docid"));
+				this.doc.setDocid(docid);				
 			}
-			
+			if(fid!=null && fid.length()>0){
+				this.doc.setFormid(Integer.parseInt(fid));
+			}
+			System.out.println("doc.formid---->"+this.doc.getFormid());
 		}
 		
+		System.out.println("GOT finfo()~~~~~");	
+		System.out.println("If get button 'save/list'~~----"+this.request.getParameter("button"));	
 		
-		System.out.println("GOT finfo----");	
+		System.out.println("GOT finfo()~~----");	
 		Map<String, List<String>> datamap = new HashMap<String, List<String>>();
 		Map map =  this.request.getParameterMap();
 		Set<String> reqkeys = (Set<String>) map.keySet();

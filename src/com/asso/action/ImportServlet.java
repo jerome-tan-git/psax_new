@@ -210,6 +210,7 @@ public class ImportServlet  extends HttpServlet{
 	    
 	    this.jsonText3=JSON.toJSONString(jmap, true); 
 		System.out.println(this.jsonText3);
+		System.out.println("doc.getFormid()="+this.doc.getFormid());
 		System.out.println("------------------------assembleNewDocJsonText over!--------------------------------------");
 	}
 	
@@ -442,6 +443,7 @@ public class ImportServlet  extends HttpServlet{
 	        Map root = new HashMap();	        
 	        root.put("jsonText3", this.jsonText3); 
 	        root.put("docid", this.doc.getDocid()); 
+	        root.put("formid", this.doc.getFormid()); 
 	        root.put("Request", request);  
 	        root.put("Session", request.getSession());  
 	      

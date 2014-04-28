@@ -189,6 +189,7 @@ public class DocManagerImpl implements DocManager {
 		if(doclist.size()>0){
 			rzdoc = doclist.get(doclist.size()-1);
 			System.out.println("DAO-----loadLastDocWithFieldValueListByUser------rzdoc.getDocid()="+rzdoc.getDocid());
+			System.out.println("DAO-----loadLastDocWithFieldValueListByUser------rzdoc.getFormid()="+rzdoc.getFormid());
 			List<FieldValue> fvl = docDao.loadFieldValueListByDocId(rzdoc.getDocid());
 			System.out.println("DAO-----loadLastDocWithFieldValueListByUser------fvl.size()="+fvl.size());
 			rzdoc.setFvlist(fvl);
