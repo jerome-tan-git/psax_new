@@ -46,6 +46,7 @@ public class DocManagerImpl implements DocManager {
 	public void updateDoc(Doc _doc) throws ClassNotFoundException, SQLException {		
 		docDao.updateDoc(_doc);		
 	}
+	
 	@Override
 	public void addFieldValue(List<FieldValue> _fvl){//withDocID
 		for(FieldValue fv : _fvl)
@@ -203,6 +204,7 @@ public class DocManagerImpl implements DocManager {
 		doclist = docDao.loadDocsByUser(_userid);					
 		return doclist;		
 	}
+	
 
 	@Override
 	public List<Doc> loadDocs(int _formid) throws ClassNotFoundException,
@@ -225,10 +227,12 @@ public class DocManagerImpl implements DocManager {
 	}
 	
 	@Override
-	public List<Doc> loadDocByFormidUserid(int _docid, int _formid) throws ClassNotFoundException,
+	public List<Doc> loadDocByFormidUserid(int _formid, int _userid) throws ClassNotFoundException,
 			SQLException {
-		List<Doc> rlist = null;
-		return rlist;
+		
+		List<Doc> doclist = new ArrayList<Doc>();
+		doclist = docDao.loadDocsByUserForm(_userid, _formid);					
+		return doclist;		
 	}
 	
 	@Override

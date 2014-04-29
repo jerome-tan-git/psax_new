@@ -166,10 +166,7 @@ transitional.dtd">
 				}
 			}
 		</script>
-		
-		<script>
-			var form_data= eval(${jsonText3});			
-		</script>
+	
 		<style>
 			table{border-collapse:collapse;border-spacing:0;border-left:1px solid #888;border-top:1px solid #888;background:#fff;}
 			th,td{border-right:1px solid #888;border-bottom:1px solid #888;padding:5px;}
@@ -232,87 +229,91 @@ transitional.dtd">
 
 				<h2 align="center">上海市浦东新区食品生产安全管理协会</h2>
 				<h2 align="center">肉制品原料肉进货表汇总</h2>
+				<h2 align="center">${docslist?size}</h2>
+				<h2 align="center">${fieldslist?size}</h2>
 				
 				<p class="STYLE1">&nbsp;&nbsp;&nbsp;&nbsp;</p>
 				<!--<p class="STYLE1">填写请参见背面样张，填写完整后请于20130130	前寄往背面地址表或电子版邮箱至pdspsax@163.com(未来电可索要电子版)</p>-->
 				
 				<table width="1033" border="0" cellpadding="0" cellspacing="1" bgcolor="#666666">
 				  <tr>
-				    <td colspan="3" bgcolor="#FFFFFF"><p>进货日期<br /></p></td>
-				    <td colspan="5" bgcolor="#FFFFFF">
-				    	<div class="display" form_data="mi_importDate" ></div>			    
-					    <input class="editor long" form_data="mi_importDate" name="mi_importDate" type="text"></input>
-				    </td>
+				    <td colspan="2" bgcolor="#FFFFFF"><p>进货日期<br /></p></td>
+				    <td colspan="2" bgcolor="#FFFFFF"><p>原料肉名称<br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p>原料肉品种<br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p>产地<br /></p></td>
+				    <td colspan="3" bgcolor="#FFFFFF"><p>进货情况<br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p>进货量<br /></p></td>			    
 				    
 				  </tr>
+				 
 				  
-				  <tr>
-				  	<td colspan="3" bgcolor="#FFFFFF">原料肉名称</td>
-				    <td colspan="5" bgcolor="#FFFFFF">
-					    <div class="display" form_data="mi_meatName" ></div>			    
-						<input class="editor short" form_data="mi_meatName" name="mi_meatName" type="text"></input>
-				    </td>
-				  </tr>
-				  
-				  <tr>				  
-				    <td colspan="3" bgcolor="#FFFFFF" width="50px" >原料肉品种</td>
-				    <td colspan="5" bgcolor="#FFFFFF">			
-				    	<div class="display" form_data="mi_meatTypeName" ></div>
-						<input form_data="mi_meatTypeName" name="mi_meatTypeName" type="text"></input>
-				    </td>
-				  </tr>
-				  
-				  <tr>
-				    <td colspan="3" bgcolor="#FFFFFF"><p>产地</p></td>
-				    <td colspan="5" bgcolor="#FFFFFF">
-					    <div class="display" form_data="mi_producerLocate" ></div>			    
-						<input class="editor long" form_data="mi_producerLocate" name="mi_producerLocate" type="text"></input>
-				    </td>				    
-				  </tr>
-				  
-				  <tr>
-				  	<td colspan="3" bgcolor="#FFFFFF">进货情况</td>
-				    <td colspan="5" bgcolor="#FFFFFF">
-					    <div class="display" form_data="mi_srcTypeName" ></div>
-					    <p>	
-					    <select>
-					    	<option form_data="mi_srcTypeName" name="mi_srcTypeName">直接进口</option>
-					    	<option form_data="mi_srcTypeName" name="mi_srcTypeName">贸易商进口</option>
-					    	<option form_data="mi_srcTypeName" name="mi_srcTypeName">国内厂家进货</option>
-					    	<option form_data="mi_srcTypeName" name="mi_srcTypeName">国内中间商进货</option>
-					    </select>
-					    </p>
-					    <p>进口肉类卫生证书编号：</p>
-					    <p>厂家营业执照注册号：</p>
-					    <p>厂家定点屠宰证代号：</p>
-					    <p>厂家动物防疫条件合格证代码编号：</p>
-					    <p>厂家动物检疫合格证明（产品A或产品B）：</p>
-					    <p>流通许可证编号：</p>										    
-				    </td>
-				  </tr>
-				  
-				  <tr>
-				    <td colspan="3" bgcolor="#FFFFFF">进货数量kg</td>
-				    <td colspan="5" bgcolor="#FFFFFF">
-				        <div class="display" form_data="mi_corpContactAddress" ></div>			    
-						<input class="editor long" form_data="mi_importCount" name="mi_importCount" type="text"></input>
-				    </td>
-				    
-				  </tr>
+				
+				
+				 
+				<#if docslist?exists>
+				  	<#if fieldslist?exists>
+				  		<#list docslist as doc>
+				  			<#assign fieldvalues=doc.fvlist>
+						  <tr>
+						  	<td colspan="2" bgcolor="#FFFFFF">
+							  <#list fieldvalues as f>
+							  		<#if (f.fieldid==941)>
+							  		<p>${f.value}<br /></p>
+							  		</#if>
+							  </#list>
+							  </td>
+							  <td colspan="2" bgcolor="#FFFFFF">
+							  <#list fieldvalues as f>
+							  		<#if (f.fieldid==942)>
+							    	<p>${f.value}<br /></p>
+							    	</#if>
+							  </#list>
+							  </td>
+							  <td colspan="1" bgcolor="#FFFFFF">
+							  <#list fieldvalues as f>
+							  		<#if (f.fieldid==943)>
+							    	<p>${f.value}<br /></p>
+							    	</#if>
+							  </#list>
+							  </td>
+							  <td colspan="1" bgcolor="#FFFFFF">
+							  <#list fieldvalues as f>
+							  		<#if (f.fieldid==951)>
+							    	<p>${f.value}<br /></p>
+							    	</#if>
+							  </#list>
+						  	 </td>
+						  	
+						  	<td colspan="3" bgcolor="#FFFFFF">
+						  	<#list fieldvalues as f>  		
+						  		<#if (f.fieldid==944)>						  		  								    
+								    <p>${f.value}<br /></p>
+								    <p>进口肉类卫生证书编号：</p>
+								    <p>厂家营业执照注册号：</p>
+								    <p>厂家定点屠宰证代号：</p>
+								    <p>厂家动物防疫条件合格证代码编号：</p>
+								    <p>厂家动物检疫合格证明（产品A或产品B）：</p>
+								    <p>流通许可证编号：</p>								  
+						    	</#if>										    	
+						  	</#list>						  	
+						    </td>				
+				    	
+				    		<td colspan="1" bgcolor="#FFFFFF">
+						  	  <#list fieldvalues as f>
+						  		    <#if (f.fieldid==952)>
+						    		<p>${f.value}<br /></p>
+						    		</#if>						    	
+						  	  </#list>
+						  	  </td>
+						  </tr>
+				  		</#list>
+				  	</#if>
+				  </#if>
+				 
 				
 				</table>
-				<div style="width: 300px;float: left;margin-top:5px;">填表日期：
-					<div class="display" form_data="mi_formMadeDate" ></div>
-					<input class="editor" form_data="mi_formMadeDate" name="mi_formMadeDate" type="text" ></input>
-				</div>
-				<div style="width: 300px;float: left;margin-top:5px;">
-				填表人：
-					<div class="display" form_data="mi_formMaker" ></div>
-					<input class="editor" form_data="mi_formMaker" name="mi_formMaker" type="text"></input>
-				</div>
-					<div style="float:right">
-					<input type="hidden" value="${docid}" name="docid" />
-					
+				
+					<div style="float:right">					
  					<input type="submit" value="新增" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" /> 					
  					</div>
 				</form>

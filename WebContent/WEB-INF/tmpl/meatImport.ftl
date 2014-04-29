@@ -275,11 +275,11 @@ transitional.dtd">
 				    <td colspan="5" bgcolor="#FFFFFF">
 					    <div class="display" form_data="mi_srcTypeName" ></div>
 					    <p>	
-					    <select>
-					    	<option form_data="mi_srcTypeName" name="mi_srcTypeName">直接进口</option>
-					    	<option form_data="mi_srcTypeName" name="mi_srcTypeName">贸易商进口</option>
-					    	<option form_data="mi_srcTypeName" name="mi_srcTypeName">国内厂家进货</option>
-					    	<option form_data="mi_srcTypeName" name="mi_srcTypeName">国内中间商进货</option>
+					    <select name="mi_srcTypeName" form_data="mi_srcTypeName">
+					    	<option value="1" selected>直接进口</option>
+					    	<option value="2">贸易商进口</option>
+					    	<option value="3">国内厂家进货</option>
+					    	<option value="4">国内中间商进货</option>
 					    </select>
 					    </p>
 					    <p>进口肉类卫生证书编号：<input class="editor long" type="text" form_data="mi_importHygieneCertNum" name="mi_importHygieneCertNum"></input></p>
@@ -315,9 +315,11 @@ transitional.dtd">
 					<div style="float:right">
 					<input type="hidden" value="${docid}" name="docid" />
 					<input type="hidden" value="${formid}" name="formid" />
+					<input type="hidden" value="${userid}" name="userid" />
 					
- 					<input type="submit" value="保存" name="button" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
- 					<input type="submit" value="查看" name="button" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
+ 					<input type="submit" value="保存" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
+ 					<input type="submit" value="取消" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
+ 					<input type="submit" value="查看" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
  					</div>
 				</form>
 				

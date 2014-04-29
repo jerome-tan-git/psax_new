@@ -417,6 +417,7 @@ public class ImportServlet  extends HttpServlet{
 	    	if(request.getSession().getAttribute("user_")!=null){
 	    		System.out.println("session-----------user="+request.getSession().getAttribute("user_").toString());
 	    		user = (User) request.getSession().getAttribute("user_");
+	    		System.out.println("From session-----------user="+user.toString());
 	    	}
 	
 	    	if(request.getParameter("formid")!=null && Integer.parseInt(request.getParameter("formid"))>0){
@@ -444,6 +445,7 @@ public class ImportServlet  extends HttpServlet{
 	        root.put("jsonText3", this.jsonText3); 
 	        root.put("docid", this.doc.getDocid()); 
 	        root.put("formid", this.doc.getFormid()); 
+	        root.put("userid", user.getId()); 
 	        root.put("Request", request);  
 	        root.put("Session", request.getSession());  
 	      

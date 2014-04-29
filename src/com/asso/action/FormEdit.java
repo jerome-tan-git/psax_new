@@ -41,20 +41,19 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	private FormManager fm;	
 	private DocManager dm;	
 	
-	private String button;
+	
 	private String jsonText3;
-	private Form f;
-	private List<Doc> doclist;
+	private Form f;	
 	private Doc doc;
+	private User user;
 	private Map<String, List<String>> formDataMap;
 	private Map<String, List<String>> formValueMap;
 	private Map<String, List<String>> formDataMapModel;
 	private String[] date1;
+		
 	public String[] getDate1() {
 		return date1;
 	}
-
-
 	public void setDate1(String[] date1) {
 		this.date1 = date1;
 	}
@@ -63,7 +62,11 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	private HttpServletRequest request;	
 	private Map session;
 	private FormInfo finfo;
-
+	
+	public List<Doc> docslist;
+	public List<Fields> fieldslist;
+	
+	
 	public FormEdit(){		
 		fm = (FormManager) SpringFactory.getObject("formManager");
 		dm = (DocManager) SpringFactory.getObject("docManager");
@@ -85,6 +88,19 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 		this.dm = dm;
 	}
 	
+	
+	public List<Doc> getDocslist() {
+		return docslist;
+	}
+	public void setDocslist(List<Doc> docslist) {
+		this.docslist = docslist;
+	}
+	public List<Fields> getFieldslist() {
+		return fieldslist;
+	}
+	public void setFieldslist(List<Fields> fieldslist) {
+		this.fieldslist = fieldslist;
+	}
 	
 	public FormInfo getFinfo() {
 		return finfo;
@@ -114,25 +130,21 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	}
 
 
-	public String getButton() {
-		return button;
-	}
-	public void setButton(String button) {
-		this.button = button;
-	}
 	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public Form getF() {
 		return f;
 	}
 	public void setF(Form f) {
 		this.f = f;
 	}
-	public List<Doc> getDoclist() {
-		return doclist;
-	}
-	public void setDoclist(List<Doc> doclist) {
-		this.doclist = doclist;
-	}
+	
 	public String getJsonText3() {
 		return jsonText3;
 	}
@@ -180,6 +192,12 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 		int formid = 1;
 		if(this.request.getParameter("formid")!=null)
 			formid = Integer.parseInt(this.request.getParameter("formid"));
+		else{
+			if(this.doc!=null && this.doc.getFormid()>0){
+				formid = this.doc.getFormid();
+			}
+		}
+		System.out.println("~~~----------formid="+formid);
 		this.setDocForm(formid);
 		
 		HashMap<String,List<Fields>> group = new HashMap<String,List<Fields>>();//KEY-groupname, VALUE-fieldname 
@@ -323,15 +341,72 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 		return SUCCESS;
 	}
 	
-	public String listDocs(){
-		return "listMeat";
+	private void listDocsWithFF(){
+		this.docslist = new ArrayList<Doc>();
+		this.fieldslist = new ArrayList<Fields>();
+		this.f = new Form();
+		
+		try {
+			this.docslist = dm.loadDocByFormidUserid(this.doc.getFormid(), this.user.getId());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			this.f = fm.loadFormWithFieldsById(this.doc.getFormid());
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		this.fieldslist = f.getFields();
+		
+		List<Doc> docslistWff = new ArrayList<Doc>();
+		for(Doc d:this.docslist){
+			if(d.getStep()==1){
+				try {
+					docslistWff.add(dm.loadDocWithFieldValueList(d.getDocid()));
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+	
+		System.out.println("~~~~~~~~~~~~~~~~FIELDs~~~~~~~~~~~~~~~~~~");
+		for(Fields field: this.fieldslist)
+			System.out.println(field.toString());
+		System.out.println("-----------------DOCs---------------------");
+		for(Doc d:this.docslist)
+			System.out.println(d.toString());
+		System.out.println("-----------------DOCsFF---------------------");
+		for(Doc d:docslistWff){
+			System.out.println(d.toString());
+			System.out.println("^^^"+d.getFvlist().toString());
+		}
+		this.docslist = docslistWff;
 	}
+	
+	
 	public String updateDoc(){
 		
 		User u = new User(); 
 		u = (User) this.request.getSession().getAttribute("user_");
-		if(u!=null){
-			System.out.println("userID--------------------"+u.getId());
+		if(u!=null){			
+			this.user = new User();
+			this.user = u;
+			System.out.println("userID--------------------"+this.user.getId());
+		}else{
+			String uid = request.getParameter("userid"); 
+			if(uid!=null && uid.length()>0){
+				u.setId(Integer.parseInt(uid));
+				System.out.println("userID(from hidden input)--------------------"+u.getId());
+			}
 		}
 		
 		int docid = 0;
@@ -351,24 +426,25 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 				System.out.println("formid(1)--->"+this.doc.getFormid());
 						
 		}else{
-			System.out.println("docid_1===="+this.request.getParameter("docid"));
-			System.out.println("formid_2===="+this.request.getParameter("formid"));
-			String fid = this.request.getParameter("formid");
-			System.out.println("formid_3===="+fid);
+			
+			String fid = this.request.getParameter("formid");			
+			this.doc = new Doc();
+			
+			if(fid!=null && fid.length()>0){
+				System.out.println(Integer.parseInt(fid));				
+				this.doc.setFormid(Integer.parseInt(fid));
+			}
 			
 			if(this.request.getParameter("docid")!=null && this.request.getParameter("docid").length()>0){
 				docid = Integer.parseInt(this.request.getParameter("docid"));
 				System.out.println("docid(2)--->"+this.request.getParameter("docid"));
 				this.doc.setDocid(docid);				
 			}
-			if(fid!=null && fid.length()>0){
-				this.doc.setFormid(Integer.parseInt(fid));
-			}
-			System.out.println("doc.formid---->"+this.doc.getFormid());
+			
+			System.out.println("this.doc.formid---->"+this.doc.getFormid());
+			System.out.println("this.doc.docid---->"+this.doc.getDocid());
 		}
 		
-		System.out.println("GOT finfo()~~~~~");	
-		System.out.println("If get button 'save/list'~~----"+this.request.getParameter("button"));	
 		
 		System.out.println("GOT finfo()~~----");	
 		Map<String, List<String>> datamap = new HashMap<String, List<String>>();
@@ -384,7 +460,7 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 			System.out.println("@@!!!!!!@@------request.getParameterValues.length="+x.length);
 			if(x!=null && x.length>0)
 			{
-				fvindex = x.length;//fvindex = 1 ΩˆÃ·Ωª“ªÃı ˝æ›, fvindex > 1 Ã·Ωª∂‡Ãı ˝æ›£¨–Ë“™«Âø’æ… ˝æ›£¨÷ÿ–¬∏¯index
+				fvindex = x.length;//fvindex = 1 ‰ªÖÊèê‰∫§‰∏ÄÊù°Êï∞ÊçÆ, fvindex > 1 Êèê‰∫§Â§öÊù°Êï∞ÊçÆÔºåÈúÄË¶ÅÊ∏ÖÁ©∫ÊóßÊï∞ÊçÆÔºåÈáçÊñ∞Áªôindex
 				List<String> l = new ArrayList<String>();
 //				System.out.println("VALUE---"+x[0]);	
 				for(String cc:x)
@@ -397,7 +473,7 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 		if(fvindex>0){			
 			System.out.println("fvindex--->"+fvindex);
 			this.dm.deleteFieldValueListByDocId(docid);
-			if(fvindex==1){//√ª”–group
+			if(fvindex==1){//Ê≤°Êúâgroup
 				for(String reqo :reqkeys){
 					if(reqo.equals("docid"))
 						continue;
@@ -423,7 +499,32 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 				
 		}
 		
-	
+		System.out.println("GOT finfo()~~~this.doc~~~"+this.doc.toString());
+		try {
+			this.doc = dm.loadDoc(docid);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		String button = this.request.getParameter("snext");
+		System.out.println("If get button 'save/list'~~----"+this.request.getParameter("snext"));		
+		if(button.contains("‰øùÂ≠ò")){
+			this.doc.setStep(1);
+			try {
+				dm.updateDoc(this.doc);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			System.out.println("GOT finfo()~~~this.doc(updated)~~~"+this.doc.toString());
+			this.listDocsWithFF();
+			System.out.println("##########@@@@@@@@@@@##########@@@@@@@@@@@@###############");
+			return "list";
+		}
+		
 		return SUCCESS;
 	}
 
