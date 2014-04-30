@@ -521,8 +521,17 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 			}
 			System.out.println("GOT finfo()~~~this.doc(updated)~~~"+this.doc.toString());
 			this.listDocsWithFF();
-			System.out.println("##########@@@@@@@@@@@##########@@@@@@@@@@@@###############");
+			System.out.println("##########@@@@@@@@@@@#####保存#####@@@@@@@@@@@@###############");
 			return "list";
+		}else{
+			if(button.contains("查看")){
+				System.out.println("##########@@@@@@@@@@@#####查看#####@@@@@@@@@@@@###############");
+				return "list";				
+			}
+			if(button.contains("取消")){
+				System.out.println("##########@@@@@@@@@@@#####查看#####@@@@@@@@@@@@###############");
+				return "cancel";				
+			}
 		}
 		
 		return SUCCESS;

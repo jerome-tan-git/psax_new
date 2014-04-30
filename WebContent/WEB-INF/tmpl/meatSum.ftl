@@ -288,12 +288,18 @@ transitional.dtd">
 						  	<#list fieldvalues as f>  		
 						  		<#if (f.fieldid==944)>						  		  								    
 								    <p>${f.value}<br /></p>
+								    <#if (f.value?number<3)>
 								    <p>进口肉类卫生证书编号：</p>
+								    </#if>
+								    <#if (f.value?number>2)>
 								    <p>厂家营业执照注册号：</p>
 								    <p>厂家定点屠宰证代号：</p>
 								    <p>厂家动物防疫条件合格证代码编号：</p>
 								    <p>厂家动物检疫合格证明（产品A或产品B）：</p>
-								    <p>流通许可证编号：</p>								  
+								    </#if>
+								    <#if (f.value?number==4)>								    
+								    <p>流通许可证编号：</p>
+								    </#if>								  
 						    	</#if>										    	
 						  	</#list>						  	
 						    </td>				
