@@ -392,8 +392,97 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 		this.docslist = docslistWff;
 	}
 	
+public String updateDoc(){
+		
+		User u = new User(); 
+		u = (User) this.request.getSession().getAttribute("user_");
+		if(u!=null){
+			System.out.println("userID--------------------"+u.getId());
+		}
+		
+		int docid = 0;
+		int fvindex = 0;
+		
+		String smode = request.getParameter("mode");
+		if(smode!=null && smode.length()>0 && smode.equals("edit")){			
+				try {
+					this.doc = dm.loadLastDocWithFieldValueListByUser(u.getId());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				docid = this.doc.getDocid();
+				System.out.println("docid--->"+docid);
+						
+		}else{
+			if(this.request.getParameter("docid")!=null && this.request.getParameter("docid").length()>0){
+				docid = Integer.parseInt(this.request.getParameter("docid"));
+				System.out.println("docid--->"+this.request.getParameter("docid"));			
+			}
+			
+		}
+		
+		
+		System.out.println("GOT finfo----");	
+		Map<String, List<String>> datamap = new HashMap<String, List<String>>();
+		Map map =  this.request.getParameterMap();
+		Set<String> reqkeys = (Set<String>) map.keySet();
+//		System.out.println("length: " + request.getParameterValues("date1").length);
+//		System.out.println("length: " + this.date1.length);
+		for(String reqo :reqkeys){
+			if(reqo.equals("docid"))
+				continue;
+			System.out.println("KEY---"+reqo.toString());
+			String[] x = this.request.getParameterValues(reqo);
+			System.out.println("@@!!!!!!@@------request.getParameterValues.length="+x.length);
+			if(x!=null && x.length>0)
+			{
+				fvindex = x.length;//fvindex = 1 ���ύһ�����, fvindex > 1 �ύ������ݣ���Ҫ��վ���ݣ����¸�index
+				List<String> l = new ArrayList<String>();
+//				System.out.println("VALUE---"+x[0]);	
+				for(String cc:x)
+					l.add(cc);
+				datamap.put(reqo, l);
+			}			
+			
+		}
+		
+		if(fvindex>0){			
+			System.out.println("fvindex--->"+fvindex);
+			this.dm.deleteFieldValueListByDocId(docid);
+			if(fvindex==1){//û��group
+				for(String reqo :reqkeys){
+					if(reqo.equals("docid"))
+						continue;
+					System.out.println("To UPDATE---fieldname="+reqo+", fieldvalue="+
+							datamap.get(reqo).get(0)+", docid="+docid+", fvindex="+fvindex);
+					this.dm.updateSingleFieldValueByFieldName(reqo,datamap.get(reqo).get(0), docid, -1);
+				}
+			}else{	//update multi fieldvalue
+				for(int i=0; i<fvindex; i++){
+					for(String reqo :reqkeys){
+						if(reqo.equals("docid"))
+							continue;
+						System.out.println("("+i+") "+reqo+"---"+datamap.get(reqo).get(i));
+						String fv = datamap.get(reqo).get(i);
+						if( fv!=null && fv.length()>0 )
+							fv = fv.trim();
+						else
+							fv = "";
+						this.dm.updateSingleFieldValueByFieldName(reqo,fv,docid,i);						
+					}
+				}
+			}
+				
+		}
+		
 	
-	public String updateDoc(){
+		return SUCCESS;
+	}
+
+
+	public String updateMeatDoc(){
 		
 		User u = new User(); 
 		u = (User) this.request.getSession().getAttribute("user_");
@@ -509,31 +598,34 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 		}
 		
 		String button = this.request.getParameter("snext");
-		System.out.println("If get button 'save/list'~~----"+this.request.getParameter("snext"));		
-		if(button.contains("保存")){
-			this.doc.setStep(1);
-			try {
-				dm.updateDoc(this.doc);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			System.out.println("GOT finfo()~~~this.doc(updated)~~~"+this.doc.toString());
-			this.listDocsWithFF();
-			System.out.println("##########@@@@@@@@@@@#####保存#####@@@@@@@@@@@@###############");
-			return "list";
-		}else{
-			if(button.contains("查看")){
-				System.out.println("##########@@@@@@@@@@@#####查看#####@@@@@@@@@@@@###############");
-				return "list";				
-			}
-			if(button.contains("取消")){
-				System.out.println("##########@@@@@@@@@@@#####查看#####@@@@@@@@@@@@###############");
-				return "cancel";				
+		System.out.println("If get button 'save/list'~~----");
+		if(button!=null){
+			if(button.contains("保存")){
+				this.doc.setStep(1);
+				try {
+					dm.updateDoc(this.doc);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				System.out.println("GOT finfo()~~~this.doc(updated)~~~"+this.doc.toString());
+				this.listDocsWithFF();
+				System.out.println("##########@@@@@@@@@@@#####保存#####@@@@@@@@@@@@###############");
+				return "list";
+			}else{
+				if(button.contains("查看")){
+					this.listDocsWithFF();
+					System.out.println("##########@@@@@@@@@@@#####查看#####@@@@@@@@@@@@###############");
+					return "list";				
+				}
+				if(button.contains("取消")){
+					System.out.println("##########@@@@@@@@@@@#####查看#####@@@@@@@@@@@@###############");
+					return "cancel";				
+				}
 			}
 		}
-		
+
 		return SUCCESS;
 	}
 

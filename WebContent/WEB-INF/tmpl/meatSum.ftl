@@ -225,12 +225,10 @@ transitional.dtd">
 			<!-- Teaser Start -->
 			<div class="section" id="content" class="tag_line" style="padding-top: 30px" bordercolor="#666666">
 			
-				<form action="saveDoc.action" method="post" >
+				
 
 				<h2 align="center">上海市浦东新区食品生产安全管理协会</h2>
 				<h2 align="center">肉制品原料肉进货表汇总</h2>
-				<h2 align="center">${docslist?size}</h2>
-				<h2 align="center">${fieldslist?size}</h2>
 				
 				<p class="STYLE1">&nbsp;&nbsp;&nbsp;&nbsp;</p>
 				<!--<p class="STYLE1">填写请参见背面样张，填写完整后请于20130130	前寄往背面地址表或电子版邮箱至pdspsax@163.com(未来电可索要电子版)</p>-->
@@ -286,19 +284,68 @@ transitional.dtd">
 						  	
 						  	<td colspan="3" bgcolor="#FFFFFF">
 						  	<#list fieldvalues as f>  		
-						  		<#if (f.fieldid==944)>						  		  								    
-								    <p>${f.value}<br /></p>
-								    <#if (f.value?number<3)>
-								    <p>进口肉类卫生证书编号：</p>
+						  		<#if (f.fieldid==944)>
+						  			<#if (f.value?number==1)>	
+								    <p>直接进口<br /></p>
 								    </#if>
+								    <#if (f.value?number==2)>
+								    <p>贸易商进口<br /></p>
+								    </#if>
+								    <#if (f.value?number==3)>
+								    <p>国内厂家进货<br /></p>
+								    </#if>
+								    <#if (f.value?number==4)>
+								    <p>国内中间商进货<br /></p>
+								    </#if>		  
+								    
+								    <#if (f.value?number<3)>
+								    <p>进口肉类卫生证书编号：
+								    <#list fieldvalues as fv>
+								    	<#if (fv.fieldid==945)>
+								    		${fv.value}
+								    	</#if>
+								 	</#list>  
+								    </p>
+								    </#if>
+								    
 								    <#if (f.value?number>2)>
-								    <p>厂家营业执照注册号：</p>
-								    <p>厂家定点屠宰证代号：</p>
-								    <p>厂家动物防疫条件合格证代码编号：</p>
-								    <p>厂家动物检疫合格证明（产品A或产品B）：</p>
+								    <p>厂家营业执照注册号：
+								    	<#list fieldvalues as fv>
+								    		<#if (fv.fieldid==946)>
+								    		${fv.value}
+								    		</#if>
+								 		</#list>  
+								    </p>
+								    <p>厂家定点屠宰证代号：
+								    	<#list fieldvalues as fv>
+								    		<#if (fv.fieldid==947)>
+								    		${fv.value}
+								    		</#if>
+								 		</#list>  
+								    </p>
+								    <p>厂家动物防疫条件合格证代码编号：
+								    	<#list fieldvalues as fv>
+								    		<#if (fv.fieldid==948)>
+								    		${fv.value}
+								    		</#if>
+								 		</#list>  
+								    </p>
+								    <p>厂家动物检疫合格证明（产品A或产品B）：
+								    	<#list fieldvalues as fv>
+								    		<#if (fv.fieldid==949)>
+								    		${fv.value}
+								    		</#if>
+								 		</#list>  
+								    </p>
 								    </#if>
 								    <#if (f.value?number==4)>								    
-								    <p>流通许可证编号：</p>
+								    <p>流通许可证编号：
+								    	<#list fieldvalues as fv>
+								    		<#if (fv.fieldid==950)>
+								    		${fv.value}
+								    		</#if>
+								 		</#list>   	
+								    </p>
 								    </#if>								  
 						    	</#if>										    	
 						  	</#list>						  	
@@ -319,10 +366,11 @@ transitional.dtd">
 				
 				</table>
 				
-					<div style="float:right">					
- 					<input type="submit" value="新增" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" /> 					
- 					</div>
-				</form>
+				<br />
+				<div style="float:right">					
+ 				<a href="./import?formid=15&mode=edit"><h3 align="right">新增</h3></a> 					
+ 				</div>
+				<br />
 				
 				
 			</div>

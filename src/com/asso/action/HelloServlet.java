@@ -203,8 +203,9 @@ public class HelloServlet  extends HttpServlet{
 	    jmap.put("title",f.getDisplayname());
 	    jmap.put("type","edit");
 	    
+	    System.out.println("this.f.fieldssize="+this.f.getFields().size());
 	    for(Fields fd:this.f.getFields()){		    	
-//	    	System.out.println("key---"+fd.getFieldname()+",value---");
+	    	System.out.println("key---"+fd.getFieldname()+",value---");
 	    	jmap.put(fd.getFieldname(),"");
 		}
 	    

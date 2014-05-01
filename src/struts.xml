@@ -275,11 +275,12 @@
 		
 		<action name="saveDoc" class="com.asso.action.FormEdit" method="updateDoc">  
 			<result name="success" type="freemarker">/WEB-INF/ftl/membercenter.ftl</result>
-			<result name="list" type="freemarker">/WEB-INF/tmpl/meatSum.ftl</result>				        
 					
 		</action>
-		<action name="listDocs" class="com.asso.action.FormEdit" method="listDocs">
-			<result name="listMeat" type="freemarker">/WEB-INF/ftl/meatSum.ftl</result>
+		<action name="saveMeatDoc" class="com.asso.action.FormEdit" method="updateMeatDoc">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/membercenter.ftl</result>
+			<result name="list" type="freemarker">/WEB-INF/tmpl/meatSum.ftl</result>				        
+					
 		</action>
 		
 		

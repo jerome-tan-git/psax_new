@@ -228,7 +228,7 @@ transitional.dtd">
 			<!-- Teaser Start -->
 			<div class="section" id="content" class="tag_line" style="padding-top: 30px" bordercolor="#666666">
 			
-				<form action="saveDoc.action" method="post" >
+				<form action="saveMeatDoc.action" method="post" >
 
 				<h2 align="center">上海市浦东新区食品生产安全管理协会</h2>
 				<h2 align="center">肉制品原料肉进货表</h2>

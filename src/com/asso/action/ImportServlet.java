@@ -209,6 +209,7 @@ public class ImportServlet  extends HttpServlet{
 		}
 	    
 	    this.jsonText3=JSON.toJSONString(jmap, true); 
+	    System.out.println("---jsonText3---");
 		System.out.println(this.jsonText3);
 		System.out.println("doc.getFormid()="+this.doc.getFormid());
 		System.out.println("------------------------assembleNewDocJsonText over!--------------------------------------");

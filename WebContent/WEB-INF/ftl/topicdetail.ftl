@@ -246,7 +246,7 @@ transitional.dtd">
 						<div class="bbs_thread_avatar">
 							<img src=${usr.portrait?default("./images/a_1.png")} />
 						</div>
-						<div class="bbs_thread_name">${usr.username}</div>
+						<div class="bbs_thread_name">${usr.username?default("???")}</div>
 					</div>
 					<div class="bbs_thread_content">
 						<div>${topic.content}</div>
@@ -266,7 +266,7 @@ transitional.dtd">
 									<div class="bbs_thread_avatar">
 										<img src=${usr.portrait?default("./images/a_1.png")} />
 									</div>
-									<div class="bbs_thread_name">${usr.username}</div>
+									<div class="bbs_thread_name">${usr.username?default("???")}</div>
 								</#if>
 								</div>
 								<div class="bbs_thread_content">
