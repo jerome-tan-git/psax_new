@@ -206,11 +206,11 @@ transitional.dtd">
 			<div class="sub_header  exam_bg">
 
 				<div class="sub_header_title">
-					<h2>企业信息</h2>
+					<h2>食品生产管理</h2>
 					<div class="sub_header_description">
 						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
 						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
-						<span class="page">企业信息</span>
+						<span class="page"><a href="./uploadfoldersmanager.action">食品生产管理</a></span>
 					</div>
 
 				</div>
@@ -234,13 +234,13 @@ transitional.dtd">
 				<!--<p class="STYLE1">填写请参见背面样张，填写完整后请于20130130	前寄往背面地址表或电子版邮箱至pdspsax@163.com(未来电可索要电子版)</p>-->
 				
 				<table width="1033" border="0" cellpadding="0" cellspacing="1" bgcolor="#666666">
-				  <tr>
-				    <td colspan="2" bgcolor="#FFFFFF"><p>进货日期<br /></p></td>
-				    <td colspan="2" bgcolor="#FFFFFF"><p>原料肉名称<br /></p></td>
-				    <td colspan="1" bgcolor="#FFFFFF"><p>原料肉品种<br /></p></td>
-				    <td colspan="1" bgcolor="#FFFFFF"><p>产地<br /></p></td>
-				    <td colspan="3" bgcolor="#FFFFFF"><p>进货情况<br /></p></td>
-				    <td colspan="1" bgcolor="#FFFFFF"><p>进货量<br /></p></td>			    
+				  <tr font-size=15px align="center">
+				    <td colspan="2" bgcolor="#FFFFFF"><p><b>进货日期</b><br /></p></td>
+				    <td colspan="2" bgcolor="#FFFFFF"><p><b>原料肉名称</b><br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p><b>原料肉品种</b><br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p><b>产地</b><br /></p></td>
+				    <td colspan="3" bgcolor="#FFFFFF"><p><b>进货情况</b><br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p><b>进货量</b><br /></p></td>			    
 				    
 				  </tr>
 				 
@@ -365,10 +365,10 @@ transitional.dtd">
 				 
 				
 				</table>
-				
-				<br />
+								
 				<div style="float:right">					
- 				<a href="./import?formid=15&mode=edit"><h3 align="right">新增</h3></a> 					
+ 				<!-- <a href="./import?formid=15&mode=edit"><h3 align="right">新增</h3></a> -->
+ 				<a href="./import?formid=15&mode=edit"><input type="button" value="新增" class="clearinput"  style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" /></a>				
  				</div>
 				<br />
 				

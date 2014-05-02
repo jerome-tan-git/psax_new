@@ -16,16 +16,19 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import util.CONSTANT;
 import util.SpringFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.asso.manager.DocManager;
 import com.asso.manager.FormManager;
+import com.asso.manager.UserManager;
 import com.asso.model.Doc;
 import com.asso.model.FieldValue;
 import com.asso.model.Fields;
 import com.asso.model.Form;
 import com.asso.model.User;
+import com.asso.vo.Form16;
 import com.asso.vo.FormInfo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -40,6 +43,7 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	private static final long serialVersionUID = 1L;
 	private FormManager fm;	
 	private DocManager dm;	
+	private UserManager um;
 	
 	
 	private String jsonText3;
@@ -50,6 +54,8 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	private Map<String, List<String>> formValueMap;
 	private Map<String, List<String>> formDataMapModel;
 	private String[] date1;
+	private List<User> allusers;
+	private int formid;
 		
 	public String[] getDate1() {
 		return date1;
@@ -70,6 +76,7 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	public FormEdit(){		
 		fm = (FormManager) SpringFactory.getObject("formManager");
 		dm = (DocManager) SpringFactory.getObject("docManager");
+		um = (UserManager) SpringFactory.getObject("userManager");
 	}	
 		
 	
@@ -87,7 +94,13 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	public void setDm(DocManager dm) {
 		this.dm = dm;
 	}
-	
+	public UserManager getUm() {
+		return um;
+	}
+	@Resource(name="userManager")
+	public void setUm(UserManager um) {
+		this.um = um;
+	}
 	
 	public List<Doc> getDocslist() {
 		return docslist;
@@ -128,10 +141,21 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	public void setFormValueMap(Map<String, List<String>> formValueMap) {
 		this.formValueMap = formValueMap;
 	}
-
+	public List<User> getAllusers() {
+		return allusers;
+	}
+	public void setAllusers(List<User> allusers) {
+		this.allusers = allusers;
+	}	
 
 	
 	
+	public int getFormid() {
+		return formid;
+	}
+	public void setFormid(int formid) {
+		this.formid = formid;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -551,7 +575,6 @@ public String updateDoc(){
 			{
 				fvindex = x.length;//fvindex = 1 仅提交一条数据, fvindex > 1 提交多条数据，需要清空旧数据，重新给index
 				List<String> l = new ArrayList<String>();
-//				System.out.println("VALUE---"+x[0]);	
 				for(String cc:x)
 					l.add(cc);
 				datamap.put(reqo, l);
@@ -611,16 +634,16 @@ public String updateDoc(){
 				}
 				System.out.println("GOT finfo()~~~this.doc(updated)~~~"+this.doc.toString());
 				this.listDocsWithFF();
-				System.out.println("##########@@@@@@@@@@@#####保存#####@@@@@@@@@@@@###############");
+				System.out.println("##########----保存----########");
 				return "list";
 			}else{
 				if(button.contains("查看")){
 					this.listDocsWithFF();
-					System.out.println("##########@@@@@@@@@@@#####查看#####@@@@@@@@@@@@###############");
+					System.out.println("#########----查看----######");
 					return "list";				
 				}
 				if(button.contains("取消")){
-					System.out.println("##########@@@@@@@@@@@#####查看#####@@@@@@@@@@@@###############");
+					System.out.println("#########----查看----#########");
 					return "cancel";				
 				}
 			}
@@ -629,10 +652,316 @@ public String updateDoc(){
 		return SUCCESS;
 	}
 
+private void assembleNewDocJsonText(int _formid, int _userid){
+		
+		String time = CONSTANT.getNowTime();
+		this.doc = new Doc();
+		doc.setFormid(_formid);
+		doc.setCreatedate(time);
+		doc.setUserid(_userid);
+		try {
+			dm.addDoc(this.doc);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.doc.setDocid(dm.getDocIdByCreateDate(time));
+		
+		try {
+			this.f = fm.loadFormWithFieldsById(_formid);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		Map jmap = new HashMap();  
+		jmap.put("options", "options_");
+	    jmap.put("title",f.getDisplayname());
+	    jmap.put("type","edit");
+	    
+	    if(_formid==16){
+	    	this.listDocsWithFF(_userid);
+	    	List<Form16> docs = new ArrayList<Form16>();
+	    	for(Doc doc:this.docslist){
+	    		Form16 f16 = new Form16();
+	    		List<FieldValue> fvlist =  doc.getFvlist();
+	    		for(FieldValue fv: fvlist){	    			
+	    			if(fv.getFieldid()==961)
+	    				f16.setMs_date(fv.getValue());
+	    			if(fv.getFieldid()==962)
+	    				f16.setMs_productName(fv.getValue());
+	    			if(fv.getFieldid()==963)
+	    				f16.setMs_category(fv.getValue());
+	    			if(fv.getFieldid()==964)
+	    				f16.setMs_productBatchId(fv.getValue());
+	    			if(fv.getFieldid()==965)
+	    				f16.setMs_buyer(fv.getValue());
+	    			if(fv.getFieldid()==966)
+	    				f16.setMs_saleAmount(fv.getValue());
+	    		}
+	    		docs.add(f16);
+	    	}
+	    	System.out.println("..........List<Form16> docs.size="+docs.size());
+//	    	String jsonText = JSON.toJSONString(docs, true); 
+//	    	jmap.put("data_2", jsonText);
+	    	jmap.put("data_2", docs);
+	    	
+	    }else{	    
+		    for(Fields fd:this.f.getFields()){		    	
+	//	    	System.out.println("key---"+fd.getFieldname()+",value---");
+		    	jmap.put(fd.getFieldname(),"");
+			}
+	    }
+	    this.jsonText3=JSON.toJSONString(jmap, true); 
+	    System.out.println("---jsonText3---");
+		System.out.println(this.jsonText3);
+		System.out.println("doc.getFormid()="+this.doc.getFormid());
+		System.out.println("------------------------assembleNewDocJsonText over!--------------------------------------");
+	}
+	
+	public String updateMeatSaleDoc(){
+		
+		User u = new User(); 
+		u = (User) this.request.getSession().getAttribute("user_");
+		if(u!=null){			
+			this.user = new User();
+			this.user = u;
+			System.out.println("userID--------------------"+this.user.getId());
+		}else{
+			String uid = request.getParameter("userid"); 
+			if(uid!=null && uid.length()>0){
+				u.setId(Integer.parseInt(uid));
+				System.out.println("userID(from hidden input)--------------------"+u.getId());
+			}
+		}
+		
+		int docid = 0;
+		int fvindex = 0;
+		
+		String smode = request.getParameter("mode");
+		if(smode!=null && smode.length()>0 && smode.contains("edit")){			
+				try {
+					this.doc = dm.loadLastDocWithFieldValueListByUser(u.getId());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				docid = this.doc.getDocid();
+				System.out.println("docid(1)--->"+docid);
+				System.out.println("formid(1)--->"+this.doc.getFormid());
+						
+		}else{
+			
+			String fid = this.request.getParameter("formid");			
+			this.doc = new Doc();
+			
+			if(fid!=null && fid.length()>0){
+				System.out.println("formid(2)="+Integer.parseInt(fid));				
+				this.doc.setFormid(Integer.parseInt(fid));
+			}
+			
+			if(this.request.getParameter("docid")!=null && this.request.getParameter("docid").length()>0){
+				docid = Integer.parseInt(this.request.getParameter("docid"));
+				System.out.println("docid(2)--->"+this.request.getParameter("docid"));
+				this.doc.setDocid(docid);				
+			}
+			
+			System.out.println("this.doc.formid---->"+this.doc.getFormid());
+			System.out.println("this.doc.docid---->"+this.doc.getDocid());
+		}
+		
+		
+		System.out.println("GOT finfo()~~----");	
+		Map<String, List<String>> datamap = new HashMap<String, List<String>>();
+		Map map =  this.request.getParameterMap();
+		Set<String> reqkeys = (Set<String>) map.keySet();
+//		System.out.println("length: " + request.getParameterValues("date1").length);
+//		System.out.println("length: " + this.date1.length);
+		for(String reqo :reqkeys){
+			if(reqo.equals("docid"))
+				continue;
+			System.out.println("KEY---"+reqo.toString());
+			String[] x = this.request.getParameterValues(reqo);
+			System.out.println("@@!!!!!!@@------request.getParameterValues.length="+x.length);
+			if(x!=null && x.length>0)
+			{
+				fvindex = x.length;//fvindex = 1 仅提交一条数据, fvindex > 1 提交多条数据，需要清空旧数据，重新给index
+				List<String> l = new ArrayList<String>();
+				for(String cc:x)
+					l.add(cc);
+				datamap.put(reqo, l);
+			}			
+			
+		}
+		
+		if(fvindex>0){			
+			System.out.println("fvindex--->"+fvindex);
+			this.dm.deleteFieldValueListByDocId(docid);
+			if(fvindex==1){//没有group
+				for(String reqo :reqkeys){
+					if(reqo.equals("docid"))
+						continue;
+					System.out.println("To UPDATE---fieldname="+reqo+", fieldvalue="+
+							datamap.get(reqo).get(0)+", docid="+docid+", fvindex="+fvindex);
+					this.dm.updateSingleFieldValueByFieldName(reqo,datamap.get(reqo).get(0), docid, -1);
+				}
+			}else{	//update multi fieldvalue
+				for(int i=0; i<fvindex; i++){
+					for(String reqo :reqkeys){
+						if(reqo.equals("docid"))
+							continue;
+						System.out.println("("+i+") "+reqo+"---"+datamap.get(reqo).get(i));
+						String fv = datamap.get(reqo).get(i);
+						if( fv!=null && fv.length()>0 )
+							fv = fv.trim();
+						else
+							fv = "";
+						this.dm.updateSingleFieldValueByFieldName(reqo,fv,docid,i);						
+					}
+				}
+			}
+				
+		}
+		
+		String s_docid = this.request.getParameter("docid");
+		System.out.println("^^^^^^^^$^^^^^^docid="+s_docid);
+//		int docid=0;
+		if(s_docid!=null && s_docid.length()>0)
+			docid = Integer.parseInt(s_docid);
+//		System.out.println("GOT finfo()~~~this.doc~~~"+this.doc.toString());
+		this.doc = new Doc();
+		try {
+			this.doc = dm.loadDoc(docid);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		String button = this.request.getParameter("snext");
+		System.out.println("If get button 'save/list'~~----");
+		if(button!=null){
+			if(button.contains("保存")){
+				this.doc.setStep(1);
+				try {
+					dm.updateDoc(this.doc);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				System.out.println("GOT finfo()~~~this.doc(updated)~~~"+this.doc.toString());
+				this.listDocsWithFF(this.user.getId());
+				System.out.println("##########----保存----########");
+				this.assembleNewDocJsonText(this.doc.getFormid(), this.user.getId());
+				
+				return "list";
+			}else{
+				
+			}
+		}
+
+		return SUCCESS;
+	}
+	
+	private void listFields(int _formid){
+		this.fieldslist = new ArrayList<Fields>();
+		this.f = new Form();
+		this.f.setFormid(_formid);
+		try {
+			this.f = fm.loadFormWithFieldsById(_formid);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		this.fieldslist = f.getFields();
+		System.out.println("^^^^^^^^^fieldslist="+fieldslist.toString());		
+	}
+	private void listDocsByFormidUserid(int _formid, int _userid){
+		this.docslist = new ArrayList<Doc>();
+		try {
+			this.docslist = dm.loadDocByFormidUserid(_formid, _userid);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	private void chosenValidDocsWithFVlist(){
+		List<Doc> docslistWff = new ArrayList<Doc>();
+		for(Doc d:this.docslist){
+			if(d.getStep()==1){
+				try {
+					docslistWff.add(dm.loadDocWithFieldValueList(d.getDocid()));
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
+	
+		System.out.println("~~~~~~~~~~~~~~~~FIELDs~~~~~~~~~~~~~~~~~~");
+		for(Fields field: this.fieldslist)
+			System.out.println(field.toString());
+		System.out.println("-----------------DOCs---------------------");
+		for(Doc d:this.docslist)
+			System.out.println(d.toString());
+		System.out.println("-----------------DOCsFF---------------------");
+		for(Doc d:docslistWff){
+			System.out.println(d.toString());
+			System.out.println("^^^"+d.getFvlist().toString());
+		}
+		this.docslist = docslistWff;
+	}
+	private void listDocsWithFF(int _userid){		
+		System.out.println("^^^^^^^^^listDocsWithFF  With Userid^^^^^^^^^^^");
+		System.out.println("^^^^^^^^^Userid="+_userid);
+		
+		this.listFields(this.doc.getFormid());
+		this.listDocsByFormidUserid(this.doc.getFormid(), _userid);
+		this.chosenValidDocsWithFVlist();
+	}
+
+	public String listChosenProductForms(){
+		this.loadAllUsers();
+		System.out.println("Chosen userid="+this.request.getParameter("userid"));
+		System.out.println("Chosen formid="+this.request.getParameter("formid"));
+		String formid = this.request.getParameter("formid");
+		String userid = this.request.getParameter("userid");
+		if(formid!=null && formid.length()>0 && userid!=null && userid.length()>0){
+			int fid = Integer.parseInt(formid);			
+			int uid = Integer.parseInt(userid);
+			this.setFormid(fid);
+			this.listFields(fid);
+			this.listDocsByFormidUserid(fid, uid);
+			this.chosenValidDocsWithFVlist();
+		}		
+		return SUCCESS;
+	}
+
+	private void loadAllUsers(){
+		this.allusers = new ArrayList<User>();
+		try {
+			this.allusers = um.loadusers();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+		
 	@Override
 	public String execute(){
 		
 		this.jsonText3 = "andy";
+		this.loadAllUsers();
+		for(User user:this.allusers)
+			System.out.println("user----"+user.toString());
 			
 		return "success";
 	}

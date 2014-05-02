@@ -22,7 +22,7 @@ $(document).ready(function() {
 				loop_cells.remove();
 				var innerData = form_data[key];
 				var dateLen = innerData.length;
-				alert("len: " + dateLen);
+			
 				for ( i = 0; i < dateLen; i++) {
 					
 					container.append(insertHTML);

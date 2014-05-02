@@ -81,7 +81,51 @@ transitional.dtd">
 					myList.hide();
 
 				});
-
+				$(".match_1").show();
+				$(".match_2").hide();
+				$(".match_3").hide();
+				$(".match_4").hide();
+				
+				$(".selectType").change(function()
+				{
+					if($(this).val()==1)
+					{
+						$(".match_1").show();
+						$(".match_2").hide();
+						$(".match_3").hide();
+						$(".match_4").hide();
+					}
+					else if($(this).val()==2)
+					{
+						$(".match_2").show();
+						$(".match_1").hide();
+						$(".match_3").hide();
+						$(".match_4").hide();
+					}
+					else if($(this).val()==3)
+					{
+						$(".match_3").show();
+						$(".match_1").hide();
+						$(".match_2").hide();
+						$(".match_4").hide();
+					}
+					else if($(this).val()==4)
+					{
+						$(".match_4").show();
+						$(".match_1").hide();
+						$(".match_2").hide();
+						$(".match_3").hide();
+					}
+				});
+				$("input.clearinput").bind("click",function()
+				{				
+					$(".needClear").each(
+						function()
+						{
+							$(this).val("");
+						}
+					);
+				});
 				$(".small_menu_title").bind("click", function() {
 					var newHeight = $(".small_menu_list").find(".clearfix").outerHeight();
 					if ($(".small_menu_list").outerHeight() == 0) {
@@ -209,11 +253,11 @@ transitional.dtd">
 			<div class="sub_header  exam_bg">
 
 				<div class="sub_header_title">
-					<h2>企业信息</h2>
+					<h2>食品生产管理</h2>
 					<div class="sub_header_description">
 						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
 						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
-						<span class="page">企业信息</span>
+						<span class="page"><a href="./uploadfoldersmanager.action">食品生产管理</a></span>
 					</div>
 
 				</div>
@@ -238,64 +282,64 @@ transitional.dtd">
 				
 				<table width="1033" border="0" cellpadding="0" cellspacing="1" bgcolor="#666666">
 				  <tr>
-				    <td colspan="3" bgcolor="#FFFFFF"><p>进货日期<br /></p></td>
-				    <td colspan="5" bgcolor="#FFFFFF">
+				    <td colspan="1" style="width: 150px;" bgcolor="#FFFFFF"><p>进货日期<br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF">
 				    	<div class="display" form_data="mi_importDate" ></div>			    
-					    <input class="editor long" form_data="mi_importDate" name="mi_importDate" type="text"></input>
+					    <input class="editor long needClear" form_data="mi_importDate" name="mi_importDate" type="text" fieldtype="date" readonly></input>
 				    </td>
 				    
 				  </tr>
 				  
 				  <tr>
-				  	<td colspan="3" bgcolor="#FFFFFF">原料肉名称</td>
-				    <td colspan="5" bgcolor="#FFFFFF">
+				  	<td colspan="1" bgcolor="#FFFFFF">原料肉名称</td>
+				    <td colspan="1" bgcolor="#FFFFFF">
 					    <div class="display" form_data="mi_meatName" ></div>			    
-						<input class="editor short" form_data="mi_meatName" name="mi_meatName" type="text"></input>
+						<input class="editor short needClear" form_data="mi_meatName" name="mi_meatName" type="text"></input>
 				    </td>
 				  </tr>
 				  
 				  <tr>				  
-				    <td colspan="3" bgcolor="#FFFFFF" width="50px" >原料肉品种</td>
-				    <td colspan="5" bgcolor="#FFFFFF">			
+				    <td colspan="1" bgcolor="#FFFFFF" width="50px" >原料肉品种</td>
+				    <td colspan="1" bgcolor="#FFFFFF">			
 				    	<div class="display" form_data="mi_meatTypeName" ></div>
-						<input class="editor long" form_data="mi_meatTypeName" name="mi_meatTypeName" type="text"></input>
+						<input class="editor long needClear" form_data="mi_meatTypeName" name="mi_meatTypeName" type="text"></input>
 				    </td>
 				  </tr>
 				  
 				  <tr>
-				    <td colspan="3" bgcolor="#FFFFFF"><p>产地</p></td>
-				    <td colspan="5" bgcolor="#FFFFFF">
+				    <td colspan="1" bgcolor="#FFFFFF"><p>产地</p></td>
+				    <td colspan="1" bgcolor="#FFFFFF">
 					    <div class="display" form_data="mi_producerLocate" ></div>			    
-						<input class="editor long" form_data="mi_producerLocate" name="mi_producerLocate" type="text"></input>
+						<input class="editor long needClear" form_data="mi_producerLocate" name="mi_producerLocate" type="text"></input>
 				    </td>				    
 				  </tr>
 				  
 				  <tr>
-				  	<td colspan="3" bgcolor="#FFFFFF">进货情况</td>
-				    <td colspan="5" bgcolor="#FFFFFF">
+				  	<td colspan="1" bgcolor="#FFFFFF">进货情况</td>
+				    <td colspan="1" bgcolor="#FFFFFF">
 					    <div class="display" form_data="mi_srcTypeName" ></div>
-					    <p>	
-					    <select name="mi_srcTypeName" form_data="mi_srcTypeName">
+					    <div>
+					    <select name="mi_srcTypeName" form_data="mi_srcTypeName" class="selectType">
 					    	<option value="1" selected>直接进口</option>
 					    	<option value="2">贸易商进口</option>
 					    	<option value="3">国内厂家进货</option>
 					    	<option value="4">国内中间商进货</option>
 					    </select>
-					    </p>
-					    <p>进口肉类卫生证书编号：<input class="editor long" type="text" form_data="mi_importHygieneCertNum" name="mi_importHygieneCertNum"></input></p>
-					    <p>厂家营业执照注册号：<input class="editor long" type="text" form_data="mi_producerNum" name="mi_producerNum"></input></p>
-					    <p>厂家定点屠宰证代号：<input class="editor long" type="text" form_data="mi_producerSlaughterNum" name="mi_producerSlaughterNum"></input></p>
-					    <p>厂家动物防疫条件合格证代码编号：<input class="editor long" type="text" form_data="mi_producerDiseasePrevNum" name="mi_producerDiseasePrevNum"></input></p>
-					    <p>厂家动物检疫合格证明（产品A或产品B）：<input class="editor long" type="text" form_data="mi_producerQuarantineNum" name="mi_producerQuarantineNum"></input></p>
-					    <p>流通许可证编号：<input class="editor long" type="text" form_data="mi_circulateNum" name="mi_circulateNum"></input></p>										    
+					    </div>
+					    <p class="match_1">进口肉类卫生证书编号：<input class="editor long needClear" type="text" form_data="mi_importHygieneCertNum" name="mi_importHygieneCertNum"></input></p>
+					    <p class="match_2">厂家营业执照注册号：<input class="editor long needClear" type="text" form_data="mi_producerNum" name="mi_producerNum"></input></p>
+					    <p class="match_2">厂家定点屠宰证代号：<input class="editor long needClear" type="text" form_data="mi_producerSlaughterNum" name="mi_producerSlaughterNum"></input></p>
+					    <p class="match_3">厂家动物防疫条件合格证代码编号：<input class="editor long needClear" type="text" form_data="mi_producerDiseasePrevNum" name="mi_producerDiseasePrevNum"></input></p>
+					    <p class="match_4">厂家动物检疫合格证明（产品A或产品B）：<input class="editor long needClear" type="text" form_data="mi_producerQuarantineNum" name="mi_producerQuarantineNum"></input></p>
+					    <p class="match_4">流通许可证编号：<input class="editor long needClear" type="text" form_data="mi_circulateNum" name="mi_circulateNum"></input></p>										    
 				    </td>
 				  </tr>
 				  
 				  <tr>
-				    <td colspan="3" bgcolor="#FFFFFF">进货数量kg</td>
-				    <td colspan="5" bgcolor="#FFFFFF">
+				    <td colspan="1" bgcolor="#FFFFFF">进货数量kg</td>
+				    <td colspan="1" bgcolor="#FFFFFF">
 				        <div class="display" form_data="mi_corpContactAddress" ></div>			    
-						<input class="editor long" form_data="mi_importCount" name="mi_importCount" type="text"></input>
+						<input class="editor long needClear" form_data="mi_importCount" name="mi_importCount" type="text"></input>
 				    </td>
 				    
 				  </tr>
@@ -318,7 +362,7 @@ transitional.dtd">
 					<input type="hidden" value="${userid}" name="userid" />
 					
  					<input type="submit" value="保存" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
- 					<input type="submit" value="取消" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
+ 					<input type="button" value="取消" class="clearinput" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
  					<input type="submit" value="查看" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
  					</div>
 				</form>

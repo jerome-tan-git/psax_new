@@ -209,11 +209,11 @@ transitional.dtd">
 			<div class="sub_header  exam_bg">
 
 				<div class="sub_header_title">
-					<h2>企业管理</h2>
+					<h2>食品生产管理</h2>
 					<div class="sub_header_description">
 						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
 						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
-						<span class="page"><a href="./uploadfoldersmanager.action">企业管理</a></span>
+						<span class="page"><a href="./uploadfoldersmanager.action">食品生产管理</a></span>
 						<!--<#if folder?exists>
 							<span class="page">${folder.id}</span>
 						</#if>-->
@@ -277,6 +277,18 @@ transitional.dtd">
 					</form>
 				</div>	
 				</#if>
+			
+			<br /><br />	
+			<div class="clearfix">
+				<a href="./import?formid=15&mode=edit">
+					<div class="member_block_folder blue">
+						<div class="member_block_upload_folder_title">肉制品原料肉进货表
+				</div></div></a>
+				<a href="./import?formid=16&mode=edit">
+					<div class="member_block_folder blue">
+						<div class="member_block_upload_folder_title">肉制品原料肉销售表
+				</div></div></a>			
+			</div>
 			
 			</div>
 			<!-- Teaser End -->

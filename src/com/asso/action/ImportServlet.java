@@ -27,6 +27,7 @@ import com.asso.model.FieldValue;
 import com.asso.model.Fields;
 import com.asso.model.Form;
 import com.asso.model.User;
+import com.asso.vo.Form16;
 
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -48,6 +49,8 @@ public class ImportServlet  extends HttpServlet{
 	private Form f;
 	private List<Doc> doclist;
 	private Doc doc;
+	public List<Doc> docslist;
+	public List<Fields> fieldslist;
 
 	private HashMap<String,List<Fields>> group;//KEY-groupname, VALUE-fieldname 
 	private HashSet<Integer> indexes;
@@ -173,6 +176,59 @@ public class ImportServlet  extends HttpServlet{
 			return 0;
 	}
 	
+	private void listDocsWithFF(int _userid){
+		
+		System.out.println("^^^^^^^^^listDocsWithFF  With Userid^^^^^^^^^^^");
+		System.out.println("^^^^^^^^^Userid="+_userid);
+		this.docslist = new ArrayList<Doc>();
+		this.fieldslist = new ArrayList<Fields>();
+		
+		this.f = new Form();
+		try {
+			this.f = fm.loadFormWithFieldsById(this.doc.getFormid());
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		this.fieldslist = f.getFields();
+		System.out.println("^^^^^^^^^fieldslist="+fieldslist.toString());
+		
+		try {
+			this.docslist = dm.loadDocByFormidUserid(this.doc.getFormid(), _userid);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		List<Doc> docslistWff = new ArrayList<Doc>();
+		for(Doc d:this.docslist){
+			if(d.getStep()==1){
+				try {
+					docslistWff.add(dm.loadDocWithFieldValueList(d.getDocid()));
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+	
+		System.out.println("~~~~~~~~~~~~~~~~FIELDs~~~~~~~~~~~~~~~~~~");
+		for(Fields field: this.fieldslist)
+			System.out.println(field.toString());
+		System.out.println("-----------------DOCs---------------------");
+		for(Doc d:this.docslist)
+			System.out.println(d.toString());
+		System.out.println("-----------------DOCsFF---------------------");
+		for(Doc d:docslistWff){
+			System.out.println(d.toString());
+			System.out.println("^^^"+d.getFvlist().toString());
+		}
+		this.docslist = docslistWff;
+	}
 	
 	private void assembleNewDocJsonText(int _formid, int _userid){
 		
@@ -203,11 +259,39 @@ public class ImportServlet  extends HttpServlet{
 	    jmap.put("title",f.getDisplayname());
 	    jmap.put("type","edit");
 	    
-	    for(Fields fd:this.f.getFields()){		    	
-//	    	System.out.println("key---"+fd.getFieldname()+",value---");
-	    	jmap.put(fd.getFieldname(),"");
-		}
-	    
+	    if(_formid==16){
+	    	this.listDocsWithFF(_userid);
+	    	List<Form16> docs = new ArrayList<Form16>();
+	    	for(Doc doc:this.docslist){
+	    		Form16 f16 = new Form16();
+	    		List<FieldValue> fvlist =  doc.getFvlist();
+	    		for(FieldValue fv: fvlist){	    			
+	    			if(fv.getFieldid()==961)
+	    				f16.setMs_date(fv.getValue());
+	    			if(fv.getFieldid()==962)
+	    				f16.setMs_productName(fv.getValue());
+	    			if(fv.getFieldid()==963)
+	    				f16.setMs_category(fv.getValue());
+	    			if(fv.getFieldid()==964)
+	    				f16.setMs_productBatchId(fv.getValue());
+	    			if(fv.getFieldid()==965)
+	    				f16.setMs_buyer(fv.getValue());
+	    			if(fv.getFieldid()==966)
+	    				f16.setMs_saleAmount(fv.getValue());
+	    		}
+	    		docs.add(f16);
+	    	}
+	    	System.out.println("..........List<Form16> docs.size="+docs.size());
+//	    	String jsonText = JSON.toJSONString(docs, true); 
+//	    	jmap.put("data_2", jsonText);
+	    	jmap.put("data_2", docs);
+	    	
+	    }else{	    
+		    for(Fields fd:this.f.getFields()){		    	
+	//	    	System.out.println("key---"+fd.getFieldname()+",value---");
+		    	jmap.put(fd.getFieldname(),"");
+			}
+	    }
 	    this.jsonText3=JSON.toJSONString(jmap, true); 
 	    System.out.println("---jsonText3---");
 		System.out.println(this.jsonText3);

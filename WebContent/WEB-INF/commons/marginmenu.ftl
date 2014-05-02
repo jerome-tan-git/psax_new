@@ -10,6 +10,7 @@
 								    <li><a href="./manageruser.action">账户管理</a></li>								    
 								    <li><a href="./listtodownloads.action?isall=1">下载管理</a></li>
 								    <li><a href="./listmcc.action">栏目管理</a></li>
+								    <li><a href="./listProductForms.action">食品生产管理</a></li>
 								</ul>
 							</li>
 							<li class="active">

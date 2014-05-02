@@ -19,7 +19,9 @@ transitional.dtd">
 		<link rel="stylesheet" type="text/css" href="./css/quicksand.css" />
 		<link rel="stylesheet" type="text/css" href="./css/skin.css" />
 		<link rel="stylesheet" type="text/css" href="./css/960_24_col.css" />
-
+				<link rel="stylesheet" type="text/css" href="./css/jquery-ui-1.10.3.custom.css" />
+		<link rel="stylesheet" type="text/css" href="./css/select2.css" />
+		
 
 		<script type="text/javascript" src="./js/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/jquery-migrate.js"></script>
@@ -34,7 +36,9 @@ transitional.dtd">
 
 		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 		<script type="text/javascript" src="js/form.js"></script>
-
+		<script src="./js/select2.js"></script>
+		<script src="./js/select2_locale_zh-CN.js"></script>
+		
 		<style type="text/css">
 			html, body, p {
 				margin: 0;
@@ -57,8 +61,8 @@ transitional.dtd">
 				input.editor
 				{
 					border: 0px solid #ccc;
-					height: 27px;
-					border-bottom: 1px solid #ccc;
+					height: 27px;		
+					border-bottom: 1px solid #ccc;			
 					margin-left:5px;
 					margin-bottom:5px;
 				}
@@ -81,7 +85,15 @@ transitional.dtd">
 					myList.hide();
 
 				});
-
+				$("input.clearinput").bind("click",function()
+				{
+					$(".needClear").each(
+						function()
+						{
+							$(this).val("");
+						}
+					);
+				});
 				$(".small_menu_title").bind("click", function() {
 					var newHeight = $(".small_menu_list").find(".clearfix").outerHeight();
 					if ($(".small_menu_list").outerHeight() == 0) {
@@ -209,11 +221,11 @@ transitional.dtd">
 			<div class="sub_header  exam_bg">
 
 				<div class="sub_header_title">
-					<h2>企业信息</h2>
+					<h2>食品生产管理</h2>
 					<div class="sub_header_description">
 						<span><a href="./page.action?categoryid=0">首页 &raquo;</a></span>
 						<span><a href="./page.action?categoryid=1">用户中心 &raquo;</a></span>
-						<span class="page">企业信息</span>
+						<span class="page"><a href="./uploadfoldersmanager.action">食品生产管理</a></span>
 					</div>
 
 				</div>
@@ -228,7 +240,7 @@ transitional.dtd">
 			<!-- Teaser Start -->
 			<div class="section" id="content" class="tag_line" style="padding-top: 30px" bordercolor="#666666">
 			
-				<form action="saveDoc.action" method="post" >
+				<form action="saveMeatSaleDoc.action" method="post" >
 
 				<h2 align="center">上海市浦东新区食品生产安全管理协会</h2>
 				<h2 align="center">肉制品销售（出货）情况表</h2>
@@ -237,43 +249,71 @@ transitional.dtd">
 				<!--<p class="STYLE1">填写请参见背面样张，填写完整后请于20130130	前寄往背面地址表或电子版邮箱至pdspsax@163.com(未来电可索要电子版)</p>-->
 				
 				<table width="1033" border="0" cellpadding="0" cellspacing="1" bgcolor="#666666">
-				  <tr>
-				    <td colspan="2" bgcolor="#FFFFFF"><p>出货日期<br /></p></td>
-				    <td colspan="2" bgcolor="#FFFFFF"><p>产品名称<br /></p></td>
+				  <tr font-size=15px font-weight=bolder align="center">
+				    <td colspan="1" bgcolor="#FFFFFF"><p>出货日期<br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p>产品名称<br /></p></td>
 				    <td colspan="1" bgcolor="#FFFFFF"><p>类别<br /></p></td>
-				    <td colspan="3" bgcolor="#FFFFFF"><p>产品批号<br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p>产品批号<br /></p></td>
 				    <td colspan="1" bgcolor="#FFFFFF"><p>销售去向<br /></p></td>
 				    <td colspan="1" bgcolor="#FFFFFF"><p>销售量<br /></p></td>
 				  </tr>
 				  
+				  <tbody id='data_2_container'>
+					<tr form_data="_loop" target_data = "data_2">
+						<td><div colspan="1" bgcolor="#FFFFFF" class="display" form_data="ms_date">&nbsp;</div>
+						<input class="editor" form_data="ms_date" disabled style="background-color: transparent;border-bottom: 0px" />
+						</td>
+						<td><div colspan="1" bgcolor="#FFFFFF" class="display" form_data="ms_productName">&nbsp;</div>
+						<input class="editor" form_data="ms_productName" disabled style="background-color: transparent;border-bottom: 0px" />
+						</td>
+						<td><div colspan="1" bgcolor="#FFFFFF" class="display" form_data="ms_category">&nbsp;</div>
+						<input class="editor" form_data="ms_category" disabled style="background-color: transparent;border-bottom: 0px" />
+						</td>
+						<td><div colspan="1" bgcolor="#FFFFFF" class="display" form_data="ms_productBatchId">&nbsp;</div>
+						<input class="editor" form_data="ms_productBatchId" disabled style="background-color: transparent;border-bottom: 0px" />
+						</td>
+						<td><div colspan="1" bgcolor="#FFFFFF" class="display" form_data="ms_buyer">&nbsp;</div>
+						<input class="editor" form_data="ms_buyer" disabled style="background-color: transparent;border-bottom: 0px" />
+						</td>
+						<td><div colspan="1" bgcolor="#FFFFFF" class="display" form_data="ms_saleAmount">&nbsp;</div>
+						<input class="editor" form_data="ms_saleAmount" disabled style="background-color: transparent;border-bottom: 0px" />
+						</td>
+					</tr>
+				  </tbody>
+				  
 				  <tr>
-				  	<td colspan="2" bgcolor="#FFFFFF"><p><br /></p></td>
-				    <td colspan="2" bgcolor="#FFFFFF"><p><br /></p></td>
-				    <td colspan="1" bgcolor="#FFFFFF"><p><br /></p></td>
-				    <td colspan="3" bgcolor="#FFFFFF"><p><br /></p></td>
-				    <td colspan="1" bgcolor="#FFFFFF"><p><br /></p></td>
-				    <td colspan="1" bgcolor="#FFFFFF"><p><br /></p></td>
+				  	<td colspan="1" bgcolor="#FFFFFF"><p><input class="editor short needClear" form_data="ms_date" name="ms_date" type="text" fieldtype="date" readonly></input><br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p><input class="editor short needClear" form_data="ms_productName" name="ms_productName" type="text"></input><br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p><input class="editor short needClear" form_data="ms_category" name="ms_category" type="text"></input><br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p><input class="editor short needClear" form_data="ms_productBatchId" name="ms_productBatchId" type="text"></input><br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p><input class="editor short needClear" form_data="ms_buyer" name="ms_buyer" type="text"></input><br /></p></td>
+				    <td colspan="1" bgcolor="#FFFFFF"><p><input class="editor short needClear" form_data="ms_saleAmount" name="ms_saleAmount" type="text"></input><br /></p></td>
 				  </tr>
 				  
 				
 				</table>
-				<div style="width: 300px;float: left;margin-top:5px;">填表日期：
-					<div class="display" form_data="mi_formMadeDate" ></div>
-					<input class="editor" form_data="mi_formMadeDate" name="mi_formMadeDate" type="text" ></input>
-				</div>
-				<div style="width: 300px;float: left;margin-top:5px;">
-				填表人：
-					<div class="display" form_data="mi_formMaker" ></div>
-					<input class="editor" form_data="mi_formMaker" name="mi_formMaker" type="text"></input>
-				</div>
+								
 					<div style="float:right">
+					<#if (docid?exists)>
 					<input type="hidden" value="${docid}" name="docid" />
+					<#elseif (doc.id?exists)>
+					<input type="hidden" value="${doc.id}" name="docid" />
+					</#if>
+					
+					<#if (formid?exists)>
 					<input type="hidden" value="${formid}" name="formid" />
+					<#elseif (f.id?exists)>
+					<input type="hidden" value="${f.id}" name="formid" />
+					</#if>
+					
+					<#if (userid?exists)>
 					<input type="hidden" value="${userid}" name="userid" />
- 					<input type="submit" value="新增" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
+					<#elseif (user?exists)>
+					<input type="hidden" value="${user.id}" name="userid" />
+					</#if>
+					 					
  					<input type="submit" value="保存" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
- 					<input type="submit" value="取消" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />
- 					<input type="submit" value="查看" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" /> 					
+ 					<input type="button" value="取消" class="clearinput" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" /> 					 					
  					</div>
 				</form>
 				
