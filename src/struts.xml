@@ -289,9 +289,29 @@
 		</action>
 		<action name="listChosenProductForms" class="com.asso.action.FormEdit" method="listChosenProductForms">  
 			<result name="success" type="freemarker">/WEB-INF/ftl/listProductForms.ftl</result>					
+		</action>		
+	<!-- 
+		<action name="meatReportsDownload" class="com.asso.action.FormEdit" method="meatDocsDownload">  
+			<result name="success" type="freemarker">/WEB-INF/ftl/listProductForms.ftl</result>
+			<result name="fail1" type="freemarker">/WEB-INF/ftl/listProductForms.ftl</result>
+			<result name="fail2" type="freemarker">/WEB-INF/ftl/listProductForms.ftl</result>					
 		</action>
-		
-		
+		<result name="success" type="freemarker">/WEB-INF/ccpage/wip.ftl</result>	
+	-->
+		<action name="meatReport" class="com.asso.action.FormEdit" method="meatReport">  
+			
+			<result name="success" type="stream">  
+		        <!-- 文件类型 -->  
+		        <param name="contentType"> application/vnd.ms-excel</param>  
+		        <!-- excelStream 与对应action中的输入流的名字要一致 -->  
+		        <param name= "inputName"> excelStream</param>   
+		        <!-- 文件名 与action中fileName一致 -->  
+		        <param name="contentDisposition">attachment;filename="${fileName}.xls"</param>   
+		        <param name="bufferSize">1024</param>   
+	        </result>  
+	        <result name="error">/WEB-INF/ccpage/wip.ftl</result>
+        	        					
+		</action>
 		
 		<action name="upload" class="com.asso.action.CKEUpload"  method="myExecute" />
 		

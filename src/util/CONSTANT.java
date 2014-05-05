@@ -1,8 +1,14 @@
 package util;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +23,11 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public class CONSTANT {
 	
@@ -168,6 +179,11 @@ public class CONSTANT {
 		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
 		return formatter.format(currentTime);
 	}
+	public final static String getNowTime2Second(){
+		Date currentTime = new Date();   
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+		return formatter.format(currentTime);
+	}
 	
 	public static String getJSCateName(int _categoryid){
         String type = "single_selection";
@@ -243,6 +259,60 @@ public class CONSTANT {
 		return seqs;
 	}
 	
+	public static List<Integer> sortDatesDesc(List<String> _datelist, String _dateFormat){
+		List<Integer> seqs = new ArrayList<Integer>();
+		List<Date> datelist = new ArrayList<Date>();		
+		List<Date> unsorteddatelist = new ArrayList<Date>();
+		SimpleDateFormat format = new SimpleDateFormat(_dateFormat);  
+		 /**字符串转时间**/  
+		for(String dt:_datelist){
+			try {
+				datelist.add((Date) format.parse(dt));
+				unsorteddatelist.add((Date) format.parse(dt));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		/**打印时间**/  
+        System.out.println("排序前：");  
+        for(Date d:datelist){  
+            System.out.println(format.format(d));  
+        }  
+        /**冒泡排序**/  
+        Date tempDate = null;  
+        for(int i=datelist.size()-1; i>0; --i) {  
+           for(int j=0; j<i; ++j) {  
+                /**从大到小的排序**/  
+                if(datelist.get(j+1).after(datelist.get(j))){  
+                    tempDate = datelist.get(j);  
+                    datelist.set(j, datelist.get(j+1));  
+                    datelist.set(j+1, tempDate);  
+                }else{  
+                /**从小到大**/  
+//                  tempDate = dateList.get(j);  
+//                  dateList.set(j, dateList.get(j+1));  
+//                  dateList.set(j+1, tempDate);  
+                }  
+            }  
+        }  
+        /**打印排序之后的时间**/
+        System.out.println("排序后：");  
+        for(int i=0; i<datelist.size(); i++){  
+        	Date d = datelist.get(i);
+            System.out.println(format.format(d));  
+            for(int j=0; j<unsorteddatelist.size(); j++){
+            	Date ud = unsorteddatelist.get(j);
+            	if(ud.equals(d) && !seqs.contains(j)){
+            		seqs.add(j);
+            		break;
+            	}            		
+            }
+        }  
+		for(Integer seq:seqs)
+			System.out.println("sesq="+seq);
+		return seqs;
+	}
+	
 	public static String replaceHtml(String html){
 		String regEx="<.+?>"; //表示标签
 		Pattern p=Pattern.compile(regEx);
@@ -261,6 +331,146 @@ public class CONSTANT {
 		System.out.println("Height=" + bi.getHeight());
 		return sizes;
 	}
+	
+//	public static String exportExcel(String _sheetname, String _filename, List<List<String>> _docs){
+//		System.out.println("exportExcel---------1");
+//		System.out.println("_sheetname="+_sheetname);
+//		System.out.println("_filename="+_filename);
+//		for(int i=0;i<_docs.size();i++){
+//			System.out.println("line num="+i+",content="+_docs.get(i).toString());					
+//		}
+//		System.out.println("0-0");
+//		HSSFWorkbook wb = new HSSFWorkbook();
+//		System.out.println("0-1");
+//		HSSFSheet sheet = wb.createSheet(_sheetname);
+//		System.out.println("1-1");
+//		if(_docs!=null && _docs.size()>0){
+//			System.out.println("2-2");
+//			for(int i=0;i<_docs.size(); i++){
+//				List<String> line = _docs.get(i);
+//				System.out.println("line3-3="+i+", content="+line.toString());
+//				HSSFRow row = sheet.createRow(i);
+//				for(int j=0; j<line.size(); j++){
+//					HSSFCell cell = row.createCell(j);
+//					cell.setCellValue(line.get(j));
+//				}
+//			}				
+//		}else{
+//			System.out.println("No data to output!");
+//		}	
+////		输出到具体路径
+//		FileOutputStream fileout = null;
+//		System.out.println("4-4");
+//		try {
+//			fileout = new FileOutputStream(_filename);
+//		} catch (FileNotFoundException e) {
+//			System.out.println("文件没找到！");
+//			e.printStackTrace();			
+////			return "FileNotFoundError";
+//			return "fail1";
+//		}
+//		try {
+//			wb.write(fileout);
+//			fileout.close();
+//		} catch (IOException e) {
+//			System.out.println("文件写入出错！");
+//			e.printStackTrace();
+////			return "FileWritingError";
+//			return "fail2";
+//		}
+//		System.out.println("5-5");
+//		return "success";
+//	}
+	
+	public static HSSFWorkbook getWorkbook(String _sheetname, List<List<String>> _docs) throws Exception { 
+		
+		HSSFWorkbook workbook = new HSSFWorkbook();		
+		HSSFSheet sheet = workbook.createSheet(_sheetname);
+		HSSFCellStyle cellStyle=workbook.createCellStyle();     
+		cellStyle.setWrapText(true);     
+		
+	    
+        if(_docs!=null && _docs.size()>0){
+			
+			for(int i=0;i<_docs.size(); i++){
+				List<String> line = _docs.get(i);			
+				HSSFRow row = sheet.createRow(i);
+				for(int j=0; j<line.size(); j++){
+					@SuppressWarnings("deprecation")
+					HSSFCell cell = row.createCell((short)j);  
+					cell.setCellValue(line.get(j));
+					cell.setCellStyle(cellStyle); 
+				}
+			}				
+		}else{
+			System.out.println("No data to output!");
+		}
+        
+        return workbook;  
+    }  
+	
+
+
+	public static InputStream exportExcelStream(String _sheetname, String _filename, List<List<String>> _docs){
+		
+		
+//		System.out.println("0-0");
+//		HSSFWorkbook wb = new HSSFWorkbook();
+//		System.out.println("0-1");
+//		HSSFSheet sheet = wb.createSheet(_sheetname);
+//		System.out.println("1-1");
+//		if(_docs!=null && _docs.size()>0){
+//			System.out.println("2-2");
+//			for(int i=0;i<_docs.size(); i++){
+//				List<String> line = _docs.get(i);
+//				System.out.println("line3-3="+i+", content="+line.toString());
+//				HSSFRow row = sheet.createRow(i);
+//				for(int j=0; j<line.size(); j++){
+//					HSSFCell cell = row.createCell(j);
+//					cell.setCellValue(line.get(j));
+//				}
+//			}				
+//		}else{
+//			System.out.println("No data to output!");
+//		}	
+		HSSFWorkbook wb = null;
+		try {
+			wb = getWorkbook(_sheetname, _docs);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+//		输出到具体路径
+		FileOutputStream fileout = null;
+		System.out.println("4-4");
+		try {
+			fileout = new FileOutputStream(_filename);
+		} catch (FileNotFoundException e) {
+			System.out.println("文件没找到！");
+			e.printStackTrace();			
+//			return "FileNotFoundError";
+		}
+		try {
+			wb.write(fileout);
+			fileout.close();
+		} catch (IOException e) {
+			System.out.println("文件写入出错！");
+			e.printStackTrace();
+//			return "FileWritingError";
+		}
+
+
+		InputStream in = null;		  
+		  try {
+		   in = new FileInputStream(_filename);//将file转换成输入流
+		   //in.close();
+		  } catch (Exception e) {
+		   e.printStackTrace();
+		  }
+		  
+		  return in;
+	}
+	
 	
 	
 	public static void main(String[] args){
@@ -291,6 +501,29 @@ public class CONSTANT {
 		
 //		CONSTANT.getImgWidthHeight("//C://Users//Administrator//workspace_2//psax_new//WebContent//images//key_img_1.png");
 //		CONSTANT.getImgWidthHeight("//C://Users//Administrator//workspace_2//psax_new//WebContent//images//10035.jpg");
+		
+//		String sheetname = "import";
+//		String filename = "d:/import"+CONSTANT.getNowTime2Second()+".xls";
+//		ArrayList<List<String>> excelDownloads = new ArrayList<List<String>>();
+//		for(int i=0;i<7;i++){
+//			List<String> line = new ArrayList<String>();
+//			for(int j=0;j<10;j++){
+//				line.add("v"+i+"_"+j);
+//			}
+//			excelDownloads.add(line);
+//		}
+//		CONSTANT.exportExcel(sheetname, filename,excelDownloads);
+//		System.out.println("OK");
+		
+		List<String> arts = new ArrayList<String>();
+		arts.add("08/24/2012");
+		arts.add("09/12/2012");
+		arts.add("12/22/2012");
+		arts.add("06/17/1981");
+		arts.add("01/23/2013");
+		arts.add("12/24/2013");
+		arts.add("05/14/1981");
+		System.out.println(CONSTANT.sortDatesDesc(arts, "MM/dd/yyyy"));
 		
 	}
 }

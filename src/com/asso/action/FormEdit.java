@@ -1,5 +1,11 @@
 package com.asso.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +17,10 @@ import java.util.Set;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.annotation.Scope;
@@ -56,6 +66,9 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	private String[] date1;
 	private List<User> allusers;
 	private int formid;
+	private List<List<String>> excelDownloads;
+	private InputStream excelStream;  
+	private String fileName;
 		
 	public String[] getDate1() {
 		return date1;
@@ -147,9 +160,27 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 	public void setAllusers(List<User> allusers) {
 		this.allusers = allusers;
 	}	
-
 	
+	public List<List<String>> getExcelDownloads() {
+		return excelDownloads;
+	}
+	public void setExcelDownloads(List<List<String>> excelDownloads) {
+		this.excelDownloads = excelDownloads;
+	}
 	
+	public InputStream getExcelStream() {
+		return excelStream;
+	}
+	public void setExcelStream(InputStream excelStream) {
+		this.excelStream = excelStream;
+	}
+	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public int getFormid() {
 		return formid;
 	}
@@ -414,6 +445,8 @@ public class FormEdit extends ActionSupport implements ModelDriven<Object>,Servl
 			System.out.println("^^^"+d.getFvlist().toString());
 		}
 		this.docslist = docslistWff;
+		
+		this.resortDocsByDate();
 	}
 	
 public String updateDoc(){
@@ -638,7 +671,7 @@ public String updateDoc(){
 				return "list";
 			}else{
 				if(button.contains("查看")){
-					this.listDocsWithFF();
+					this.listDocsWithFF();					
 					System.out.println("#########----查看----######");
 					return "list";				
 				}
@@ -892,11 +925,11 @@ private void assembleNewDocJsonText(int _formid, int _userid){
 		}
 	}
 	private void chosenValidDocsWithFVlist(){
-		List<Doc> docslistWff = new ArrayList<Doc>();
+		List<Doc> docslistWff = new ArrayList<Doc>();		
 		for(Doc d:this.docslist){
 			if(d.getStep()==1){
 				try {
-					docslistWff.add(dm.loadDocWithFieldValueList(d.getDocid()));
+					docslistWff.add(dm.loadDocWithFieldValueList(d.getDocid()));					
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				} catch (SQLException e) {
@@ -918,6 +951,31 @@ private void assembleNewDocJsonText(int _formid, int _userid){
 		}
 		this.docslist = docslistWff;
 	}
+	private void resortDocsByDate(){
+		List<Doc> docslistWff_ = new ArrayList<Doc>();
+		List<String> dates = new ArrayList<String>();
+		List<Integer> seqs = new ArrayList<Integer>();
+		for(Doc d:this.docslist){
+			List<FieldValue> fvlist = d.getFvlist();
+			if(this.formid==15){
+				for(FieldValue fv : fvlist){
+					if(fv.getFieldid()==941)
+						dates.add(fv.getValue());
+				}
+			}
+			if(this.formid==16){
+				for(FieldValue fv : fvlist){
+					if(fv.getFieldid()==961)
+						dates.add(fv.getValue());
+				}
+			}
+		}
+		seqs = CONSTANT.sortDatesDesc(dates, "MM/dd/yyyy");
+		for(int seq:seqs)
+			docslistWff_.add(this.docslist.get(seq));
+		this.docslist = docslistWff_;
+	}
+	
 	private void listDocsWithFF(int _userid){		
 		System.out.println("^^^^^^^^^listDocsWithFF  With Userid^^^^^^^^^^^");
 		System.out.println("^^^^^^^^^Userid="+_userid);
@@ -925,6 +983,7 @@ private void assembleNewDocJsonText(int _formid, int _userid){
 		this.listFields(this.doc.getFormid());
 		this.listDocsByFormidUserid(this.doc.getFormid(), _userid);
 		this.chosenValidDocsWithFVlist();
+		this.resortDocsByDate();
 	}
 
 	public String listChosenProductForms(){
@@ -936,10 +995,13 @@ private void assembleNewDocJsonText(int _formid, int _userid){
 		if(formid!=null && formid.length()>0 && userid!=null && userid.length()>0){
 			int fid = Integer.parseInt(formid);			
 			int uid = Integer.parseInt(userid);
+			this.user = new User(); 
+			this.user.setId(uid);
 			this.setFormid(fid);
 			this.listFields(fid);
 			this.listDocsByFormidUserid(fid, uid);
 			this.chosenValidDocsWithFVlist();
+			this.resortDocsByDate();
 		}		
 		return SUCCESS;
 	}
@@ -954,6 +1016,274 @@ private void assembleNewDocJsonText(int _formid, int _userid){
 			e.printStackTrace();
 		}
 	}
+	
+	private List<String> loadLineCells(int[] _fieldIDs, List<FieldValue> _fvlist){
+		List<String> line = new ArrayList<String>();		
+		for(int fieldid:_fieldIDs){
+			for(FieldValue fv : _fvlist){
+				if(fv.getFieldid()==fieldid)
+					line.add(fv.getValue());				
+			}
+		}	
+		return line;
+	}
+	
+	private List<String> loadLineCells(List<FieldValue> _fvlist,
+			int[] _fieldIDs, int _level2BeginId, Map _level2map,
+			Map _item1map, Map _item2map, Doc _doc){
+		List<String> line = new ArrayList<String>();		
+		for(int fieldid:_fieldIDs){
+			if(fieldid!=_level2BeginId){
+				for(FieldValue fv : _fvlist){
+					if(fv.getFieldid()==fieldid)
+						line.add(fv.getValue());				
+				}
+			}else{
+				String value944 = "";
+				for(FieldValue fv : _fvlist){
+					if(fv.getFieldid()==_level2BeginId)
+						value944 = fv.getValue();				
+				}
+				String cell = ""; 
+				Set<String> keys1 = _level2map.keySet();
+				for(String key:keys1){
+					if(key.equals(value944)){
+						cell = _item1map.get(key).toString()+"\r\n";						
+						System.out.println("cell_0="+cell);
+						List<String> others = (List<String>) _level2map.get(key);
+						System.out.println("---------list(for others) size="+others.size());
+						for(String id:others){
+							if(id!=null && id.length()>0){
+								System.out.println("id="+id+", value="+_item2map.get(id));
+								int fid = Integer.parseInt(id);							
+								cell += _item2map.get(id);
+								for(FieldValue fv :_doc.getFvlist()){
+									if(fv.getFieldid()==fid)
+										cell += fv.getValue();
+								}
+								cell += "\r\n";
+							}
+							System.out.println("cell_1="+cell);
+						}
+						cell = cell.trim();
+						System.out.println("cell_2="+cell);
+					}
+				}
+				line.add(cell);				
+			}
+			
+		}	
+		return line;
+	}
+	
+	private void setFormHead(){
+		List<String> head = new ArrayList<String>();
+		if(this.formid==16){
+			head.add("出货日期");
+			head.add("产品名称");
+			head.add("类别");
+			head.add("产品批号");
+			head.add("销售去向");
+			head.add("销售量");
+		}
+		if(this.formid==15){
+			head.add("进货日期");
+			head.add("原料肉名称");
+			head.add("原料肉品种");
+			head.add("产地");
+			head.add("进货情况");
+			head.add("进货量");
+		}
+	}
+	
+//	public String meatDocsDownload(){
+//		System.out.println("-------------docsDownload-----------(meat)");
+//		String sheetname = "";
+//		String filename = "";
+//		String rz = "success";
+//		this.listChosenProductForms();
+//		if(this.docslist!=null && this.docslist.size()>0){
+//			this.excelDownloads = new ArrayList<List<String>>();
+//			this.setFormHead();
+//			if(this.formid==16){				
+//				sheetname = "import";
+//				filename = "import"+CONSTANT.getNowTime2Second();				
+//				for(Doc doc:this.docslist){					
+//					List<FieldValue> fvlist = doc.getFvlist();	
+//					int[] fieldIDs = {961,962,963,964,965,966};
+//					this.excelDownloads.add(this.loadLineCells(fieldIDs,fvlist));
+//				}			
+//				
+//			}else{				
+//				if(this.formid==15){
+//					sheetname = "sale";
+//					filename = "sale"+CONSTANT.getNowTime2Second();
+//					for(Doc doc:this.docslist){					
+//						List<FieldValue> fvlist = doc.getFvlist();	
+//						int[] fieldIDs = {941,942,943,951,944,952};
+////						int[] fieldIDs2nd = {945,946,947,948,949,950};
+//						Map<String, String> map944_itemName = new HashMap<String, String>();
+//						map944_itemName.put("1", "直接进口");
+//						map944_itemName.put("2", "贸易商进口");
+//						map944_itemName.put("3", "国内厂家进货");
+//						map944_itemName.put("4", "国内中间商进货");						
+//						Map<String, String> map_itemName = new HashMap<String, String>();
+//						map_itemName.put("945", "进口肉类卫生证书编号：");
+//						map_itemName.put("946", "厂家营业执照注册号：");
+//						map_itemName.put("947", "厂家定点屠宰证代号：");
+//						map_itemName.put("948", "厂家动物防疫条件合格证代码编号：");
+//						map_itemName.put("949", "厂家动物检疫合格证明（产品A或产品B）：");	
+//						map_itemName.put("950", "流通许可证编号：");	
+//						Map<String, List<String>> map_ = new HashMap<String, List<String>>();
+//						List<String> fvll = new ArrayList<String>();	
+//						fvll.add(945+"");
+//						map_.put("1", fvll);
+//						map_.put("2", fvll);
+//						fvll = new ArrayList<String>();
+//						fvll.add(946+"");
+//						fvll.add(947+"");
+//						fvll.add(948+"");
+//						fvll.add(949+"");
+//						map_.put("3", fvll);
+//						fvll.add(950+"");
+//						map_.put("4", fvll);
+//						this.excelDownloads.add(this.loadLineCells(fvlist,fieldIDs,944,map_,map944_itemName,map_itemName,doc));
+//					}
+//				}				
+//			}
+//			rz = CONSTANT.exportExcel(sheetname, filename,this.excelDownloads);			
+//		}
+//		
+//		return "rz";
+//	}
+//	
+
+	private void workbook2InputStream(HSSFWorkbook workbook, String fileName)  
+            throws Exception {  
+		System.out.println("--workbook2InputStream-----1");
+		this.fileName = fileName; // 设置文件名
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+        workbook.write(baos);  
+        baos.flush();  
+        byte[] aa = baos.toByteArray();  
+        excelStream = new ByteArrayInputStream(aa, 0, aa.length);  
+        baos.close();  
+        System.out.println("--workbook2InputStream-----2");
+  
+    }  
+	
+	public String meatReport(){
+		System.out.println("-------------meatReport Download-----------");
+		String sheetname = "";
+		String filename = "";
+		String rz = "success";
+		this.listChosenProductForms();
+		if(this.docslist!=null && this.docslist.size()>0){
+			System.out.println("this.docslist.size="+this.docslist.size());
+			System.out.println("this.formid="+this.formid);
+			this.excelDownloads = new ArrayList<List<String>>();
+			HSSFWorkbook wb = null;
+			if(this.formid==16){
+				sheetname = "sale";				
+				filename = "sale"+CONSTANT.getNowTime2Second();
+				System.out.println("sheetname16----"+sheetname);
+				System.out.println("filename16----"+filename);
+				for(Doc doc:this.docslist){					
+					List<FieldValue> fvlist = doc.getFvlist();	
+					int[] fieldIDs = {961,962,963,964,965,966};
+					this.excelDownloads.add(this.loadLineCells(fieldIDs,fvlist));
+				}	
+				System.out.println("---this.excelDownloads.size---"+this.excelDownloads.size());
+				for(int i=0;i<this.excelDownloads.size();i++){
+					System.out.println("line num="+i+",content="+this.excelDownloads.get(i).toString());					
+				}
+				////////////////////download/////////////////////
+//				HSSFWorkbook wb = null;
+				try {
+					wb = CONSTANT.getWorkbook(sheetname, excelDownloads);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}				
+				
+				try {
+					this.workbook2InputStream(wb, filename);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}  
+				
+				System.out.println("---ok_f16---");
+//				if(wb!=null)
+//					rz = SUCCESS;
+//				else
+//					rz = ERROR;
+				////////////////////download/////////////////////
+			}
+			if(this.formid==15){
+				sheetname = "import";
+//				filename = "d:/import"+CONSTANT.getNowTime2Second()+".xls";
+				filename = "import"+CONSTANT.getNowTime2Second();
+				System.out.println("sheetname15----"+sheetname);
+				System.out.println("filename15----"+filename);
+				
+				for(Doc doc:this.docslist){					
+					List<FieldValue> fvlist = doc.getFvlist();	
+					int[] fieldIDs = {941,942,943,951,944,952};
+//					int[] fieldIDs2nd = {945,946,947,948,949,950};
+					Map<String, String> map944_itemName = new HashMap<String, String>();
+					map944_itemName.put("1", "直接进口");
+					map944_itemName.put("2", "贸易商进口");
+					map944_itemName.put("3", "国内厂家进货");
+					map944_itemName.put("4", "国内中间商进货");						
+					Map<String, String> map_itemName = new HashMap<String, String>();
+					map_itemName.put("945", "进口肉类卫生证书编号：");
+					map_itemName.put("946", "厂家营业执照注册号：");
+					map_itemName.put("947", "厂家定点屠宰证代号：");
+					map_itemName.put("948", "厂家动物防疫条件合格证代码编号：");
+					map_itemName.put("949", "厂家动物检疫合格证明（产品A或产品B）：");	
+					map_itemName.put("950", "流通许可证编号：");	
+					Map<String, List<String>> map_ = new HashMap<String, List<String>>();
+					List<String> fvll = new ArrayList<String>();	
+					fvll.add(945+"");
+					map_.put("1", fvll);
+					map_.put("2", fvll);
+					fvll = new ArrayList<String>();
+					fvll.add(946+"");
+					fvll.add(947+"");
+					fvll.add(948+"");
+					fvll.add(949+"");
+					map_.put("3", fvll);
+					fvll.add(950+"");
+					map_.put("4", fvll);
+					this.excelDownloads.add(this.loadLineCells(fvlist,fieldIDs,944,map_,map944_itemName,map_itemName,doc));
+				}
+				
+				System.out.println("---this.excelDownloads.size---"+this.excelDownloads.size());
+				for(int i=0;i<this.excelDownloads.size();i++){
+					System.out.println("line num="+i+",content="+this.excelDownloads.get(i).toString());					
+				}
+				////////////////////download/////////////////////
+				try {
+					wb = CONSTANT.getWorkbook(sheetname, excelDownloads);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}				
+				
+				try {
+					this.workbook2InputStream(wb, filename);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}  
+				
+				System.out.println("---ok_f15---");
+				
+			}
+			if(wb!=null)
+				rz = SUCCESS;
+			else
+				rz = ERROR;
+		}
+		return rz; 
+	}
 		
 	@Override
 	public String execute(){
@@ -962,7 +1292,7 @@ private void assembleNewDocJsonText(int _formid, int _userid){
 		this.loadAllUsers();
 		for(User user:this.allusers)
 			System.out.println("user----"+user.toString());
-			
+		
 		return "success";
 	}
 

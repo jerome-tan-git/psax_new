@@ -112,9 +112,17 @@
 					  <div class="form-group">
 					    <label for="inputPassword3" class="col-sm-3 control-label">报表</label>
 					    <div class="col-sm-9">					       			
-							<select name="formid" class="form-control">							
-									<option class="e_c" value="15" selected>肉制品原料肉进货表</option>							
-								  	<option class="e_c" value="16" >肉制品原料肉销售表</option>							
+							<select name="formid" class="form-control">		
+								<#if formid?exists && (formid==15)>					
+									<option class="e_c" value="15" selected>肉制品原料肉进货表</option>
+								<#else>
+									<option class="e_c" value="15">肉制品原料肉进货表</option>
+								</#if>							
+								<#if formid?exists && (formid==16)>	
+								  	<option class="e_c" value="16" selected>肉制品原料肉销售表</option>
+								<#else>
+								  	<option class="e_c" value="16" >肉制品原料肉销售表</option>
+								</#if>			
 							</select>
 					    </div>
 					  </div>
@@ -126,20 +134,23 @@
 				</div>
 				</form>
 	
-				<div class="col-md-12">
+				
+				<div class="col-md-16">
 					<#if docslist?exists>
 					<div class="page-header" style="margin-top: -15px;border-bottom: 1px solid #D6D6D6;position: relative;font-size: 12pt;">
 					  <span>共有${docslist?size}个记录</span>
 					</div>
+				
 					<#if (formid==15)>
-						<table width="1033" border="0" cellpadding="0" cellspacing="1" bgcolor="#666666">
-						  <tr font-size=15px align="center">
-						    <td colspan="2" bgcolor="#FFFFFF"><p><b>进货日期</b><br /></p></td>
-						    <td colspan="2" bgcolor="#FFFFFF"><p><b>原料肉名称</b><br /></p></td>
-						    <td colspan="1" bgcolor="#FFFFFF"><p><b>原料肉品种</b><br /></p></td>
-						    <td colspan="1" bgcolor="#FFFFFF"><p><b>产地</b><br /></p></td>
-						    <td colspan="3" bgcolor="#FFFFFF"><p><b>进货情况</b><br /></p></td>
-						    <td colspan="1" bgcolor="#FFFFFF"><p><b>进货量</b><br /></p></td>	
+					<div>
+						<table width="800" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
+						  <tr font-size=15px align="center" >
+						    <td width="10%" ><p><b>进货日期</b><br /></p></td>
+						    <td width="15%" ><p><b>原料肉名称</b><br /></p></td>
+						    <td width="10%" ><p><b>原料肉品种</b><br /></p></td>
+						    <td width="5%" ><p><b>产地</b><br /></p></td>
+						    <td width="50%" ><p><b>进货情况</b><br /></p></td>
+						    <td width="10%" ><p><b>进货量(kg)</b><br /></p></td>	
 						  </tr>
 						 
 						
@@ -147,28 +158,28 @@
 						  		<#list docslist as doc>
 						  			<#assign fieldvalues=doc.fvlist>
 								  <tr>
-								  	<td colspan="2" bgcolor="#FFFFFF">
+								  	<td width="10%" >
 									  <#list fieldvalues as f>
 									  		<#if (f.fieldid==941)>
 									  		<p>${f.value}<br /></p>
 									  		</#if>
 									  </#list>
 									  </td>
-									  <td colspan="2" bgcolor="#FFFFFF">
+									  <td width="15%">
 									  <#list fieldvalues as f>
 									  		<#if (f.fieldid==942)>
 									    	<p>${f.value}<br /></p>
 									    	</#if>
 									  </#list>
 									  </td>
-									  <td colspan="1" bgcolor="#FFFFFF">
+									  <td width="10%" >
 									  <#list fieldvalues as f>
 									  		<#if (f.fieldid==943)>
 									    	<p>${f.value}<br /></p>
 									    	</#if>
 									  </#list>
 									  </td>
-									  <td colspan="1" bgcolor="#FFFFFF">
+									  <td width="5%">
 									  <#list fieldvalues as f>
 									  		<#if (f.fieldid==951)>
 									    	<p>${f.value}<br /></p>
@@ -176,7 +187,7 @@
 									  </#list>
 								  	 </td>
 								  	
-								  	<td colspan="3" bgcolor="#FFFFFF">
+								  	<td width="50%">
 								  	<#list fieldvalues as f>  		
 								  		<#if (f.fieldid==944)>
 								  			<#if (f.value?number==1)>	
@@ -245,7 +256,7 @@
 								  	</#list>						  	
 								    </td>				
 						    	
-						    		<td colspan="1" bgcolor="#FFFFFF">
+						    		<td width="10%">
 								  	  <#list fieldvalues as f>
 								  		    <#if (f.fieldid==952)>
 								    		<p>${f.value}<br /></p>
@@ -258,9 +269,98 @@
 						</table>
 					<#elseif (formid==16)>
 					
-					</#if>
-																	
-				</#if>														
+						<table width="600" border="1" cellpadding="0" cellspacing="1" bgcolor="#666666">
+							<tr font-size=15px font-weight=bold align="center">
+							    <td width="20%"><p>出货日期<br /></p></td>
+							    <td width="20%"><p>产品名称<br /></p></td>
+							    <td width="10%"><p>类别<br /></p></td>
+							    <td width="30%"><p>产品批号<br /></p></td>
+							    <td width="10%"><p>销售去向<br /></p></td>
+							    <td width="10%"><p>销售量<br /></p></td>
+							</tr>
+							  
+							<#if fieldslist?exists>
+						  		<#list docslist as doc>
+						  			<#assign fieldvalues=doc.fvlist>
+							<tr >
+								<td width="20%">
+									<#list fieldvalues as f>
+										<#if (f.fieldid==961)>
+									 		<p>${f.value}<br /></p>
+									  	</#if>
+									 </#list>
+								</td>
+								<td width="20%">
+									<#list fieldvalues as f>
+										<#if (f.fieldid==962)>
+									 		<p>${f.value}<br /></p>
+									  	</#if>
+									 </#list>
+								</td>
+								<td width="10%">
+									<#list fieldvalues as f>
+										<#if (f.fieldid==963)>
+									 		<p>${f.value}<br /></p>
+									  	</#if>
+									 </#list>
+								</td>
+								<td width="30%">
+									<#list fieldvalues as f>
+										<#if (f.fieldid==964)>
+									 		<p>${f.value}<br /></p>
+									  	</#if>
+									 </#list>
+								</td>
+								<td width="10%">
+									<#list fieldvalues as f>
+										<#if (f.fieldid==965)>
+									 		<p>${f.value}<br /></p>
+									  	</#if>
+									 </#list>
+								</td>
+								<td width="10%">
+									<#list fieldvalues as f>
+										<#if (f.fieldid==966)>
+									 		<p>${f.value}<br /></p>
+									  	</#if>
+									 </#list>
+								</td>
+							</tr>
+							
+								</#list>
+						  	</#if>
+						
+						</table>
+					
+					</#if>												
+				</#if>					
+					
+					<div class="form-group">
+						<form action="meatReport.action" method="post" > 	
+							<#if (formid?exists)>
+							<input type="hidden" value="${formid}" name="formid" />
+							<#elseif (f.id?exists)>
+							<input type="hidden" value="${f.id}" name="formid" />
+							</#if>
+							<#if (userid?exists)>
+							<input type="hidden" value="${userid}" name="userid" />
+							<#elseif (user?exists)>
+							<input type="hidden" value="${user.id}" name="userid" />
+							</#if>	
+							<#if docslist?exists>							
+								<#if (docslist?size>0)>
+									<br />					
+									<div class="col-sm-10" style="float:right;padding-right: 15px;">
+									<!--<input type="submit" value="下载" name="snext" style="margin-top: 30px;margin-right: 9px;padding: 5px 15px;" />-->
+									<!--<input type="submit" class="btn btn-default"  style="float:right" value="下载"/>-->
+										<button type="submit" class="btn btn-default"  style="float:right">下载</button>
+									</div>
+								</#if>		
+		 					</#if>
+	 					</form> 					 					
+	 				</div>
+	 				 
+				</div>									
 					<ul class="pager">						  
 					</ul>
 				</div>

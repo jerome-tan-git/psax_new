@@ -228,6 +228,33 @@ public class ImportServlet  extends HttpServlet{
 			System.out.println("^^^"+d.getFvlist().toString());
 		}
 		this.docslist = docslistWff;
+		
+		this.resortDocsByDate();
+	}
+	
+	private void resortDocsByDate(){		
+		List<Doc> docslistWff_ = new ArrayList<Doc>();
+		List<String> dates = new ArrayList<String>();
+		List<Integer> seqs = new ArrayList<Integer>();
+		for(Doc d:this.docslist){
+			List<FieldValue> fvlist = d.getFvlist();
+			if(this.f.getFormid()==15){
+				for(FieldValue fv : fvlist){
+					if(fv.getFieldid()==941)
+						dates.add(fv.getValue());
+				}
+			}
+			if(this.f.getFormid()==16){
+				for(FieldValue fv : fvlist){
+					if(fv.getFieldid()==961)
+						dates.add(fv.getValue());
+				}
+			}
+		}
+		seqs = CONSTANT.sortDatesDesc(dates, "MM/dd/yyyy");
+		for(int seq:seqs)
+			docslistWff_.add(this.docslist.get(seq));
+		this.docslist = docslistWff_;
 	}
 	
 	private void assembleNewDocJsonText(int _formid, int _userid){

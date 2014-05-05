@@ -1904,6 +1904,16 @@ margin-top: 10px;
 {
 	background: url('./images/folderback.png') repeat-x;
 }
+.member_block_folder_black
+{
+	width: 166px;
+	float: left;
+	height: 161px;
+	margin: 20px;
+	overflow: hidden;
+	position: relative;
+	background: url('./images/formReview.png') no-repeat;
+}
 .member_block_upload_folder_title
 {
 	position: absolute;

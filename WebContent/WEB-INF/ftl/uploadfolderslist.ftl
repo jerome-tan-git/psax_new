@@ -281,11 +281,11 @@ transitional.dtd">
 			<br /><br />	
 			<div class="clearfix">
 				<a href="./import?formid=15&mode=edit">
-					<div class="member_block_folder blue">
+					<div class="member_block_folder_black">
 						<div class="member_block_upload_folder_title">肉制品原料肉进货表
 				</div></div></a>
 				<a href="./import?formid=16&mode=edit">
-					<div class="member_block_folder blue">
+					<div class="member_block_folder_black">
 						<div class="member_block_upload_folder_title">肉制品原料肉销售表
 				</div></div></a>			
 			</div>

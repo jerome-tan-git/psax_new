@@ -19,7 +19,9 @@ transitional.dtd">
 		<link rel="stylesheet" type="text/css" href="./css/quicksand.css" />
 		<link rel="stylesheet" type="text/css" href="./css/skin.css" />
 		<link rel="stylesheet" type="text/css" href="./css/960_24_col.css" />
-
+		<link rel="stylesheet" type="text/css" href="./css/jquery-ui-1.10.3.custom.css" />
+		<link rel="stylesheet" type="text/css" href="./css/select2.css" />
+		
 
 		<script type="text/javascript" src="./js/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/jquery-migrate.js"></script>
@@ -34,6 +36,8 @@ transitional.dtd">
 
 		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 		<script type="text/javascript" src="js/form.js"></script>
+		<script src="./js/select2.js"></script>
+		<script src="./js/select2_locale_zh-CN.js"></script>
 
 		<style type="text/css">
 			html, body, p {
@@ -81,40 +85,75 @@ transitional.dtd">
 					myList.hide();
 
 				});
-				$(".match_1").show();
-				$(".match_2").hide();
-				$(".match_3").hide();
-				$(".match_4").hide();
+				$(".match").each(function()
+				{
+					if($(this).hasClass("match_1"))
+					{
+						$(this).show();
+					}
+					else
+					{
+						$(this).hide();
+					}
+				});
 				
 				$(".selectType").change(function()
 				{
 					if($(this).val()==1)
 					{
-						$(".match_1").show();
-						$(".match_2").hide();
-						$(".match_3").hide();
-						$(".match_4").hide();
+						$(".match").each(function()
+						{
+							if($(this).hasClass("match_1"))
+							{
+								$(this).show();
+							}
+							else
+							{
+								$(this).hide();
+							}
+						});
 					}
 					else if($(this).val()==2)
 					{
-						$(".match_2").show();
-						$(".match_1").hide();
-						$(".match_3").hide();
-						$(".match_4").hide();
+						$(".match").each(function()
+						{
+							if($(this).hasClass("match_2"))
+							{
+								$(this).show();
+							}
+							else
+							{
+								$(this).hide();
+							}
+						});
 					}
 					else if($(this).val()==3)
 					{
-						$(".match_3").show();
-						$(".match_1").hide();
-						$(".match_2").hide();
-						$(".match_4").hide();
+						$(".match").each(function()
+						{
+							if($(this).hasClass("match_3"))
+							{
+								$(this).show();
+							}
+							else
+							{
+								$(this).hide();
+							}
+						});
 					}
 					else if($(this).val()==4)
 					{
-						$(".match_4").show();
-						$(".match_1").hide();
-						$(".match_2").hide();
-						$(".match_3").hide();
+						$(".match").each(function()
+						{
+							if($(this).hasClass("match_4"))
+							{
+								$(this).show();
+							}
+							else
+							{
+								$(this).hide();
+							}
+						});s
 					}
 				});
 				$("input.clearinput").bind("click",function()
@@ -326,12 +365,12 @@ transitional.dtd">
 					    	<option value="4">国内中间商进货</option>
 					    </select>
 					    </div>
-					    <p class="match_1">进口肉类卫生证书编号：<input class="editor long needClear" type="text" form_data="mi_importHygieneCertNum" name="mi_importHygieneCertNum"></input></p>
-					    <p class="match_2">厂家营业执照注册号：<input class="editor long needClear" type="text" form_data="mi_producerNum" name="mi_producerNum"></input></p>
-					    <p class="match_2">厂家定点屠宰证代号：<input class="editor long needClear" type="text" form_data="mi_producerSlaughterNum" name="mi_producerSlaughterNum"></input></p>
-					    <p class="match_3">厂家动物防疫条件合格证代码编号：<input class="editor long needClear" type="text" form_data="mi_producerDiseasePrevNum" name="mi_producerDiseasePrevNum"></input></p>
-					    <p class="match_4">厂家动物检疫合格证明（产品A或产品B）：<input class="editor long needClear" type="text" form_data="mi_producerQuarantineNum" name="mi_producerQuarantineNum"></input></p>
-					    <p class="match_4">流通许可证编号：<input class="editor long needClear" type="text" form_data="mi_circulateNum" name="mi_circulateNum"></input></p>										    
+					    <p class="match match_1 match_2">进口肉类卫生证书编号：<input class="editor long needClear" type="text" form_data="mi_importHygieneCertNum" name="mi_importHygieneCertNum"></input></p>
+					    <p class="match match_3 match_4">厂家营业执照注册号：<input class="editor long needClear" type="text" form_data="mi_producerNum" name="mi_producerNum"></input></p>
+					    <p class="match match_3 match_4">厂家定点屠宰证代号：<input class="editor long needClear" type="text" form_data="mi_producerSlaughterNum" name="mi_producerSlaughterNum"></input></p>
+					    <p class="match match_3 match_4">厂家动物防疫条件合格证代码编号：<input class="editor long needClear" type="text" form_data="mi_producerDiseasePrevNum" name="mi_producerDiseasePrevNum"></input></p>
+					    <p class="match match_3 match_4">厂家动物检疫合格证明（产品A或产品B）：<input class="editor long needClear" type="text" form_data="mi_producerQuarantineNum" name="mi_producerQuarantineNum"></input></p>
+					    <p class="match match_4">流通许可证编号：<input class="editor long needClear" type="text" form_data="mi_circulateNum" name="mi_circulateNum"></input></p>										    
 				    </td>
 				  </tr>
 				  
